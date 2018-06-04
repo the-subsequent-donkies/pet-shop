@@ -1,7 +1,9 @@
+'use strict'
+
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Review = db.define('Review', {
+const Review = db.define('review', {
   content: {
     type: Sequelize.TEXT,
     allowNull: false
