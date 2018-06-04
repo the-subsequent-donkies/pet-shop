@@ -1,0 +1,26 @@
+[
+  {
+    "email": "lams101@gmail.com",
+    "isAdmin": "false",
+    "address": "111 south one ave",
+    "credentials": "placeHolderCreds",
+  },
+  {
+    "email": "newfangled@gmail.com",
+    "isAdmin": "true",
+    "address": "87 west printer pl",
+    "credentials": "placeHolderCreds",
+  },
+  {
+    "email": "mookIsfat@aol.com",
+    "isAdmin": "false",
+    "address": "213 fredface square",
+    "credentials": "placeHolderCreds",
+  },
+  {
+    "email": "goober@gmail.com",
+    "isAdmin": "true",
+    "address": "123 w bikinibottom rd",
+    "credentials": "placeHolderCreds",
+  }
+]
