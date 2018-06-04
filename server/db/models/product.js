@@ -6,10 +6,6 @@ const Product = db.define('Product', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  category: {
-    type: Sequelize.ARRAY,
-    allowNull: false
-  },
   inventory: {
     type: Sequelize.INTEGER,
     defaultValue: 0
