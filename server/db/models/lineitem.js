@@ -1,7 +1,9 @@
+'use strict'
+
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const LineItem = db.define('lineItem', {
+const LineItem = db.define('line_item', {
   productId: {
     type: Sequelize.INTEGER,
     allowNull: false

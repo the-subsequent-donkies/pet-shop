@@ -1,7 +1,9 @@
+'use strict'
+
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Order = db.define('Order', {
+const Order = db.define('order', {
   status: {
     type: Sequelize.INTEGER,
     defaultValue: 1
