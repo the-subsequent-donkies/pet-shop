@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Bone",
+    "inv": "4",
+    "price": "2.50",
+    "imgUrl": "https://imgur.com/gallery/zzD13aO",
+    "description": "this is a fun chew toy for dogs"
+  },
+  {
+    "name": "scratch post",
+    "stock": "6",
+    "price": "22.50",
+    "imgUrl": "https://imgur.com/gallery/jI1kMrK",
+    "description": "Cats will scratch this"
+  },
+  {
+    "name": "fake mouse",
+    "stock": "9",
+    "price": "5.00",
+    "imgUrl": "https://imgur.com/gallery/dQ7u2Wg",
+    "description": "Fake Mouse from the failing Meowyork times"
+  },
+  {
+    "name": "Hamster wheel",
+    "stock": "9",
+    "price": "7.50",
+    "imgUrl": "https://imgur.com/gallery/fFptBSA",
+    "description": "you spin my head right rond"
+  }
+]
