@@ -9,7 +9,7 @@ const getProducts = (products) => {
             products }
 }
 
-const getProduct = (selectedProduct) => {
+const getSingleProduct = (selectedProduct) => {
   return {  type: GET_SINGLE_PRODUCT,
             selectedProduct }
 }
@@ -21,10 +21,10 @@ export const getProductsServer = (categoryId = false) => {
   }
 }
 
-export const getProductServer = (id) => {
+export const getSingleProductServer = (id) => {
   return async (dispatch) => {
     const selectProduct = await axios.get(`/api/products/${id}`)
-    dispatch(getProducts(selectedProduct))
+    dispatch(getSingleProduct(selectedProduct))
   }
 }
 
