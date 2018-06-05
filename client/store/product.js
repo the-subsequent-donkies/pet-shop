@@ -16,7 +16,9 @@ const getSingleProduct = (selectedProduct) => {
 
 export const getProductsServer = (categoryId = false) => {
   return async (dispatch) => {
+    console.log('before error')
     const products = await axios.get(`/api/products${(categoryId) ? `/categories/${categoryId}` : ''}`)
+    console.log('products: ', products)
     dispatch(getProducts(products))
   }
 }
