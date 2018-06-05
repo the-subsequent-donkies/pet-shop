@@ -15,6 +15,14 @@ describe('Product routes', () => {
       description: 'Stylish collar for only the coolest of pups'
     }
 
+    const updatedProduct = {
+      name: 'Dog collar',
+      inventory: '4',
+      price: '12.50',
+      description: 'Stylish collar for only the coolest of pups'
+    }
+
+
     const newCategory = {
       name: 'dogs',
       description: 'Canis lupus familiaris',
@@ -68,15 +76,14 @@ describe('Product routes', () => {
         })
     })
 
-    it('GET /api/products/categories/:categoryId', async () => {
-      await Category.create({ ...newCategory })
-      await ProductCategory.create({ productId: '1', categoryId: '1' })
+    it('PUT /api/products/:productId', async () => {
       return request(app)
-        .get('/api/products/categories/1')
-        .expect(200)
+        .put('/api/products/1')
+        .send(updatedProduct)
+        .expect(204)
         .then(res => {
           expect(res.body).to.be.an('array')
-          expect(res.body[0].name).to.be.equal(newProduct.name)
+          expect(res.body.inventory).to.be.equal(updatedProduct.inventory)
         })
     })
   })
