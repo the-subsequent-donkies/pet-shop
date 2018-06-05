@@ -11,12 +11,12 @@ import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 import history from '../../history'
 
+import store from '../index'
+
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
 describe('thunk creators', () => {
-
-  let store
 
   const seedProducts = [
     {
@@ -74,7 +74,6 @@ describe('thunk creators', () => {
 
   beforeEach( async () => {
 
-    store = mockStore(initialState)
     return await Promise.all(seedProducts.map((product) => {
       return Product.create(product)
     }))
