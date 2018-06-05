@@ -1,18 +1,22 @@
 [
   {
     "content": "Random meaningless text that does nothing",
-    "stars": "4"
+    "stars": "4",
+    "productId": "1"
   },
   {
     "content": "Random meaningless text that does nothing and is meaningless twice",
-    "stars": "4.5"
+    "stars": "4.5",
+    "productId": "1"
   },
   {
     "content": "Random meaningless text that does nothing and is meaningless and has the word lamine in it",
-    "stars": "2.5"
+    "stars": "2.5",
+    "productId": "2"
   },
   {
     "content": "Random meaningless garbage that is garbage and has the word garbage three times",
-    "stars": "2.5"
+    "stars": "2.5",
+    "productId": "3"
   }
 ]
