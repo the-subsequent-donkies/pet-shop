@@ -10,5 +10,3 @@ const db = new Sequelize(
   }
 )
 module.exports = db
-
-console.log(databaseName)
