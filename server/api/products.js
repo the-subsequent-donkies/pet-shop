@@ -38,10 +38,10 @@ router.get('/categories/:categoryId', async (req, res, next) => {
 
 // POST Routes /api/products
 
-router.post('/products', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
-    const product = req.body
-    const addedProduct = await Product.create(product)
+    const addedProduct = await Product.create(req.body)
+    console.log(addedProduct)
     res.status(201).json(addedProduct)
   } catch (err) {
     next(err)
@@ -51,7 +51,7 @@ router.post('/products', async (req, res, next) => {
 
 // PUT Routes
 
-router.put('/products/:id', async (req, res, next) => {
+router.put('/:productId', async (req, res, next) => {
   try {
     const product = req.body
     const addedProduct = await Product.update(product)
