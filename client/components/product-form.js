@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router'
+import { connect } from 'react-redux'
+import "import the actions here named" from '../store'
 
-
-export default class ProductForm extends Component {
+class ProductForm extends Component {
   constructor() {
     super()
     this.state = {
@@ -16,14 +17,6 @@ export default class ProductForm extends Component {
     }
   }
 
-  componentDidMount() {
-    if (this.props.match.params.id) {
-      axios.get(`/api/products/${this.props.match.params.id}`)
-        .then((currentProduct) => {
-          this.setState({ ...this.state, currentProduct })
-        })
-    }
-  }
 
   handleChange = (event) => {
     this.setState({
@@ -41,16 +34,12 @@ export default class ProductForm extends Component {
       imgUrl: this.state.imgUrl,
       description: this.state.description,
     }
-
-    if (this.props.match.params.id) {
-      axios.put(`api/product/${this.match.params.id}`).then(() => {
-        this.setState({ fireRedirect: true })
-      })
+    if (!this.props.selectedProduct) {
+      this.props.post(newProduct)
     } else {
-      axios.post('api/products', newProduct).then(() => {
-        this.setState({ fireRedirect: true })
-      })
+      this.props.put(newProduct)
     }
+    this.setState({ fireRedirect: true })
   }
 
   render() {
@@ -74,3 +63,15 @@ export default class ProductForm extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  selectedProduct: state.selectedProduct
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  put: (newProduct) => dispatch(updateProdAction(newProduct)),
+  post: (newProduct) => dispatch(createProdAction(newProduct))
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductForm)
