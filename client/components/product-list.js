@@ -1,4 +1,9 @@
-[
+'use strict'
+
+import React, { Component } from 'react'
+import IndividualProduct from './individual-product'
+
+const tempData = [
   {
     "id": "1",
     "name": "Bone",
@@ -32,3 +37,20 @@
     "description": "you spin my head right rond"
   }
 ]
+
+export default class ProductList extends Component {
+
+  render() {
+    return (
+      <div id='product-list'>
+        {tempData.map(product => <IndividualProduct product={product} />)}
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    products: state.products
+  }
+}
