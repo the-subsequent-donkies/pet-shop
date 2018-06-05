@@ -14,7 +14,15 @@ export default class ProductForm extends Component {
       description: '',
       fireRedirect: false
     }
+  }
 
+  componentDidMount() {
+    if (this.props.match.params.id) {
+      axios.get(`/api/products/${this.props.match.params.id}`)
+        .then((currentProduct) => {
+          this.setState({ ...this.state, currentProduct })
+        })
+    }
   }
 
   handleChange = (event) => {
@@ -26,7 +34,6 @@ export default class ProductForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-
     const newProduct = {
       name: this.state.name,
       inventory: this.state.inventory,
@@ -34,9 +41,16 @@ export default class ProductForm extends Component {
       imgUrl: this.state.imgUrl,
       description: this.state.description,
     }
-    const postReq = axios.post('api/products', newProduct).then(() => {
-      this.setState({ fireRedirect: true })
-    })
+
+    if (this.props.match.params.id) {
+      axios.put(`api/product/${this.match.params.id}`).then(() => {
+        this.setState({ fireRedirect: true })
+      })
+    } else {
+      axios.post('api/products', newProduct).then(() => {
+        this.setState({ fireRedirect: true })
+      })
+    }
   }
 
   render() {
@@ -50,7 +64,6 @@ export default class ProductForm extends Component {
           <input type='text' name='price' value={this.state.price} placeholder='Price'>
           </input>
           <textarea name='description' value={this.state.description} placeholder='' cols='40' rows='5' />
-
           <input type='text' name='imgurl' value={this.state.imgUrl} placeholder='upload image'>
           </input>
           <button type='submit'>

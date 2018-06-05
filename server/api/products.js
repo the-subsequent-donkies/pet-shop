@@ -4,6 +4,8 @@ const router = require('express').Router()
 const { Product, Category } = require('../db/models')
 module.exports = router
 
+// GET Routes
+
 router.get('/', async (req, res, next) => {
   try {
     const response = await Product.findAll()
@@ -29,6 +31,31 @@ router.get('/categories/:categoryId', async (req, res, next) => {
       include: [{ model: Product, as: 'products' }]
     })
     res.json(category.products)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// POST Routes /api/products
+
+router.post('/products', async (req, res, next) => {
+  try {
+    const product = req.body
+    const addedProduct = await Product.create(product)
+    res.status(201).json(addedProduct)
+  } catch (err) {
+    next(err)
+  }
+})
+
+
+// PUT Routes
+
+router.put('/products/:id', async (req, res, next) => {
+  try {
+    const product = req.body
+    const addedProduct = await Product.update(product)
+    res.status(204).json(addedProduct)
   } catch (err) {
     next(err)
   }
