@@ -74,3 +74,7 @@ export default class ProductForm extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  selectedProduct: state.selectedProduct
+})
