@@ -12,13 +12,13 @@
     "deploy": "script/deploy",
     "lint": "eslint ./ --ignore-path .gitignore",
     "postinstall": "touch secrets.js",
-    "seed": "node script/seed.js",
+    "seed": "node bin/seed",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
   },
-  "author": "Fullstack Academy of Code",
+  "author": "The Subsequent Donkies",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",

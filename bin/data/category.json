@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "name": "cats",
+    "description": "Felis catus"
+  },
+  {
+    "id": "2",
+    "name": "dogs",
+    "description": "Canis lupus familiaris"
+  },
+  {
+    "id": "3",
+    "name": "hamster",
+    "description": "Cricetinae"
+  }
+]

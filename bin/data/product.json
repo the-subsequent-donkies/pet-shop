@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "name": "Bone",
     "inventory": "4",
     "price": "2.50",
@@ -7,6 +8,7 @@
     "description": "this is a fun chew toy for dogs"
   },
   {
+    "id": "2",
     "name": "scratch post",
     "inventory": "6",
     "price": "22.50",
@@ -14,6 +16,7 @@
     "description": "Cats will scratch this"
   },
   {
+    "id": "3",
     "name": "fake mouse",
     "inventory": "9",
     "price": "5.00",
@@ -21,6 +24,7 @@
     "description": "Fake Mouse from the failing Meowyork times"
   },
   {
+    "id": "4",
     "name": "Hamster wheel",
     "inventory": "9",
     "price": "7.50",

@@ -1,26 +1,30 @@
 [
   {
+    "id": "1",
     "email": "lams101@gmail.com",
     "isAdmin": "false",
     "address": "111 south one ave",
-    "credentials": "placeHolderCreds",
+    "credentials": "placeHolderCreds"
   },
   {
+    "id": "2",
     "email": "newfangled@gmail.com",
     "isAdmin": "true",
     "address": "87 west printer pl",
-    "credentials": "placeHolderCreds",
+    "credentials": "placeHolderCreds"
   },
   {
+    "id": "3",
     "email": "mookIsfat@aol.com",
     "isAdmin": "false",
     "address": "213 fredface square",
-    "credentials": "placeHolderCreds",
+    "credentials": "placeHolderCreds"
   },
   {
+    "id": "4",
     "email": "goober@gmail.com",
     "isAdmin": "true",
     "address": "123 w bikinibottom rd",
-    "credentials": "placeHolderCreds",
+    "credentials": "placeHolderCreds"
   }
 ]
