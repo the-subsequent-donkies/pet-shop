@@ -2,15 +2,27 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import {logout} from '../store/user'
 
-const Navbar = () => (
+const Navbar = (props) => (
   <nav className='navbar navbar-dark bg-dark'>
     <h3 style={{ margin: '0.5rem' }}>Pet Shop</h3>
     <Link to='/newproduct'><button>New Product</button></Link>
+    <Link to="/login">Login</Link>
+    <Link to="/signup">Sign Up</Link>
+    <button onClick={props.handleClick}>Logout</button>
   </nav>
 )
 
-export default Navbar
+const mapDispatch = (dispatch) => {
+  return {
+    handleClick() {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(null, mapDispatch)(Navbar)
 
 // import {logout} from '../store'
 
