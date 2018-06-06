@@ -2,21 +2,21 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
-//import "import the actions here named" from '../store'
+import { postNewProductServer, getSingleProductServer, updateProductServer } from '../store'
 
 class ProductForm extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       name: '',
       inventory: 0,
-      price: 0,
+      price: 0.00,
       imgUrl: '',
       description: '',
       fireRedirect: false
     }
-    if(this.match.params.productId) {
-      this.props.get(this.match.params.productId)
+    if (!this.props.action === 'newproduct') {
+      this.props.get(this.props.selectedProduct.id)
     }
   }
 
@@ -37,10 +37,10 @@ class ProductForm extends Component {
       imgUrl: this.state.imgUrl,
       description: this.state.description
     }
-    if (!this.props.selectedProduct) {
+    if (Object.keys(this.props.selectedProduct).length === 0) {
       this.props.post(newProduct)
     } else {
-      newProduct.id = this.props.params.productId
+      newProduct.id = this.props.match.params.productId
       this.props.put(newProduct)
     }
     this.setState({ fireRedirect: true })
@@ -57,12 +57,12 @@ class ProductForm extends Component {
           <input type='text' name='price' value={this.state.price} placeholder='Price'>
           </input>
           <textarea name='description' value={this.state.description} placeholder='' cols='40' rows='5' />
-          <input type='text' name='imgurl' value={this.state.imgUrl} placeholder='upload image'>
+          <input type='text' name='imgUrl' value={this.state.imgUrl} placeholder='upload image'>
           </input>
           <button type='submit'>
           </button>
         </form>
-        {this.state.fireRedirect && (<Redirect to={'/products'} />)}
+        {this.state.fireRedirect && (<Redirect to={'/'} />)}
       </div>
     )
   }
@@ -73,10 +73,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  put: (product) => dispatch(updateProductServer(newProduct)),
+  put: (product) => dispatch(updateProductServer(product)),
   post: (newProduct) => dispatch(postNewProductServer(newProduct)),
   get: (selectedProductId) => dispatch(getSingleProductServer(selectedProductId))
-
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductForm)
