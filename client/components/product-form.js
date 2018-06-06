@@ -15,7 +15,9 @@ class ProductForm extends Component {
       description: '',
       fireRedirect: false
     }
-    this.props.get(this.match.params.productId)
+    if(this.match.params.productId) {
+      this.props.get(this.match.params.productId)
+    }
   }
 
 
@@ -33,11 +35,12 @@ class ProductForm extends Component {
       inventory: this.state.inventory,
       price: this.state.price,
       imgUrl: this.state.imgUrl,
-      description: this.state.description,
+      description: this.state.description
     }
     if (!this.props.selectedProduct) {
       this.props.post(newProduct)
     } else {
+      newProduct.id = this.props.params.productId
       this.props.put(newProduct)
     }
     this.setState({ fireRedirect: true })
