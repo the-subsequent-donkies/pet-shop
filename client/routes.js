@@ -26,6 +26,7 @@ export default class Routes extends Component {
           <Navbar />
           <Route exact path='/' component={ProductList} />
           <Route exact path='/newproduct' render={() => <ProductForm action='newproduct' />} />
+          <Route path='products/:id/edit' render={() => <ProductForm action='editproduct' />} />
           <Route exact path='/categories' component={CategorySelector} />
         </div>
       </Router>
