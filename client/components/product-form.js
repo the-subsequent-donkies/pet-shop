@@ -72,7 +72,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   put: (product) => dispatch(updateProductServer(newProduct)),
   post: (newProduct) => dispatch(postNewProductServer(newProduct)),
-  get: (selectedProduct) => dispatch(getSingleProductServer(selectedProduct))
+  get: (selectedProductId) => dispatch(getSingleProductServer(selectedProductId))
 
 })
 
