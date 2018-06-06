@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => (
   <nav className='navbar navbar-dark bg-dark'>
     <h3 style={{ margin: '0.5rem' }}>Pet Shop</h3>
+    <Link to='/product/newproduct'><button>New Product</button></Link>
   </nav>
 )
 
