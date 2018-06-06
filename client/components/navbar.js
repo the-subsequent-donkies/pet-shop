@@ -6,6 +6,8 @@ import {Link} from 'react-router-dom'
 const Navbar = () => (
   <nav className='navbar navbar-dark bg-dark'>
     <h3 style={{ margin: '0.5rem' }}>Pet Shop</h3>
+    <Link to="/login">Login</Link>
+    <Link to="/signup">Sign Up</Link>
   </nav>
 )
 
