@@ -75,14 +75,10 @@ export const productsReducer = (state = [], action) => {
     case GET_PRODUCTS:
       return action.products
     case POST_NEW_PRODUCT:
-      return {
-        state: [...state, action.newProduct]
-      }
+      return [...state, action.newProduct]
     case UPDATE_PRODUCT:
       const otherProducts = state.filter(product => product.id !== action.product.id)
-      return {
-        state: [...otherProducts, action.product]
-      }
+      return [...otherProducts, action.product]
     default:
       return state
   }
