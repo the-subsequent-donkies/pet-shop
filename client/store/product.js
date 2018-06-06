@@ -28,19 +28,20 @@ export const getSingleProductServer = (id) => {
   }
 }
 
-const defaultState = {
-  products: [],
-  selectedProduct: {}
-}
-
-export default function(state = defaultState, action) {
+export const productsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_PRODUCTS:
-      return {...state, products: action.products}
-    case GET_SINGLE_PRODUCT:
-      return {...state, selectedProduct: action.selectedProduct}
+      return action.products
     default:
       return state
   }
 }
 
+export const selectedProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_SINGLE_PRODUCT:
+    return action.selectedProduct
+  default:
+    return state
+  }
+}
