@@ -48,7 +48,9 @@ class ProductForm extends Component {
     this.setState({ fireRedirect: true })
   }
 
+
   render() {
+    console.log("in form")
     return (
       <div className='product-form'>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
