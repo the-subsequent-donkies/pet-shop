@@ -40,6 +40,7 @@ router.get('/categories/:categoryId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    console.log("getting here")
     const addedProduct = await Product.create(req.body)
     res.status(201).json(addedProduct)
   } catch (err) {

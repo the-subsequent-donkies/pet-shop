@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 //import PropTypes from 'prop-types'
 import ProductList from './components/product-list'
 import ProductForm from './components/product-form'
+import Navbar from './components/navbar'
 //import { me } from './store'
 
 
@@ -18,9 +19,12 @@ export default class Routes extends Component {
   render() {
     return (
       <Router>
+
+
         <div>
+          <Navbar />
           <Route exact path='/' component={ProductList} />
-          <Route exact path='/product/newproduct' component={ProductForm} />
+          <Route exact path='/newproduct' render={() => <ProductForm action='newproduct' />} />
         </div>
       </Router>
     )
