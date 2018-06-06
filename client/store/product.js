@@ -42,8 +42,8 @@ const getSingleProduct = (selectedProduct) => {
 
 export const postNewProductServer = (newProduct) => {
   return async (dispatch) => {
-    await axios.post(`/api/products`, newProduct)
-    dispatch(postNewProduct(newProduct))
+    const { data } = await axios.post(`/api/products`, newProduct)
+    dispatch(postNewProduct(data))
   }
 }
 
