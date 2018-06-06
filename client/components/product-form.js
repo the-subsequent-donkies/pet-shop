@@ -15,6 +15,7 @@ class ProductForm extends Component {
       description: '',
       fireRedirect: false
     }
+    this.props.get(this.match.params.productId)
   }
 
 
@@ -69,8 +70,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  put: (newProduct) => dispatch(updateProdAction(newProduct)),
-  post: (newProduct) => dispatch(createProdAction(newProduct))
+  put: (product) => dispatch(updateProductServer(newProduct)),
+  post: (newProduct) => dispatch(postNewProductServer(newProduct)),
+  get: (selectedProduct) => dispatch(getSingleProductServer(selectedProduct))
 
 })
 
