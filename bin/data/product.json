@@ -5,11 +5,11 @@
     "inventory": "4",
     "price": "2.50",
     "imgUrl": "https://i.imgur.com/zzD13aO.jpg",
-    "description": "this is a fun chew toy for dogs"
+    "description": "This is a fun chew toy for dogs"
   },
   {
     "id": "2",
-    "name": "scratch post",
+    "name": "Scratch Post",
     "inventory": "6",
     "price": "22.50",
     "imgUrl": "https://i.imgur.com/jI1kMrK.jpg",
@@ -17,7 +17,7 @@
   },
   {
     "id": "3",
-    "name": "fake mouse",
+    "name": "Fake Mouse",
     "inventory": "9",
     "price": "5.00",
     "imgUrl": "https:/i.imgur.com/dQ7u2Wg.jpg",
@@ -25,10 +25,10 @@
   },
   {
     "id": "4",
-    "name": "Hamster wheel",
+    "name": "Hamster Wheel",
     "inventory": "9",
     "price": "7.50",
     "imgUrl": "https://i.imgur.com/fFptBSA.jpg",
-    "description": "you spin my head right rond"
+    "description": "You spin my head right rond"
   }
 ]
