@@ -7,6 +7,9 @@ import ProductForm from './components/product-form'
 import Navbar from './components/navbar'
 import {Login, Signup} from './components/auth-form'
 import { me, logout } from './store/user'
+import CategorySelector from './components/category-selector'
+//import { me } from './store'
+
 
 
 /**
@@ -28,6 +31,8 @@ class Routes extends Component {
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
           <Route exact path='/newproduct' render={() => <ProductForm action='newproduct' />} />
+          <Route path='products/:productId/edit' render={({ match }) => <ProductForm match={match} action='editproduct' />} />
+          <Route exact path='/categories' component={CategorySelector} />
         </div>
       </Router>
     )
