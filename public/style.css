@@ -65,3 +65,9 @@ form div {
   display: flex;
   align-items: flex-end;
 }
+
+.product-form {
+  color: black;
+  position: fixed;
+
+}

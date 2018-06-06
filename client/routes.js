@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom'
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import ProductList from './components/product-list'
 import ProductForm from './components/product-form'
 import Navbar from './components/navbar'
-import {Login, Signup} from './components/auth-form'
+import { Login, Signup } from './components/auth-form'
 import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 //import { me } from './store'
@@ -16,7 +16,7 @@ import CategorySelector from './components/category-selector'
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.loadInitialData()
   }
 
@@ -31,7 +31,7 @@ class Routes extends Component {
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
           <Route exact path='/newproduct' render={() => <ProductForm action='newproduct' />} />
-          <Route path='products/:productId/edit' render={({ match }) => <ProductForm match={match} action='editproduct' />} />
+          <Route exact path='/products/:productId/edit' component={ProductForm} />
           <Route exact path='/categories' component={CategorySelector} />
         </div>
       </Router>
@@ -54,7 +54,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData () {
+    loadInitialData() {
       dispatch(me())
     }
   }
