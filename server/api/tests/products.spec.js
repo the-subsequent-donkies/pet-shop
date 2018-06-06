@@ -30,7 +30,8 @@ describe('Product routes', () => {
     }
 
     beforeEach(async () => {
-      await Product.create({ ...newProduct })
+      const myproduct = await Product.create({ ...newProduct })
+      console.log('myproduct.id>>>>>>>>>>>>>>>>', myproduct.id)
     })
 
     it('GET /api/products returns an array of products', () => {
@@ -77,13 +78,14 @@ describe('Product routes', () => {
     })
 
     // TODO: finish put route
-    xit('PUT /api/products/:productId', async () => {
+    it('PUT /api/products/:productId', async () => {
       return request(app)
         .put('/api/products/1')
         .send(updatedProduct)
-        .expect(204)
+        .expect(200)
         .then(res => {
-          expect(res.body).to.be.an('array')
+          console.log('res: ', res)
+          expect(res.body).to.be.an('object')
           expect(res.body.inventory).to.be.equal(updatedProduct.inventory)
         })
     })
