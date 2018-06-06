@@ -1,8 +1,8 @@
 import axios from 'axios'
 import history from '../history'
 
-const GET_PRODUCTS = 'GET_PRODUCTS'
-const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
+export const GET_PRODUCTS = 'GET_PRODUCTS'
+export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 
 const getProducts = (products) => {
   return {  type: GET_PRODUCTS,
@@ -16,33 +16,32 @@ const getSingleProduct = (selectedProduct) => {
 
 export const getProductsServer = (categoryId = false) => {
   return async (dispatch) => {
-    console.log('url: ', )
-    const products = await axios.get(`/api/products${(categoryId) ? `/categories/${categoryId}` : ''}`)
-    console.log('products: ', products)
-    dispatch(getProducts(products))
+    const { data } = await axios.get(`/api/products${(categoryId) ? `/categories/${categoryId}` : ''}`)
+    dispatch(getProducts(data))
   }
 }
 
 export const getSingleProductServer = (id) => {
   return async (dispatch) => {
-    const selectProduct = await axios.get(`/api/products/${id}`)
-    dispatch(getSingleProduct(selectedProduct))
+    const { data } = await axios.get(`/api/products/${id}`)
+    dispatch(getSingleProduct(data))
   }
 }
 
-const defaultState = {
-  products: [],
-  selectedProduct: {}
-}
-
-export default function(state = defaultState, action) {
+export const productsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_PRODUCTS:
-      return {...state, products: action.products}
-    case GET_SINGLE_PRODUCT:
-      return {...state, selectedProduct: action.selectedProduct}
+      return action.products
     default:
       return state
   }
 }
 
+export const selectedProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_SINGLE_PRODUCT:
+    return action.selectedProduct
+  default:
+    return state
+  }
+}
