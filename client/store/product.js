@@ -50,11 +50,10 @@ export const postNewProductServer = (newProduct) => {
 
 export const updateProductServer = (product) => {
   return async (dispatch) => {
-    await axios.put(`/api/products/${product.id}`, product)
-    dispatch(updateProduct(product))
+    const { data } = await axios.put(`/api/products/${product.id}`, product)
+    dispatch(updateProduct(data))
   }
 }
-
 
 export const getProductsServer = (categoryId = false) => {
   return async (dispatch) => {
@@ -81,8 +80,9 @@ export const productsReducer = (state = [], action) => {
         state: [...state, action.newProduct]
       }
     case UPDATE_PRODUCT:
+      const otherProducts = state.filter(product => product.id !== action.product.id)
       return {
-        state: [...state, action.product]
+        state: [...otherProducts, action.product]
       }
     default:
       return state
