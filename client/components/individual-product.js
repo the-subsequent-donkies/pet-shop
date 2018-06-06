@@ -5,7 +5,7 @@ import React from 'react'
 const IndividualProduct = (props) => {
   const { product } = props
   return (
-    <div id='product-badge' style={{ width: '25%' }}>
+    <div id='product-badge' style={{ width: '23%' }}>
       <div id='badge-img-bound'>
         <img id='badge-img' src={product.imgUrl} alt={product.name} />
       </div>

@@ -11,7 +11,6 @@ class ProductList extends Component {
     this.props.getProductsServer()
   }
 
-
   render() {
     return (
       <div id='product-list'>

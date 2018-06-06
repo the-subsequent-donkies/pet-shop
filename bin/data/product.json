@@ -30,5 +30,12 @@
     "price": "7.50",
     "imgUrl": "https://i.imgur.com/fFptBSA.jpg",
     "description": "You spin my head right rond"
+  },
+  {
+    "id": "5",
+    "name": "Doggie Bed",
+    "inventory": "12",
+    "price": "47.50",
+    "description": "For those sleepy extra big doggos"
   }
 ]
