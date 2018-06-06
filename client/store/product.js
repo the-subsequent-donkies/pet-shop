@@ -3,10 +3,10 @@ import history from '../history'
 
 //action types
 
-const GET_PRODUCTS = 'GET_PRODUCTS'
-const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
-const POST_NEW_PRODUCT = 'POST_NEW_PRODUCT'
-const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const GET_PRODUCTS = 'GET_PRODUCTS'
+export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
+export const POST_NEW_PRODUCT = 'POST_NEW_PRODUCT'
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 
 // action creators
 
