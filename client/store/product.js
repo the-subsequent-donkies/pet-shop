@@ -1,8 +1,8 @@
 import axios from 'axios'
 import history from '../history'
 
-const GET_PRODUCTS = 'GET_PRODUCTS'
-const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
+export const GET_PRODUCTS = 'GET_PRODUCTS'
+export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 
 const getProducts = (products) => {
   return {  type: GET_PRODUCTS,

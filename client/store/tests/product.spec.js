@@ -1,25 +1,23 @@
 /* global describe beforeEach afterEach it */
 
 import {expect} from 'chai'
-import {getProductsServer, getSingleProductServer} from '../product'
-import {Product} from '../../../server/db/models'
-import request from 'supertest'
-import app from '../../../server/index'
+import {getProductsServer, getSingleProductServer, GET_PRODUCTS, GET_SINGLE_PRODUCT} from '../product'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 import history from '../../history'
 
-import store from '../index'
-
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
 describe('thunk creators', () => {
+  let store
+  let mockAxios
 
   const seedProducts = [
     {
+      id: '1',
       name: 'Bone',
       inventory: '4',
       price: '2.50',
@@ -27,6 +25,7 @@ describe('thunk creators', () => {
       description: 'this is a fun chew toy for dogs'
     },
     {
+      id: '2',
       name: 'scratch post',
       inventory: '6',
       price: '22.50',
@@ -34,6 +33,7 @@ describe('thunk creators', () => {
       description: 'Cats will scratch this'
     },
     {
+      id: '3',
       name: 'fake mouse',
       inventory: '9',
       price: '5.00',
@@ -41,6 +41,7 @@ describe('thunk creators', () => {
       description: 'Fake Mouse from the failing Meowyork times'
     },
     {
+      id: '4',
       name: 'Hamster wheel',
       inventory: '9',
       price: '7.50',
@@ -72,39 +73,37 @@ describe('thunk creators', () => {
     selectedProduct: {}
   }
 
-  beforeEach( async () => {
-
-    return await Promise.all(seedProducts.map((product) => {
-      return Product.create(product)
-    }))
-
+  beforeEach(() => {
+    mockAxios = new MockAdapter(axios)
+    store = mockStore(initialState)
   })
 
-  describe('getProductsFromServer', () => {
+  afterEach(() => {
+    mockAxios.restore()
+    store.clearActions()
+  })
+
+  describe('getProductsServer', () => {
     it('eventually dispatches the GET PRODUCTS action', () => {
-
-      const apiProducts =  request(app)
-        .get('/api/products')
-        .expect(200)
-        .then(res => res.body)
-
+      mockAxios.onGet('/api/products').replyOnce(200, seedProducts)
       return store.dispatch(getProductsServer())
         .then(() => {
           const actions = store.getActions()
-          expect(actions[0].type).to.be.equal('GET_PRODUCTS')
-          expect(actions[0].products).to.be.deep.equal(apiProducts)
+          expect(actions[0].type).to.be.equal(GET_PRODUCTS)
+          expect(actions[0].products).to.be.deep.equal(seedProducts)
         })
+    })
+  })
 
-
-      // const myProducts = await axios.get('/api/products')
-      // console.log('myProducts: ', myProducts)
-      // mockAxios.onGet('/api/products').replyOnce(200, seedProducts)
-      // return store.dispatch(getProductsServer())
-      //   .then(() => {
-      //     const actions = store.getActions()
-      //     expect(actions[0].type).to.be.equal('GET_PRODUCTS')
-      //     expect(actions[0].user).to.be.deep.equal(seedProducts)
-      //   })
+  describe('getSingleProductServer', () => {
+    it('eventually dispatches the GET SINGLE PRODUCT action', () => {
+      mockAxios.onGet('/api/products/1').replyOnce(200, seedProducts[0])
+      return store.dispatch(getSingleProductServer(1))
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[0].type).to.be.equal(GET_SINGLE_PRODUCT)
+          expect(actions[0].selectedProduct).to.be.deep.equal(seedProducts[0])
+        })
     })
   })
 
