@@ -17,7 +17,6 @@ const postNewProduct = (newProduct) => {
   }
 }
 
-
 const updateProduct = (product) => {
   return {
     type: UPDATE_PRODUCT,

@@ -1,7 +1,7 @@
 /* global describe beforeEach afterEach it */
 
 import {expect} from 'chai'
-import {getProductsServer, getSingleProductServer, GET_PRODUCTS, GET_SINGLE_PRODUCT} from '../product'
+import {getProductsServer, getSingleProductServer, postNewProductServer, updateProductServer, GET_PRODUCTS, GET_SINGLE_PRODUCT, POST_NEW_PRODUCT, UPDATE_PRODUCT} from '../product'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
@@ -103,6 +103,30 @@ describe('thunk creators', () => {
           const actions = store.getActions()
           expect(actions[0].type).to.be.equal(GET_SINGLE_PRODUCT)
           expect(actions[0].selectedProduct).to.be.deep.equal(seedProducts[0])
+        })
+    })
+  })
+
+  describe('postNewProductServer', () => {
+    it('eventually dispatcheds the POST_NEW_PRODUCT action', () => {
+      mockAxios.onPost('/api/products').replyOnce(201, seedProducts[0])
+      return store.dispatch(postNewProductServer(seedProducts[0]))
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[0].type).to.be.equal(POST_NEW_PRODUCT)
+          expect(actions[0].newProduct.name).to.be.equal(seedProducts[0].name)
+        })
+    })
+  })
+
+  describe('updateProductServer', () => {
+    it('eventually dispatcheds the UPDATE_PRODUCT action', () => {
+      mockAxios.onPut('/api/products/1').replyOnce(200, seedProducts[0])
+      return store.dispatch(updateProductServer(seedProducts[0]))
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[0].type).to.be.equal(UPDATE_PRODUCT)
+          expect(actions[0].product.name).to.be.equal(seedProducts[0].name)
         })
     })
   })

@@ -31,7 +31,6 @@ describe('Product routes', () => {
 
     beforeEach(async () => {
       const myproduct = await Product.create({ ...newProduct })
-      console.log('myproduct.id>>>>>>>>>>>>>>>>', myproduct.id)
     })
 
     it('GET /api/products returns an array of products', () => {
@@ -84,7 +83,6 @@ describe('Product routes', () => {
         .send(updatedProduct)
         .expect(200)
         .then(res => {
-          console.log('res: ', res)
           expect(res.body).to.be.an('object')
           expect(res.body.inventory).to.be.equal(updatedProduct.inventory)
         })
