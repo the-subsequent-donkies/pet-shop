@@ -11,7 +11,8 @@ const IndividualProduct = (props) => {
       </div>
       <div id='badge-body'>
         <h3>{product.name}</h3>
-        <p><strong>Price:</strong> {product.price} <strong>Inventory:</strong> {product.inventory}</p>
+        <strong>Price:</strong> {product.price} <strong>Inventory:</strong> {product.inventory}
+        <p style={{ marginTop: '0.5rem' }}>{product.description}</p>
       </div>
     </div>
   )
