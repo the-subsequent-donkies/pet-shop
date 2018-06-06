@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import ProductList from './components/product-list'
 import ProductForm from './components/product-form'
 import Navbar from './components/navbar'
+import CategorySelector from './components/category-selector'
 //import { me } from './store'
 
 
@@ -26,6 +27,7 @@ export default class Routes extends Component {
           <Route exact path='/' component={ProductList} />
           <Route exact path='/newproduct' render={() => <ProductForm action='newproduct' />} />
           <Route path='products/:id/edit' render={() => <ProductForm action='editproduct' />} />
+          <Route exact path='/categories' component={CategorySelector} />
         </div>
       </Router>
     )
