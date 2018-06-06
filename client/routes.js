@@ -9,6 +9,14 @@ import CategorySelector from './components/category-selector'
 //import { me } from './store'
 
 
+import ReactForm
+import ReduxForm
+
+  <ReduxForm
+    redirectOnSuccess={(props) => `/{props.object.id}`)
+  />
+
+
 /**
  * COMPONENT
  */
@@ -25,8 +33,20 @@ export default class Routes extends Component {
         <div>
           <Navbar />
           <Route exact path='/' component={ProductList} />
+          {
+            /*
+             * REVIEW:
+             * <ProductForm action='newproduct'> vs <NewProductForm>
+             *
+             * const NewProductForm = (props) => <ProductForm {...props} action='newproduct'/>
+             */
+          }
           <Route exact path='/newproduct' render={() => <ProductForm action='newproduct' />} />
-          <Route path='products/:productId/edit' render={({ match }) => <ProductForm match={match} action='editproduct' />} />
+          {/* REVIEW: long boye */}
+          <Route
+            path='products/:productId/edit'
+            render={({ match }) => <ProductForm match={match} action='editproduct' />}
+          />
           <Route exact path='/categories' component={CategorySelector} />
         </div>
       </Router>

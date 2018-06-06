@@ -11,6 +11,7 @@ import history from '../../history'
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
+// REVIEW: NICE
 describe('thunk creators', () => {
   let store
   let mockAxios

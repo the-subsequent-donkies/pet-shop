@@ -3,10 +3,12 @@ import axios from 'axios'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { postNewProductServer, getSingleProductServer, updateProductServer } from '../store'
+import history from '../history'
 
 class ProductForm extends Component {
   constructor(props) {
     super(props)
+    BROKEN
     this.state = {
       name: '',
       inventory: 0,
@@ -30,6 +32,10 @@ class ProductForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
+    this.invokeForm()
+  }
+
+  invokeForm = async (event) => {
     const newProduct = {
       name: this.state.name,
       inventory: this.state.inventory,
@@ -38,12 +44,12 @@ class ProductForm extends Component {
       description: this.state.description
     }
     if (Object.keys(this.props.selectedProduct).length === 0) {
-      this.props.post(newProduct)
+      await this.props.post(newProduct)
+      history.push('/')
     } else {
       newProduct.id = this.props.match.params.productId
       this.props.put(newProduct)
     }
-    this.setState({ fireRedirect: true })
   }
 
   render() {

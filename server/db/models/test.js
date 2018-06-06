@@ -2,6 +2,8 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+// REVIEW: what is this file?
+
 const User = db.define('user', {
   email: {
     type: Sequelize.STRING,

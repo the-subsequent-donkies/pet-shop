@@ -12,6 +12,7 @@ const Navbar = () => (
 
 export default Navbar
 
+// REVIEW: Be bold, delete code.
 // import {logout} from '../store'
 
 // const Navbar = ({ handleClick, isLoggedIn }) => (

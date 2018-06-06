@@ -38,9 +38,11 @@ router.get('/categories/:categoryId', async (req, res, next) => {
 
 // POST Routes /api/products
 
+// REVIEW admin routes?
 router.post('/', async (req, res, next) => {
   try {
     console.log("getting here")
+    // REVIEW: unsafe use of req.body in Product.create
     const addedProduct = await Product.create(req.body)
     res.status(201).json(addedProduct)
   } catch (err) {

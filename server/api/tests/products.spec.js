@@ -6,6 +6,7 @@ const app = require('../../index')
 const { Product, Category, ProductCategory } = require('../../db/models')
 const axios = require('axios')
 
+// REVIEW: NICE
 describe('Product routes', () => {
   describe('/api/products', () => {
     const newProduct = {

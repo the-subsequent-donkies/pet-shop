@@ -8,6 +8,7 @@ const Review = require('./review')
 const Category = require('./category')
 const ProductCategory = require('./productcategory')
 
+// REVIEW: more model specs
 Order.belongsTo(User)
 User.hasMany(Order)
 

@@ -14,6 +14,7 @@ class ProductList extends Component {
   render() {
     return (
       <div id='product-list'>
+        {/* REVIEW: LONG BOYE */}
         {this.props.products.map(product => <IndividualProduct product={product} key={product.id} />)}
       </div>
     )
