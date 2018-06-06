@@ -39,7 +39,26 @@ form div {
   margin: 10px;
 }
 
+#badge-img-bound {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 #badge-img {
-  width: 100px;
-  height: 100px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#badge-body {
+  padding-top: 8%
+}
+
+.navbar {
+  color: white;
+  display: flex;
+  align-items: flex-end;
 }
