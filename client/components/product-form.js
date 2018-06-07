@@ -10,14 +10,15 @@ class ProductForm extends Component {
     super(props)
     this.state = {
       name: '',
-      inventory: 0,
-      price: 0.00,
+      inventory: '',
+      price: '',
       imgUrl: '',
       description: '',
       fireRedirect: false
     }
     if (!this.props.action === 'newproduct') {
       this.props.get(this.props.selectedProduct.id)
+        .then((select) => { console.log(select) })
     }
   }
 
@@ -38,16 +39,19 @@ class ProductForm extends Component {
       imgUrl: this.state.imgUrl,
       description: this.state.description
     }
-    if (Object.keys(this.props.selectedProduct).length === 0) {
+    if (this.props.action === 'newproduct') {
       this.props.post(newProduct)
     } else {
+      console.log(this.props)
       newProduct.id = this.props.match.params.productId
       this.props.put(newProduct)
     }
     this.setState({ fireRedirect: true })
   }
 
+
   render() {
+    console.log("in form")
     return (
       <div className='product-form'>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
