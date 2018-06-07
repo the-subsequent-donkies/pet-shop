@@ -24,19 +24,17 @@ class Routes extends Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Navbar />
-          <Route exact path='/' component={Home} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/signup' component={Signup} />
-          <Route exact path='/newproduct' render={() =>
-            <ProductForm action='newproduct' />} />
-          <Route exact path='/products/:productId' component={SelectedProduct} />
-          <Route exact path='/products/:productId/edit' component={ProductForm} />
-          <Route exact path='/categories' component={CategorySelector} />
-        </div>
-      </Router>
+      <div>
+        <Navbar />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={Signup} />
+        <Route exact path='/newproduct' render={() =>
+          <ProductForm action='newproduct' />} />
+        <Route exact path='/products/:productId' component={SelectedProduct} />
+        <Route exact path='/products/:productId/edit' component={ProductForm} />
+        <Route exact path='/categories' component={CategorySelector} />
+      </div>
     )
   }
 }
