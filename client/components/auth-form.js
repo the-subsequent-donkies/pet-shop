@@ -10,8 +10,6 @@ import history from '../history'
  */
 const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error, user} = props
-  console.log('in auth form')
-  const keys = Object.keys(user)
 
   return (
     <div>
