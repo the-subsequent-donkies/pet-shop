@@ -1,5 +1,6 @@
+'use strict'
+
 import React, { Component } from 'react'
-import axios from 'axios'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { postNewProductServer, getSingleProductServer, updateProductServer } from '../store'
@@ -54,24 +55,64 @@ class ProductForm extends Component {
     return (
       <div className='product-form'>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-          <div>
-            <input type='text' name='name' value={this.state.name} placeholder='Product Name' />
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Name</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='name'
+                className='form-control'
+                value={this.state.name}
+                placeholder='Enter Product Name'
+              />
+            </div>
           </div>
-          <div>
-            <input type='text' name='inventory' value={this.state.inventory} placeholder='Inventory' />
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Inventory</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='inventory'
+                className='form-control'
+                value={this.state.inventory}
+              />
+            </div>
           </div>
-          <div>
-            <input type='text' name='price' value={this.state.price} placeholder='Price' />
+          <div className='form-group row'>
+          <label className='col-sm-2 col-form-label'>Price</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='price'
+                className='form-control'
+                value={this.state.price}
+              />
+            </div>
           </div>
-          <div>
-            <textarea name='description' value={this.state.description} placeholder='Type a brief description here' cols='40' rows='5' />
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Description</label>
+            <div className='col-sm-8'>
+              <textarea
+                name='description'
+                className='form-control'
+                value={this.state.description}
+                cols='40'
+                rows='5'
+              />
+            </div>
           </div>
-          <div>
-            <input type='text' name='imgUrl' value={this.state.imgUrl} placeholder='image url' />
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Image URL</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='imgUrl'
+                className='form-control'
+                value={this.state.imgUrl}
+                placeholder='Upload an Image' />
+              </div>
           </div>
-          <div>
-            <button type='submit'>Submit</button>
-          </div>
+          <button className='btn btn-primary' type='submit'>Add Product</button>
         </form>
         {this.state.fireRedirect && (<Redirect to={'/'} />)}
       </div>
