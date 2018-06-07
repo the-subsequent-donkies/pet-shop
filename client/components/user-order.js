@@ -34,11 +34,13 @@ class Order extends Component {
     return (
       <div>
         <h3>Shopping Cart</h3>
-        {
-          this.props.order.lineItems.map((lineItem) => {
-            return <LineItem key={lineItem.id} lineItem={lineItem} />
-          })
-        }
+        <div className="user-order-body container">
+          {
+            this.props.order.lineItems.map((lineItem) => {
+              return <LineItem key={lineItem.id} lineItem={lineItem} />
+            })
+          }
+        </div>
       </div>
     )
   }

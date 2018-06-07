@@ -48,9 +48,14 @@ class LineItem extends Component {
     const product = this.props.product
 
     return (
-      <div>
-        <img src={product.imgUrl} />
-        <h4>{product.name}</h4>
+      <div className="line-item-container container">
+        <div className="line-item-img-bound container">
+          <img src={product.imgUrl} />
+        </div>
+        <div className="line-item-name-description">
+          <h4>{product.name}</h4>
+          <p>{product.description}</p>
+        </div>
         <p>Price: ${product.price}</p>
         <form onChange={this.handleChange}>
           Quantity:
