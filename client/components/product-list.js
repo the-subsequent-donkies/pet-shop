@@ -3,19 +3,35 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import IndividualProduct from './individual-product'
-import { getProductsServer } from '../store/product'
+import { getProductsServer, getProductsByCategoryServer } from '../store/product'
 
 class ProductList extends Component {
   constructor(props) {
     super(props)
-    this.props.getProductsServer()
+  }
+
+  componentDidMount() {
+
+    if (Object.keys(this.props.match.params).length < 1) {
+      this.props.getProductsServer()
+    } else {
+      this.props.getProductsByCategoryServer(this.props.match.params.categoryId)
+    }
   }
 
   render() {
-    console.log('user info: ', this.props.user)
+    let products
+    if (Object.keys(this.props.match.params).length < 1) {
+      products = this.props.products.allProducts
+    } else {
+      products = this.props.products.productsByCategory
+    }
+    if (!products) {
+      products = []
+    }
     return (
       <div id='product-list'>
-        {this.props.products.map(product => <IndividualProduct product={product} key={product.id} />)}
+        {products.map(product => <IndividualProduct product={product} key={product.id} />)}
       </div>
     )
   }
@@ -24,13 +40,16 @@ class ProductList extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
-    user: state.user
+    user: state.user,
+    allProducts: state.products.allProducts
   }
 }
 
 const mapDispatchToPros = dispatch => {
   return {
-    getProductsServer: () => dispatch(getProductsServer())
+    getProductsServer: () => dispatch(getProductsServer()),
+    getProductsByCategoryServer: (categoryId) => dispatch(getProductsByCategoryServer(categoryId))
+
   }
 }
 

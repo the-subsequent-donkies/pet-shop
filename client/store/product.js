@@ -7,6 +7,7 @@ export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 export const POST_NEW_PRODUCT = 'POST_NEW_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY'
 
 // action creators
 
@@ -34,6 +35,13 @@ const getSingleProduct = (selectedProduct) => {
   return {
     type: GET_SINGLE_PRODUCT,
     selectedProduct
+  }
+}
+
+const getProductsByCategory = (products) => {
+  return {
+    type: GET_PRODUCTS_BY_CATEGORY,
+    products
   }
 }
 
@@ -68,17 +76,45 @@ export const getSingleProductServer = (id) => {
   }
 }
 
-// reducers
+export const getProductsByCategoryServer = (categoryId) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`/api/products/categories/${categoryId}`)
+    console.log('data>>>>>>>>', data)
+    dispatch(getProductsByCategory(data))
+  }
+}
 
-export const productsReducer = (state = [], action) => {
+// reducers
+const productState = {
+  allProducts: [],
+  productsByCategory: []
+}
+
+export const productsReducer = (state = productState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
-      return action.products
+      return {
+        ...state,
+        allProducts: action.products
+      }
     case POST_NEW_PRODUCT:
-      return [...state, action.newProduct]
+      const postedProducts = state.allProducts
+      postedProducts.push(action.newProduct)
+      return {
+        ...state,
+        allProducts: postedProducts
+      }
     case UPDATE_PRODUCT:
-      const otherProducts = state.filter(product => product.id !== action.product.id)
-      return [...otherProducts, action.product]
+      const otherProducts = state.allProducts.filter(product => product.id !== action.product.id)
+      return {
+        ...state,
+        allProducts: [...otherProducts, action.product]
+      }
+    case GET_PRODUCTS_BY_CATEGORY:
+      return {
+        ...state,
+        productsByCategory: action.products
+      }
     default:
       return state
   }
