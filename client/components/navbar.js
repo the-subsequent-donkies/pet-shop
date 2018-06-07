@@ -5,14 +5,25 @@ import { Link } from 'react-router-dom'
 import {logout} from '../store/user'
 
 const Navbar = (props) => (
-  <nav className='navbar navbar-dark bg-dark'>
-    <h3 style={{ margin: '0.5rem' }}>Pet Shop</h3>
-    <Link to='/newproduct'><button>New Product</button></Link>
-    <Link to="/login">Login</Link>
-    <Link to="/signup">Sign Up</Link>
-    <button onClick={props.handleClick}>Logout</button>
+  <nav className="navbar navbar-dark bg-dark">
+    <Link to="/"><h3 style={{ margin: '0.5rem' }}>Pet Shop</h3></Link>
+    <Link to="/newproduct"><button>New Product</button></Link>
+    {
+      Object.keys(props.user).length === 0 ?
+        <div>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Sign Up</Link>
+        </div> :
+        <button onClick={props.handleClick}>Logout</button>
+    }
   </nav>
 )
+
+const mapState = (state) => {
+  return {
+    user: state.user
+  }
+}
 
 const mapDispatch = (dispatch) => {
   return {
@@ -22,7 +33,7 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar)
 
 // import {logout} from '../store'
 
