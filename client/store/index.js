@@ -21,7 +21,5 @@ const middleware = composeWithDevTools(applyMiddleware(
 ))
 const store = createStore(reducer, middleware)
 
-console.log(store.getState())
-
 export default store
 export * from './product'

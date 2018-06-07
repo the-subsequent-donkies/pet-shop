@@ -17,7 +17,11 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:reviewId', async (req, res, next) => {
   try {
-    const response = await Review.findById(req.params.reviewId)
+    const response = await Review.findAll({
+      where: {
+        productId: req.params.reviewId
+      }
+    })
     res.json(response)
   } catch (err) {
     next(err)
