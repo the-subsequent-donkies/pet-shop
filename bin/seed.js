@@ -28,26 +28,12 @@ const seed = async () => {
   console.log(`
     Seeding of Users table successful!`)
 
-  // await Promise.all(productData.map(pData => Product.create({...pData})))
-  // console.log(`
-  //   Seeding of Products table successful!`)
+  await Promise.all(reviewData.map(rData => Review.create({...rData})))
 
+  console.log(`
+    Seeding of Reviews table successful!
+  `)
 
-
-  // await Promise.all(productCategoryData.map(pcData => ProductCategory.create({...pcData})))
-  // console.log(`
-  //   Seeding of Product-Category associations successful!`)
-
-  // await Promise.all(reviewData.map(rData => Review.create({...rData})))
-  // console.log(`
-  //   Seeding of Reviews table successful!`)
-
-  // await Promise.all(userData.map(uData => User.create({...uData})))
-  // console.log(`
-  //   Seeding of Users table successful!
-  // `)
-
-  // setTimeout(() => db.close(), 3000)
   db.close()
 }
 
