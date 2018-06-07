@@ -3,16 +3,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getSingleProductServer } from '../store/product'
+import { getFilteredReviewsServer } from '../store/reviews'
+import SingleReview from './single-review'
 
 class SelectedProduct extends Component {
   constructor(props) {
     super(props)
     this.props.getSingleProductServer(this.props.match.params.productId)
-    // this.props.getSelectedReviewsServer(this.props.match.params.productId)
+    this.props.getFilteredReviewsServer(this.props.match.params.productId)
   }
 
   render() {
-    console.log('single product info: ', this.props.product)
     return (
       <div className='selected-product-container'>
         <h1>{this.props.product.name}</h1>
@@ -25,12 +26,10 @@ class SelectedProduct extends Component {
           <h2>Inventory: {this.props.product.inventory}</h2>
         </div>
         <div className='reviews-condensed'>
-          {
-            // this.props.reviews.map((review) => {
-            //   <div>
-            //     <SingleReview key={review.id} />
-            //   </div>
-            // })
+          {this.props.reviews && (
+            this.props.reviews.map((review) => {
+              return (<SingleReview review={review} key={review.id} userId={review.userId} />)
+            }))
           }
         </div>
       </div>
@@ -41,14 +40,14 @@ class SelectedProduct extends Component {
 const mapStateToProps = state => {
   return {
     product: state.selectedProduct,
-    // reviews: state.selectedReviews
+    reviews: state.reviews
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     getSingleProductServer: (selectedProductId) => dispatch(getSingleProductServer(selectedProductId)),
-    // getSelectedReviewsServer: (selectedProductId) => dispatch(getSelectedReviewsServer(selectedProductId))
+    getFilteredReviewsServer: (selectedProductId) => dispatch(getFilteredReviewsServer(selectedProductId))
   }
 }
 
