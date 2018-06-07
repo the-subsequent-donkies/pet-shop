@@ -8,11 +8,8 @@ import Navbar from './components/navbar'
 import { Login, Signup } from './components/auth-form'
 import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
-<<<<<<< HEAD
 import { Home } from './components'
-=======
 import SelectedProduct from './components/selected-product'
->>>>>>> ce2b5d4448cab071bb52f914b0493e43e184871f
 //import { me } from './store'
 
 

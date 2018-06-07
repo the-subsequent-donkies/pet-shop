@@ -3,12 +3,16 @@
     "name": "lamine",
     "email": "lams101@gmail.com",
     "isAdmin": false,
+    "password": "password",
+    "isAdmin": false,
     "address": "111 south one ave",
     "credentials": "placeHolderCreds"
   },
   {
     "name": "cody",
     "email": "newfangled@gmail.com",
+    "isAdmin": true,
+    "password": "password",
     "isAdmin": true,
     "address": "87 west printer pl",
     "credentials": "placeHolderCreds"
@@ -17,12 +21,16 @@
     "name": "jake",
     "email": "mookIsfat@aol.com",
     "isAdmin": false,
+    "password": "password",
+    "isAdmin": false,
     "address": "213 fredface square",
     "credentials": "placeHolderCreds"
   },
   {
     "name": "eric",
     "email": "goober@gmail.com",
+    "isAdmin": true,
+    "password": "password",
     "isAdmin": true,
     "address": "123 w bikinibottom rd",
     "credentials": "placeHolderCreds"
