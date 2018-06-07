@@ -51,12 +51,64 @@ class ProductForm extends Component {
     return (
       <div className='product-form'>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-          <input type='text' name='name' value={this.state.name} placeholder='Enter Product Name' />
-          <input type='text' name='inventory' value={this.state.inventory} placeholder='Enter Inventory Amount' />
-          <input type='text' name='price' value={this.state.price} placeholder='Price' />
-          <textarea name='description' value={this.state.description} placeholder='' cols='40' rows='5' />
-          <input type='text' name='imgUrl' value={this.state.imgUrl} placeholder='upload image' />
-          <button type='submit'>Add Product</button>
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Name</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='name'
+                className='form-control'
+                value={this.state.name}
+                placeholder='Enter Product Name'
+              />
+            </div>
+          </div>
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Inventory</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='inventory'
+                className='form-control'
+                value={this.state.inventory}
+              />
+            </div>
+          </div>
+          <div className='form-group row'>
+          <label className='col-sm-2 col-form-label'>Price</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='price'
+                className='form-control'
+                value={this.state.price}
+              />
+            </div>
+          </div>
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Description</label>
+            <div className='col-sm-8'>
+              <textarea
+                name='description'
+                className='form-control'
+                value={this.state.description}
+                cols='40'
+                rows='5'
+              />
+            </div>
+          </div>
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Image URL</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='imgUrl'
+                className='form-control'
+                value={this.state.imgUrl}
+                placeholder='Upload an Image' />
+              </div>
+          </div>
+          <button className='btn btn-primary' type='submit'>Add Product</button>
         </form>
         {this.state.fireRedirect && (<Redirect to={'/'} />)}
       </div>
