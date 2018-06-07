@@ -1,5 +1,6 @@
+'use strict'
+
 import React, { Component } from 'react'
-import axios from 'axios'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { postNewProductServer, getSingleProductServer, updateProductServer } from '../store'
@@ -50,17 +51,12 @@ class ProductForm extends Component {
     return (
       <div className='product-form'>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-          <input type='text' name='name' value={this.state.name} placeholder='Enter Product Name'>
-          </input>
-          <input type='text' name='inventory' value={this.state.inventory} placeholder='Enter Inventory Amount'>
-          </input>
-          <input type='text' name='price' value={this.state.price} placeholder='Price'>
-          </input>
+          <input type='text' name='name' value={this.state.name} placeholder='Enter Product Name' />
+          <input type='text' name='inventory' value={this.state.inventory} placeholder='Enter Inventory Amount' />
+          <input type='text' name='price' value={this.state.price} placeholder='Price' />
           <textarea name='description' value={this.state.description} placeholder='' cols='40' rows='5' />
-          <input type='text' name='imgUrl' value={this.state.imgUrl} placeholder='upload image'>
-          </input>
-          <button type='submit'>
-          </button>
+          <input type='text' name='imgUrl' value={this.state.imgUrl} placeholder='upload image' />
+          <button type='submit'>Add Product</button>
         </form>
         {this.state.fireRedirect && (<Redirect to={'/'} />)}
       </div>
