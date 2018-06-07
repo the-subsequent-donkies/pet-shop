@@ -1,22 +1,22 @@
 [
   {
-    "productId": "1",
-    "currentPrice": "2.5",
-    "quantity": "5"
+    "productId": 1,
+    "currentPrice": 2.5,
+    "quantity": 5
   },
   {
-    "productId": "2",
-    "currentPrice": "3.5",
-    "quantity": "6"
+    "productId": 2,
+    "currentPrice": 3.5,
+    "quantity": 6
   },
   {
-    "productId": "3",
-    "currentPrice": "2.55",
-    "quantity": "9"
+    "productId": 3,
+    "currentPrice": 2.55,
+    "quantity": 9
   },
   {
-    "productId": "4",
-    "currentPrice": "5.55",
-    "quantity": "90"
+    "productId": 4,
+    "currentPrice": 5.55,
+    "quantity": 90
   }
 ]
