@@ -14,7 +14,6 @@ class SelectedProduct extends Component {
   }
 
   render() {
-    console.log('single product info: ', this.props.reviews)
     return (
       <div className='selected-product-container'>
         <h1>{this.props.product.name}</h1>
@@ -29,10 +28,7 @@ class SelectedProduct extends Component {
         <div className='reviews-condensed'>
           {this.props.reviews && (
             this.props.reviews.map((review) => {
-              return (<div>
-                {console.log('here')}
-                <SingleReview review={review} key={review.id} />
-              </div>)
+              return (<SingleReview review={review} key={review.id} userId={review.userId} />)
             }))
           }
         </div>

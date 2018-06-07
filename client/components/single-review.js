@@ -3,10 +3,17 @@
 import React from 'react'
 
 const SingleReview = (props) => {
-  console.log("inside single review: ", props.review)
   return (
-    <div>
-      <h3>{props.review.content}</h3>
+    <div className='single-review-container'>
+      <div>
+        <h3>Reviews:</h3>
+      </div>
+      <div>
+        <h3>{props.review.content}</h3>
+      </div>
+      <div>
+        <h3>Stars: {props.review.stars}</h3>
+      </div>
     </div>
   )
 }
