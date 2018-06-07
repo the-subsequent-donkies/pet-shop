@@ -79,42 +79,21 @@ export const getSingleProductServer = (id) => {
 export const getProductsByCategoryServer = (categoryId) => {
   return async (dispatch) => {
     const { data } = await axios.get(`/api/products/categories/${categoryId}`)
-    console.log('data>>>>>>>>', data)
     dispatch(getProductsByCategory(data))
   }
 }
 
 // reducers
-const productState = {
-  allProducts: [],
-  productsByCategory: []
-}
 
-export const productsReducer = (state = productState, action) => {
+export const productsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_PRODUCTS:
-      return {
-        ...state,
-        allProducts: action.products
-      }
+      return action.products
     case POST_NEW_PRODUCT:
-      const postedProducts = state.allProducts
-      postedProducts.push(action.newProduct)
-      return {
-        ...state,
-        allProducts: postedProducts
-      }
+      return [...state, action.newProduct]
     case UPDATE_PRODUCT:
-      const otherProducts = state.allProducts.filter(product => product.id !== action.product.id)
-      return {
-        ...state,
-        allProducts: [...otherProducts, action.product]
-      }
-    case GET_PRODUCTS_BY_CATEGORY:
-      return {
-        ...state,
-        productsByCategory: action.products
-      }
+      const otherProducts = state.filter(product => product.id !== action.product.id)
+      return [...otherProducts, action.product]
     default:
       return state
   }
@@ -129,3 +108,11 @@ export const selectedProductReducer = (state = {}, action) => {
   }
 }
 
+export const filteredProductReducer = (state = [], action) => {
+  switch (action.type) {
+    case GET_PRODUCTS_BY_CATEGORY:
+      return action.products
+    default:
+      return state
+  }
+}

@@ -10,8 +10,7 @@ class ProductList extends Component {
     super(props)
   }
 
-  componentDidMount() {
-
+  async componentDidMount() {
     if (Object.keys(this.props.match.params).length < 1) {
       this.props.getProductsServer()
     } else {
@@ -19,12 +18,13 @@ class ProductList extends Component {
     }
   }
 
+
   render() {
     let products
     if (Object.keys(this.props.match.params).length < 1) {
-      products = this.props.products.allProducts
+      products = this.props.products
     } else {
-      products = this.props.products.productsByCategory
+      products = this.props.filteredProducts
     }
     if (!products) {
       products = []
@@ -41,7 +41,7 @@ const mapStateToProps = state => {
   return {
     products: state.products,
     user: state.user,
-    allProducts: state.products.allProducts
+    filteredProducts: state.filteredProducts,
   }
 }
 

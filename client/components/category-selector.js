@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getCategoriesServer } from '../store/category'
 import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import history from '../history'
 // refactor the redux store
 // add a action to get the products by id
@@ -18,7 +19,9 @@ class CategorySelector extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.setState({ fireRedirect: true })
+    history.push(`/categories/${this.state.category}`)
+
+
 
   }
 
@@ -36,7 +39,7 @@ class CategorySelector extends Component {
           </select>
           <button type='submit' className='btn btn-primary'>Filter</button>
         </form>
-        {this.state.fireRedirect && (<Redirect to={`/categories/${this.state.category}`} />)}
+        {/* {this.state.fireRedirect && (<Redirect to={`/categories/${this.state.category}`} />)} */}
       </div>
 
     )
@@ -56,4 +59,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategorySelector);
+export default connect(mapStateToProps, mapDispatchToProps)(CategorySelector)
+  ;
