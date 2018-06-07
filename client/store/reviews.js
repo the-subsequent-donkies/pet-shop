@@ -57,19 +57,21 @@ export const getReviewsServer = () => {
   }
 }
 
+// const reviewTest = [{ content: "test" }, { content: "test2" }]
 export const getFilteredReviewsServer = (id) => {
   return async (dispatch) => {
     const { data } = await axios.get(`/api/reviews`)
     const filteredData = data.filter((review) => {
-      return review.id !== id
+      return review.productId !== id
     })
-    dispatch(getFilteredReviews(filteredData))
+    console.log(filteredData)
+    dispatch(getFilteredReviews(reviewTest))
   }
 }
 
 // reducers
 
-export const reviewReducer = (state = [], action) => {
+export const reviewsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_REVIEWS:
       return action.reviews
@@ -79,17 +81,8 @@ export const reviewReducer = (state = [], action) => {
       const otherReviews = state.filter(review => review.id !== action.review.id)
       return [...otherReviews, action.review]
     case GET_FILTERED_REVIEWS:
-      return action.filteredData
+      return action.filteredReviews
     default:
       return state
   }
 }
-
-// export const selectedProductReducer = (state = {}, action) => {
-//   switch (action.type) {
-//     case GET_SINGLE_PRODUCT:
-//       return action.selectedProduct
-//     default:
-//       return state
-//   }
-// }
