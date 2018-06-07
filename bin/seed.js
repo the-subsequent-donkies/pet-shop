@@ -23,6 +23,11 @@ const seed = async () => {
   console.log(`
     Seeding of Products table successful!`)
 
+  await Promise.all(userData.map(uData => User.create({...uData})))
+
+  console.log(`
+    Seeding of Users table successful!`)
+
   // await Promise.all(productData.map(pData => Product.create({...pData})))
   // console.log(`
   //   Seeding of Products table successful!`)
