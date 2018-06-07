@@ -7,7 +7,9 @@ import {logout} from '../store/user'
 const Navbar = (props) => (
   <nav className="navbar navbar-dark bg-dark">
     <Link to="/"><h3 style={{ margin: '0.5rem' }}>Pet Shop</h3></Link>
-    <Link to="/newproduct"><button>New Product</button></Link>
+    {
+      (props.user.isAdmin) ? <Link to="/newproduct"><button>New Product</button></Link> : <div />
+    }
     {
       Object.keys(props.user).length === 0 ?
         <div>

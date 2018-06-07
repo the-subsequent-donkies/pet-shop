@@ -39,7 +39,7 @@ router.get('/categories/:categoryId', async (req, res, next) => {
 
 // POST Routes /api/products
 
-router.post('/', async (req, res, next) => {
+router.post('/', checkAccess, async (req, res, next) => {
   const { name, inventory, price, imgUrl, description } = req.body
   try {
     const addedProduct = await Product.create({ name, inventory, price, imgUrl, description })
