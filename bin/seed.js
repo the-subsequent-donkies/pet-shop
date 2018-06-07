@@ -8,27 +8,41 @@ const seed = async () => {
 
   await db.sync({ force: true })
 
-  await Promise.all(productData.map(pData => Product.create({...pData})))
-  console.log(`
-    Seeding of Products table successful!`)
-
   await Promise.all(categoryData.map(cData => Category.create({...cData})))
+
   console.log(`
     Seeding of Categories table successful!`)
 
-  await Promise.all(productCategoryData.map(pcData => ProductCategory.create({...pcData})))
-  console.log(`
-    Seeding of Product-Category associations successful!`)
+  await Promise.all(productData.map(async pData => {
+    const { category, ...data } = pData
+    const product = await Product.create({...data})
+    const categoryFromDb = await Category.findOne({ where: { name: category }})
+    await product.addCategory(categoryFromDb)
+  }))
 
-  await Promise.all(reviewData.map(rData => Review.create({...rData})))
   console.log(`
-    Seeding of Reviews table successful!`)
+    Seeding of Products table successful!`)
 
-  await Promise.all(userData.map(uData => User.create({...uData})))
-  console.log(`
-    Seeding of Users table successful!
-  `)
+  // await Promise.all(productData.map(pData => Product.create({...pData})))
+  // console.log(`
+  //   Seeding of Products table successful!`)
 
+
+
+  // await Promise.all(productCategoryData.map(pcData => ProductCategory.create({...pcData})))
+  // console.log(`
+  //   Seeding of Product-Category associations successful!`)
+
+  // await Promise.all(reviewData.map(rData => Review.create({...rData})))
+  // console.log(`
+  //   Seeding of Reviews table successful!`)
+
+  // await Promise.all(userData.map(uData => User.create({...uData})))
+  // console.log(`
+  //   Seeding of Users table successful!
+  // `)
+
+  // setTimeout(() => db.close(), 3000)
   db.close()
 }
 
