@@ -15,11 +15,6 @@ nav a {
   margin: 1em;
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
-}
-
 #product-list {
   padding: 10px;
   display: flex;
@@ -67,6 +62,19 @@ form div {
 }
 
 .product-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product-form form {
+  margin: 2rem;
+  width: 70%;
+}
+
+.product-form .col-form-label {
+  display: flex;
+  align-items: center;
   color: black;
   position: fixed;
 

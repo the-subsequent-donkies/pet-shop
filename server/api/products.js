@@ -2,6 +2,7 @@
 
 const router = require('express').Router()
 const { Product, Category } = require('../db/models')
+const checkAccess = require('./checkAccess')
 module.exports = router
 
 // GET Routes
@@ -38,9 +39,10 @@ router.get('/categories/:categoryId', async (req, res, next) => {
 
 // POST Routes /api/products
 
-router.post('/', async (req, res, next) => {
+router.post('/', checkAccess, async (req, res, next) => {
+  const { name, inventory, price, imgUrl, description } = req.body
   try {
-    const addedProduct = await Product.create(req.body)
+    const addedProduct = await Product.create({ name, inventory, price, imgUrl, description })
     res.status(201).json(addedProduct)
   } catch (err) {
     next(err)
@@ -50,8 +52,7 @@ router.post('/', async (req, res, next) => {
 
 // PUT Routes
 
-router.put('/:productId', async (req, res, next) => {
-
+router.put('/:productId', checkAccess, async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.productId)
     const addedProduct = await product.update(req.body)

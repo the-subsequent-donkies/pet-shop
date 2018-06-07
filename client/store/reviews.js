@@ -57,15 +57,13 @@ export const getReviewsServer = () => {
   }
 }
 
-// const reviewTest = [{ content: "test" }, { content: "test2" }]
 export const getFilteredReviewsServer = (id) => {
   return async (dispatch) => {
     const { data } = await axios.get(`/api/reviews`)
     const filteredData = data.filter((review) => {
-      return review.productId !== id
+      return review.id !== id
     })
-    console.log(filteredData)
-    dispatch(getFilteredReviews(reviewTest))
+    dispatch(getFilteredReviews(filteredData))
   }
 }
 
