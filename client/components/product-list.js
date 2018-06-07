@@ -12,7 +12,6 @@ class ProductList extends Component {
   }
 
   render() {
-    console.log('user info: ', this.props.user)
     return (
       <div id='product-list'>
         {this.props.products.map(product => <IndividualProduct product={product} key={product.id} />)}
@@ -24,7 +23,6 @@ class ProductList extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
-    user: state.user
   }
 }
 
