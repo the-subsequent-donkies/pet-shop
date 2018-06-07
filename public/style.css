@@ -69,16 +69,14 @@ nav a {
 
 .product-form form {
   margin: 2rem;
-  width: 70%;
+  width: 50%;
 }
 
 .product-form .col-form-label {
   display: flex;
   align-items: center;
-  color: black;
-  position: fixed;
-
 }
+
 .selected-product-container{
   display: flex;
   width: 500px;

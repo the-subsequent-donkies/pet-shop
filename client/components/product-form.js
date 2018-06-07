@@ -32,13 +32,6 @@ class ProductForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     this.invokePostOrPut()
-    // if (this.props.action === 'newproduct') {
-    //   this.props.post(newProduct)
-    // } else {
-    //   console.log(this.props)
-    //   newProduct.id = this.props.match.params.productId
-    //   this.props.put(newProduct)
-    // }
   }
 
   invokePostOrPut = async () => {
@@ -50,12 +43,6 @@ class ProductForm extends Component {
       description: this.state.description
     }
     const newProductId = await this.props.post(newProduct)
-    // if (this.props.action === 'newproduct') {
-    //   newProduct = await this.props.post(newProduct)
-    // } else {
-    //   newProduct.id = this.props.match.params.productId
-    //   this.props.put(newProduct)
-    // }
     history.push(`/products/${newProductId}`)
   }
 
@@ -64,8 +51,8 @@ class ProductForm extends Component {
       <div className='product-form'>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <div className='form-group row'>
-            <label className='col-sm-2 col-form-label'>Name</label>
-            <div className='col-sm-8'>
+            <label className='col-sm-3 col-form-label'>Name</label>
+            <div className='col-sm-9'>
               <input
                 type='text'
                 name='name'
@@ -76,42 +63,45 @@ class ProductForm extends Component {
             </div>
           </div>
           <div className='form-group row'>
-            <label className='col-sm-2 col-form-label'>Inventory</label>
-            <div className='col-sm-8'>
+            <label className='col-sm-3 col-form-label'>Inventory</label>
+            <div className='col-sm-9'>
               <input
                 type='text'
                 name='inventory'
                 className='form-control'
                 value={this.state.inventory}
+                placeholder='Set Inventory'
               />
             </div>
           </div>
           <div className='form-group row'>
-          <label className='col-sm-2 col-form-label'>Price</label>
-            <div className='col-sm-8'>
+          <label className='col-sm-3 col-form-label'>Price</label>
+            <div className='col-sm-9'>
               <input
                 type='text'
                 name='price'
                 className='form-control'
                 value={this.state.price}
+                placeholder='Set Price'
               />
             </div>
           </div>
           <div className='form-group row'>
-            <label className='col-sm-2 col-form-label'>Description</label>
-            <div className='col-sm-8'>
+            <label className='col-sm-3 col-form-label'>Description</label>
+            <div className='col-sm-9'>
               <textarea
                 name='description'
                 className='form-control'
                 value={this.state.description}
                 cols='40'
                 rows='5'
+                placeholder='Add a Description'
               />
             </div>
           </div>
           <div className='form-group row'>
-            <label className='col-sm-2 col-form-label'>Image URL</label>
-            <div className='col-sm-8'>
+            <label className='col-sm-3 col-form-label'>Image URL</label>
+            <div className='col-sm-9'>
               <input
                 type='text'
                 name='imgUrl'
@@ -120,7 +110,9 @@ class ProductForm extends Component {
                 placeholder='Upload an Image' />
               </div>
           </div>
-          <button className='btn btn-primary' type='submit'>Add Product</button>
+          <div className='button-row'>
+            <button className='btn btn-primary' type='submit'>Add Product</button>
+          </div>
         </form>
       </div>
     )
