@@ -8,6 +8,8 @@ import Navbar from './components/navbar'
 import { Login, Signup } from './components/auth-form'
 import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
+import { Home } from './components'
+import SelectedProduct from './components/selected-product'
 //import { me } from './store'
 
 
@@ -22,20 +24,18 @@ class Routes extends Component {
 
   render() {
     return (
-      <Router>
+      <div>
+        <Navbar />
+        <CategorySelector />
+        <Route exact path='/' component={ProductList} />
+        <Route exact path='/categories/:categoryId' component={ProductList} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={Signup} />
+        <Route exact path='/newproduct' render={() => <ProductForm action='newproduct' />} />
+        <Route exact path='/products/:productId/edit' component={ProductForm} />
+        <Route exact path='/categories' component={CategorySelector} />
+      </div>
 
-
-        <div>
-          <Navbar />
-          <Route exact path='/' component={ProductList} />
-          <Route exact path='/categories/:categoryId' component={ProductList} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/signup' component={Signup} />
-          <Route exact path='/newproduct' render={() => <ProductForm action='newproduct' />} />
-          <Route exact path='/products/:productId/edit' component={ProductForm} />
-          <Route exact path='/categories' component={CategorySelector} />
-        </div>
-      </Router>
     )
   }
 }

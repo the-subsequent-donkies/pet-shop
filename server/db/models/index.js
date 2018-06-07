@@ -20,6 +20,12 @@ LineItem.belongsTo(Order)
 Product.belongsToMany(Category, { through: ProductCategory })
 Category.belongsToMany(Product, { through: ProductCategory })
 
+Review.belongsTo(Product)
+Product.hasMany(Review)
+
+Review.belongsTo(User)
+User.hasMany(Review)
+
 module.exports = {
   User,
   LineItem,

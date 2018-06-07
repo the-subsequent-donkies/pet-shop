@@ -15,11 +15,6 @@ nav a {
   margin: 1em;
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
-}
-
 #product-list {
   padding: 10px;
   display: flex;
@@ -67,7 +62,44 @@ form div {
 }
 
 .product-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product-form form {
+  margin: 2rem;
+  width: 70%;
+}
+
+.product-form .col-form-label {
+  display: flex;
+  align-items: center;
   color: black;
   position: fixed;
 
+}
+.selected-product-container{
+  display: flex;
+  width: 500px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  left: 25%;
+}
+
+.selected-product-img-bound {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.selected-product-img {
+  max-width: 100%;
+  max-height: 100%;
 }

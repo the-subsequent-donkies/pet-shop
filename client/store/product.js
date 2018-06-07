@@ -52,6 +52,7 @@ export const postNewProductServer = (newProduct) => {
   return async (dispatch) => {
     const { data } = await axios.post(`/api/products`, newProduct)
     dispatch(postNewProduct(data))
+    return data.id
   }
 }
 

@@ -1,41 +1,41 @@
 [
   {
-    "id": "1",
     "name": "Bone",
     "inventory": "4",
     "price": "2.50",
     "imgUrl": "https://i.imgur.com/zzD13aO.jpg",
-    "description": "This is a fun chew toy for dogs"
+    "description": "This is a fun chew toy for dogs",
+    "category": "dogs"
   },
   {
-    "id": "2",
     "name": "Scratch Post",
     "inventory": "6",
     "price": "22.50",
     "imgUrl": "https://i.imgur.com/jI1kMrK.jpg",
-    "description": "Cats will scratch this"
+    "description": "Cats will scratch this",
+    "category": "cats"
   },
   {
-    "id": "3",
     "name": "Fake Mouse",
     "inventory": "9",
     "price": "5.00",
     "imgUrl": "https:/i.imgur.com/dQ7u2Wg.jpg",
-    "description": "Fake Mouse from the failing Meowyork times"
+    "description": "Fake Mouse from the failing Meowyork times",
+    "category": "cats"
   },
   {
-    "id": "4",
     "name": "Hamster Wheel",
     "inventory": "9",
     "price": "7.50",
     "imgUrl": "https://i.imgur.com/fFptBSA.jpg",
-    "description": "You spin my head right round"
+    "description": "You spin my head right round",
+    "category": "hamsters"
   },
   {
-    "id": "5",
     "name": "Doggie Bed",
     "inventory": "12",
     "price": "47.50",
-    "description": "For those sleepy extra big doggos"
+    "description": "For those sleepy extra big doggos",
+    "category": "dogs"
   }
 ]

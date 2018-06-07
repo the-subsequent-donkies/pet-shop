@@ -1,8 +1,10 @@
+'use strict'
+
 import React, { Component } from 'react'
-import axios from 'axios'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { postNewProductServer, getSingleProductServer, updateProductServer } from '../store'
+import history from '../history'
 
 class ProductForm extends Component {
   constructor(props) {
@@ -12,12 +14,10 @@ class ProductForm extends Component {
       inventory: '',
       price: '',
       imgUrl: '',
-      description: '',
-      fireRedirect: false
+      description: ''
     }
     if (!this.props.action === 'newproduct') {
       this.props.get(this.props.selectedProduct.id)
-        .then((select) => { console.log(select) })
     }
   }
 
@@ -31,49 +31,97 @@ class ProductForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const newProduct = {
+    this.invokePostOrPut()
+    // if (this.props.action === 'newproduct') {
+    //   this.props.post(newProduct)
+    // } else {
+    //   console.log(this.props)
+    //   newProduct.id = this.props.match.params.productId
+    //   this.props.put(newProduct)
+    // }
+  }
+
+  invokePostOrPut = async () => {
+    let newProduct = {
       name: this.state.name,
       inventory: this.state.inventory,
       price: this.state.price,
       imgUrl: this.state.imgUrl,
       description: this.state.description
     }
-    if (this.props.action === 'newproduct') {
-      this.props.post(newProduct)
-    } else {
-      console.log(this.props)
-      newProduct.id = this.props.match.params.productId
-      this.props.put(newProduct)
-    }
-    this.setState({ fireRedirect: true })
+    const newProductId = await this.props.post(newProduct)
+    // if (this.props.action === 'newproduct') {
+    //   newProduct = await this.props.post(newProduct)
+    // } else {
+    //   newProduct.id = this.props.match.params.productId
+    //   this.props.put(newProduct)
+    // }
+    history.push(`/products/${newProductId}`)
   }
 
-
   render() {
-    console.log("in form")
     return (
       <div className='product-form'>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-          <div>
-            <input type='text' name='name' value={this.state.name} placeholder='Product Name' />
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Name</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='name'
+                className='form-control'
+                value={this.state.name}
+                placeholder='Enter Product Name'
+              />
+            </div>
           </div>
-          <div>
-            <input type='text' name='inventory' value={this.state.inventory} placeholder='Inventory' />
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Inventory</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='inventory'
+                className='form-control'
+                value={this.state.inventory}
+              />
+            </div>
           </div>
-          <div>
-            <input type='text' name='price' value={this.state.price} placeholder='Price' />
+          <div className='form-group row'>
+          <label className='col-sm-2 col-form-label'>Price</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='price'
+                className='form-control'
+                value={this.state.price}
+              />
+            </div>
           </div>
-          <div>
-            <textarea name='description' value={this.state.description} placeholder='Type a brief description here' cols='40' rows='5' />
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Description</label>
+            <div className='col-sm-8'>
+              <textarea
+                name='description'
+                className='form-control'
+                value={this.state.description}
+                cols='40'
+                rows='5'
+              />
+            </div>
           </div>
-          <div>
-            <input type='text' name='imgUrl' value={this.state.imgUrl} placeholder='image url' />
+          <div className='form-group row'>
+            <label className='col-sm-2 col-form-label'>Image URL</label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                name='imgUrl'
+                className='form-control'
+                value={this.state.imgUrl}
+                placeholder='Upload an Image' />
+              </div>
           </div>
-          <div>
-            <button type='submit'>Submit</button>
-          </div>
+          <button className='btn btn-primary' type='submit'>Add Product</button>
         </form>
-        {this.state.fireRedirect && (<Redirect to={'/'} />)}
       </div>
     )
   }

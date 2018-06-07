@@ -5,12 +5,13 @@ import { connect } from 'react-redux'
 import IndividualProduct from './individual-product'
 import { getProductsServer, getProductsByCategoryServer } from '../store/product'
 
+
 class ProductList extends Component {
   constructor(props) {
     super(props)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (Object.keys(this.props.match.params).length < 1) {
       this.props.getProductsServer()
     } else {

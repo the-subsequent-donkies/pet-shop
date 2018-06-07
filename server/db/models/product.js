@@ -24,6 +24,14 @@ const Product = db.define('product', {
     type: Sequelize.TEXT,
     allowNull: false
   }
+}, {
+  hooks: {
+    beforeCreate: product => {
+      if (product.imgUrl === '') {
+        product.imgUrl = '../../images/default-product.jpg'
+      }
+    }
+  }
 })
 
 module.exports = Product
