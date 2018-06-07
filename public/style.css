@@ -71,3 +71,26 @@ form div {
   position: fixed;
 
 }
+.selected-product-container{
+  display: flex;
+  width: 500px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.selected-product-img-bound {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.selected-product-img {
+  max-width: 100%;
+  max-height: 100%;
+}
