@@ -1,7 +1,6 @@
 'use strict'
 
 import React, { Component } from 'react'
-import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { postNewProductServer, getSingleProductServer, updateProductServer } from '../store'
 import history from '../history'
@@ -26,7 +25,6 @@ class ProductForm extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-
   }
 
   handleSubmit = (event) => {

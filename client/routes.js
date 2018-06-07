@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import ProductList from './components/product-list'
-import ProductForm from './components/product-form'
+import NewProductForm from './components/new-product-form'
 import Navbar from './components/navbar'
 import { Login, Signup } from './components/auth-form'
 import { me, logout } from './store/user'
@@ -29,8 +28,7 @@ class Routes extends Component {
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
-        <Route exact path='/newproduct' render={() =>
-          <ProductForm action='newproduct' />} />
+        <Route path='/newproduct' component={NewProductForm} />
         <Route exact path='/products/:productId' component={SelectedProduct} />
         <Route exact path='/products/:productId/edit' component={ProductForm} />
         <Route exact path='/categories' component={CategorySelector} />
