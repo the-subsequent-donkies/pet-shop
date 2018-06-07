@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import { postNewProductServer, getSingleProductServer, updateProductServer } from '../store'
+import history from '../history'
 
 class ProductForm extends Component {
   constructor(props) {
@@ -13,12 +14,10 @@ class ProductForm extends Component {
       inventory: '',
       price: '',
       imgUrl: '',
-      description: '',
-      fireRedirect: false
+      description: ''
     }
     if (!this.props.action === 'newproduct') {
       this.props.get(this.props.selectedProduct.id)
-        .then((select) => { console.log(select) })
     }
   }
 
@@ -32,26 +31,35 @@ class ProductForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const newProduct = {
+    this.invokePostOrPut()
+    // if (this.props.action === 'newproduct') {
+    //   this.props.post(newProduct)
+    // } else {
+    //   console.log(this.props)
+    //   newProduct.id = this.props.match.params.productId
+    //   this.props.put(newProduct)
+    // }
+  }
+
+  invokePostOrPut = async () => {
+    let newProduct = {
       name: this.state.name,
       inventory: this.state.inventory,
       price: this.state.price,
       imgUrl: this.state.imgUrl,
       description: this.state.description
     }
-    if (this.props.action === 'newproduct') {
-      this.props.post(newProduct)
-    } else {
-      console.log(this.props)
-      newProduct.id = this.props.match.params.productId
-      this.props.put(newProduct)
-    }
-    this.setState({ fireRedirect: true })
+    const newProductId = await this.props.post(newProduct)
+    // if (this.props.action === 'newproduct') {
+    //   newProduct = await this.props.post(newProduct)
+    // } else {
+    //   newProduct.id = this.props.match.params.productId
+    //   this.props.put(newProduct)
+    // }
+    history.push(`/products/${newProductId}`)
   }
 
-
   render() {
-    console.log("in form")
     return (
       <div className='product-form'>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
@@ -114,7 +122,6 @@ class ProductForm extends Component {
           </div>
           <button className='btn btn-primary' type='submit'>Add Product</button>
         </form>
-        {this.state.fireRedirect && (<Redirect to={'/'} />)}
       </div>
     )
   }
