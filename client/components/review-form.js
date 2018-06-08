@@ -14,13 +14,6 @@ class ReviewForm extends Component {
     }
   }
 
-  // componentDidMount = () => {
-  //   this.setState({
-  //     product: this.props.product,
-  //     user: this.props.user
-  //   })
-  // }
-
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
