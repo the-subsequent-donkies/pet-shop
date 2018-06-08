@@ -27,7 +27,6 @@ class Routes extends Component {
     return (
       <div>
         <Navbar />
-        <CategorySelector />
         <Route exact path='/' component={Home} />
         <Route exact path='/categories/:categoryId' component={Home} />
         <Route exact path='/login' component={Login} />

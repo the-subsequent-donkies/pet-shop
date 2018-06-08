@@ -19,11 +19,40 @@ router.get('/:orderId', async (req, res, next) => {
   try {
     const response = await Order.findAll({
       where: { id: req.params.orderId },
-      include: [{ model: LineItem, as: 'lineitems' }]
+      include: [{ model: LineItem, as: 'line_items' }]
     })
     res.json(response)
   } catch (err) {
     next(err)
+  }
+})
+
+router.get('/me/:userId', async (req, res, next) => {
+  try {
+    Order.find({
+      where: {
+        userId: parseInt(req.params.userId),
+        status: 'Initialized',
+      },
+      include: [{ model: LineItem}]
+    }).then((foundOrder) => {
+      foundOrder ?
+        res.json(foundOrder) :
+        Order.create({
+          userId: parseInt(req.params.userId),
+          status: 'Initialized',
+          submittedAt: Date.now()
+        },
+        {
+          include: [
+            {model: LineItem}
+          ]
+        }).then((createdOrder) => {
+          res.json(createdOrder)
+        })
+    })
+  } catch(e) {
+    next(e)
   }
 })
 

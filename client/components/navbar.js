@@ -19,7 +19,7 @@ const Navbar = (props) => (
           </div> :
           <button onClick={props.handleClick}>Logout</button>
       }
-      <Link to="/Order">Cart ({'#_ITEMS'})</Link>
+      <Link to="/order">Cart ({'#_ITEMS'})</Link>
     </div>
   </nav>
 )
