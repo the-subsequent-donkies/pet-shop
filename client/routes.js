@@ -6,12 +6,12 @@ import ProductList from './components/product-list'
 import ProductForm from './components/product-form'
 import Navbar from './components/navbar'
 import { Login, Signup } from './components/auth-form'
+import Order from './components/user-order'
 import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 import { Home } from './components'
 import SelectedProduct from './components/selected-product'
 //import { me } from './store'
-
 
 
 /**
@@ -34,12 +34,11 @@ class Routes extends Component {
         <Route exact path='/newproduct' render={() => <ProductForm action='newproduct' />} />
         <Route exact path='/products/:productId/edit' component={ProductForm} />
         <Route exact path='/categories' component={CategorySelector} />
+        <Route exact path="/order" component={Order} />
       </div>
-
     )
   }
 }
-
 
 
 /**
