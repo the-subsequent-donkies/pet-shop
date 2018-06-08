@@ -23,7 +23,7 @@ class ProductForm extends Component {
         name: this.props.name,
         inventory: this.props.inventory,
         price: this.props.price,
-        imgUrl: this.props.name,
+        imgUrl: this.props.imgUrl,
         description: this.props.description
       })
     }
