@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { getSingleProductServer } from '../store/product'
 import { getFilteredReviewsServer } from '../store/reviews'
 import SingleReview from './single-review'
+import NewReviewForm from './new-review-form'
 
 class SelectedProduct extends Component {
   constructor(props) {
@@ -26,6 +27,12 @@ class SelectedProduct extends Component {
           <h2>Inventory: {this.props.product.inventory}</h2>
         </div>
         <div className='reviews-condensed'>
+          <div>
+            <NewReviewForm />
+          </div>
+          <div>
+            <h2>Reviews:</h2>
+          </div>
           {this.props.reviews && (
             this.props.reviews.map((review) => {
               return (<SingleReview review={review} key={review.id} userId={review.userId} />)
