@@ -7,6 +7,7 @@ export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 export const POST_NEW_PRODUCT = 'POST_NEW_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY'
 
 // action creators
 
@@ -34,6 +35,13 @@ const getSingleProduct = (selectedProduct) => {
   return {
     type: GET_SINGLE_PRODUCT,
     selectedProduct
+  }
+}
+
+const getProductsByCategory = (products) => {
+  return {
+    type: GET_PRODUCTS_BY_CATEGORY,
+    products
   }
 }
 
@@ -69,6 +77,13 @@ export const getSingleProductServer = (id) => {
   }
 }
 
+export const getProductsByCategoryServer = (categoryId) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`/api/products/categories/${categoryId}`)
+    dispatch(getProductsByCategory(data))
+  }
+}
+
 // reducers
 
 export const productsReducer = (state = [], action) => {
@@ -94,3 +109,11 @@ export const selectedProductReducer = (state = {}, action) => {
   }
 }
 
+export const filteredProductReducer = (state = [], action) => {
+  switch (action.type) {
+    case GET_PRODUCTS_BY_CATEGORY:
+      return action.products
+    default:
+      return state
+  }
+}
