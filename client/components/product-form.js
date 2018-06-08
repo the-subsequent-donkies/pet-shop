@@ -17,6 +17,18 @@ class ProductForm extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.name && this.props.name !== this.state.name) {
+      this.setState({
+        name: this.props.name,
+        inventory: this.props.inventory,
+        price: this.props.price,
+        imgUrl: this.props.name,
+        description: this.props.description
+      })
+    }
+  }
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -36,8 +48,8 @@ class ProductForm extends Component {
       imgUrl: this.state.imgUrl,
       description: this.state.description
     }
-    if (this.props.selectedProduct) {
-      product.id = this.props.selectedProduct.id
+    if (this.props.id) {
+      product.id = this.props.id
     }
     const productId = await this.props.formAction(product)
     history.push(`/products/${productId}`)

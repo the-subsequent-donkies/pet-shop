@@ -14,7 +14,12 @@ class EditProductForm extends ProductForm {
     const { name, inventory, price, imgUrl, description, id } = this.props.selectedProduct
     return (
       <ProductForm
-        selectedProduct={{ name, inventory, price, imgUrl, description, id }}
+        name={name}
+        inventory={inventory}
+        price={price}
+        imgUrl={imgUrl}
+        description={description}
+        id={id}
         formAction={this.props.updateProduct}
       />
     )
