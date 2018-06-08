@@ -8,6 +8,7 @@ const seed = async () => {
 
   await db.sync({ force: true })
 
+
   await Promise.all(categoryData.map(cData => Category.create({...cData})))
 
   console.log(`
