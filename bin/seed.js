@@ -5,8 +5,9 @@ const { User, LineItem, Order, Product, Review, Category, ProductCategory } = re
 const { productData, categoryData, productCategoryData, reviewData, userData } = require('./data')
 
 const seed = async () => {
-
+  console.log('Before db sync')
   await db.sync({ force: true })
+  console.log('After db sync')
 
   await Promise.all(categoryData.map(cData => Category.create({...cData})))
 
@@ -36,6 +37,8 @@ const seed = async () => {
 
   db.close()
 }
+
+console.log('About to run seed')
 
 seed().catch(error => {
   db.close()
