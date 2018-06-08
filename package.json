@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A Website for Pet Products",
   "engines": {
-    "node": ">= 7.0.0"
+    "node": ">= 8.0.0"
   },
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "deploy": "script/deploy",
     "lint": "eslint ./ --ignore-path .gitignore",
     "postinstall": "touch secrets.js",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
     "seed": "node bin/seed",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
