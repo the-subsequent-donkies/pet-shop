@@ -53,10 +53,11 @@ router.post('/', checkAccess, async (req, res, next) => {
 // PUT Routes
 
 router.put('/:productId', checkAccess, async (req, res, next) => {
+  const { name, inventory, price, imgUrl, description } = req.body
   try {
     const product = await Product.findById(req.params.productId)
-    const addedProduct = await product.update(req.body)
-    res.status(200).json(addedProduct)
+    const updatedProduct = await product.update({ name, inventory, price, imgUrl, description })
+    res.status(200).json(updatedProduct)
   } catch (err) {
     next(err)
   }
