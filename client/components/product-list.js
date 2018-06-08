@@ -22,7 +22,7 @@ class ProductList extends Component {
 
   render() {
     let products
-    if (Object.keys(this.props.match.params).length < 1) {
+    if (this.props.match.params && Object.keys(this.props.match.params).length < 1) {
       products = this.props.products
     } else {
       products = this.props.filteredProducts
