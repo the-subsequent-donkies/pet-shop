@@ -7,12 +7,12 @@ import NewProductForm from './components/new-product-form'
 import EditProductForm from './components/edit-product-form'
 import Navbar from './components/navbar'
 import { Login, Signup } from './components/auth-form'
+import Order from './components/user-order'
 import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 import { Home } from './components'
 import SelectedProduct from './components/selected-product'
 //import { me } from './store'
-
 
 
 /**
@@ -27,18 +27,20 @@ class Routes extends Component {
     return (
       <div>
         <Navbar />
-        <Route exact path='/' component={Home} />
+        <CategorySelector />
+        <Route exact path='/' component={ProductList} />
+        <Route exact path='/categories/:categoryId' component={ProductList} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <Route path='/newproduct' component={NewProductForm} />
         <Route exact path='/products/:productId' component={SelectedProduct} />
         <Route exact path='/products/:productId/edit' component={EditProductForm} />
         <Route exact path='/categories' component={CategorySelector} />
+        <Route exact path="/order" component={Order} />
       </div>
     )
   }
 }
-
 
 
 /**
