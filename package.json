@@ -11,7 +11,7 @@
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
     "lint": "eslint ./ --ignore-path .gitignore",
-    "postinstall": "touch secrets.js node bin/seed",
+    "postinstall": "touch secrets.js",
     "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
     "seed": "node bin/seed",
     "start": "node server",
