@@ -11,7 +11,9 @@ class EditProductForm extends Component {
     this.props.getProduct(this.props.match.params.productId)
   }
   render () {
-    const { name, inventory, price, imgUrl, description, id } = this.props.selectedProduct
+    const {
+      name, inventory, price, imgUrl, description, id
+    } = this.props.selectedProduct
     return (
       <ProductForm
         name={name}

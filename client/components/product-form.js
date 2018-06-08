@@ -119,14 +119,4 @@ class ProductForm extends Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   selectedProduct: state.selectedProduct
-// })
-
-// const mapDispatchToProps = (dispatch) => ({
-//   put: (product) => dispatch(updateProductServer(product)),
-//   post: (newProduct) => dispatch(postNewProductServer(newProduct)),
-//   get: (selectedProductId) => dispatch(getSingleProductServer(selectedProductId))
-// })
-
 export default ProductForm
