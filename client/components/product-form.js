@@ -120,7 +120,7 @@ class ProductForm extends Component {
               </div>
           </div>
           <div className='button-row'>
-            <button className='btn btn-primary' type='submit'>Add Product</button>
+            <button className='btn btn-primary' type='submit'>{this.props.buttonAction}</button>
           </div>
         </form>
       </div>

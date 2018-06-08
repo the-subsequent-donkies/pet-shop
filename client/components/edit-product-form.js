@@ -21,6 +21,7 @@ class EditProductForm extends ProductForm {
         description={description}
         id={id}
         formAction={this.props.updateProduct}
+        buttonAction='Save changes'
       />
     )
   }

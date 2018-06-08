@@ -7,7 +7,10 @@ import ProductForm from './product-form'
 
 const NewProductForm = (props) => {
   return (
-    <ProductForm formAction={props.postNewProduct} />
+    <ProductForm
+      formAction={props.postNewProduct}
+      buttonAction='Add product'
+    />
   )
 }
 
