@@ -35,7 +35,7 @@ class SelectedProduct extends Component {
           </div>
           {this.props.reviews && (
             this.props.reviews.map((review) => {
-              return (<SingleReview review={review} key={review.id} userId={review.userId} />)
+              return (<SingleReview review={review} key={review.id} userId={review.userId} user={this.props.user} />)
             }))
           }
         </div>
@@ -47,14 +47,15 @@ class SelectedProduct extends Component {
 const mapStateToProps = state => {
   return {
     product: state.selectedProduct,
-    reviews: state.reviews
+    reviews: state.reviews,
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     getSingleProductServer: (selectedProductId) => dispatch(getSingleProductServer(selectedProductId)),
-    getFilteredReviewsServer: (selectedProductId) => dispatch(getFilteredReviewsServer(selectedProductId))
+    getFilteredReviewsServer: (selectedProductId) => dispatch(getFilteredReviewsServer(selectedProductId)),
   }
 }
 
