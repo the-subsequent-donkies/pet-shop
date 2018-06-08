@@ -52,6 +52,7 @@ export const updateProductServer = (product) => {
   return async (dispatch) => {
     const { data } = await axios.put(`/api/products/${product.id}`, product)
     dispatch(updateProduct(data))
+    return data.id
   }
 }
 

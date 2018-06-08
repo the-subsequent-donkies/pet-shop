@@ -6,7 +6,7 @@ import { postNewProductServer, getSingleProductServer, updateProductServer } fro
 import history from '../history'
 
 class ProductForm extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       name: '',
@@ -15,11 +15,7 @@ class ProductForm extends Component {
       imgUrl: '',
       description: ''
     }
-    if (!this.props.action === 'newproduct') {
-      this.props.get(this.props.selectedProduct.id)
-    }
   }
-
 
   handleChange = (event) => {
     this.setState({
@@ -33,15 +29,18 @@ class ProductForm extends Component {
   }
 
   invokePostOrPut = async () => {
-    let newProduct = {
+    const product = {
       name: this.state.name,
       inventory: this.state.inventory,
       price: this.state.price,
       imgUrl: this.state.imgUrl,
       description: this.state.description
     }
-    const newProductId = await this.props.post(newProduct)
-    history.push(`/products/${newProductId}`)
+    if (this.props.selectedProduct) {
+      product.id = this.props.selectedProduct.id
+    }
+    const productId = await this.props.formAction(product)
+    history.push(`/products/${productId}`)
   }
 
   render() {
@@ -117,14 +116,14 @@ class ProductForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  selectedProduct: state.selectedProduct
-})
+// const mapStateToProps = (state) => ({
+//   selectedProduct: state.selectedProduct
+// })
 
-const mapDispatchToProps = (dispatch) => ({
-  put: (product) => dispatch(updateProductServer(product)),
-  post: (newProduct) => dispatch(postNewProductServer(newProduct)),
-  get: (selectedProductId) => dispatch(getSingleProductServer(selectedProductId))
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   put: (product) => dispatch(updateProductServer(product)),
+//   post: (newProduct) => dispatch(postNewProductServer(newProduct)),
+//   get: (selectedProductId) => dispatch(getSingleProductServer(selectedProductId))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductForm)
+export default ProductForm
