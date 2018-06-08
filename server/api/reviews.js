@@ -28,11 +28,14 @@ router.get('/:reviewId', async (req, res, next) => {
   }
 })
 
-// POST Routes /api/products
+// POST Routes
 
 router.post('/', async (req, res, next) => {
   try {
-    const addedReview = await Review.create(req.body)
+    const review = { content: req.body.content, stars: req.body.stars }
+    const addedReview = await Review.create(review)
+    addedReview.setProduct(req.body.product.id)
+    addedReview.setUser(req.body.user.id)
     res.status(201).json(addedReview)
   } catch (err) {
     next(err)
@@ -43,7 +46,6 @@ router.post('/', async (req, res, next) => {
 // PUT Routes
 
 router.put('/:reviewId', async (req, res, next) => {
-
   try {
     const review = await Review.findById(req.params.reviewId)
     const addedReview = await review.update(req.body)
