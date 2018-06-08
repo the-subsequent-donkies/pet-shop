@@ -17,16 +17,17 @@ class ProductForm extends Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.name && this.props.name !== this.state.name) {
-      this.setState({
-        name: this.props.name,
-        inventory: this.props.inventory,
-        price: this.props.price,
-        imgUrl: this.props.imgUrl,
-        description: this.props.description
-      })
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.name && nextProps.name !== prevState.name) {
+      return {
+        name: nextProps.name,
+        inventory: nextProps.inventory,
+        price: nextProps.price,
+        imgUrl: nextProps.imgUrl,
+        description: nextProps.description
+      }
     }
+    return null
   }
 
   handleChange = (event) => {
