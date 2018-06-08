@@ -37,10 +37,10 @@ class ProductForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.invokePostOrPut()
+    this.invokeSubmit()
   }
 
-  invokePostOrPut = async () => {
+  invokeSubmit = async () => {
     const product = { ...this.state }
     const productId = await this.props.formAction(product)
     history.push(`/products/${productId}`)

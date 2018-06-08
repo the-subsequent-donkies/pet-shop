@@ -10,14 +10,17 @@ const Navbar = (props) => (
     {
       (props.user.isAdmin) ? <Link to="/newproduct"><button>New Product</button></Link> : <div />
     }
-    {
-      Object.keys(props.user).length === 0 ?
-        <div>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div> :
-        <button onClick={props.handleClick}>Logout</button>
-    }
+    <div>
+      {
+        Object.keys(props.user).length === 0 ?
+          <div>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div> :
+          <button onClick={props.handleClick}>Logout</button>
+      }
+      <Link to="/Order">Cart ({'#_ITEMS'})</Link>
+    </div>
   </nav>
 )
 
