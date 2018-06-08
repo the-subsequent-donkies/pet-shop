@@ -1,8 +1,6 @@
 'use strict'
 
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { postNewProductServer, getSingleProductServer, updateProductServer } from '../store'
 import history from '../history'
 
 class ProductForm extends Component {
@@ -24,7 +22,8 @@ class ProductForm extends Component {
         inventory: nextProps.inventory,
         price: nextProps.price,
         imgUrl: nextProps.imgUrl,
-        description: nextProps.description
+        description: nextProps.description,
+        id: nextProps.id
       }
     }
     return null
@@ -42,16 +41,7 @@ class ProductForm extends Component {
   }
 
   invokePostOrPut = async () => {
-    const product = {
-      name: this.state.name,
-      inventory: this.state.inventory,
-      price: this.state.price,
-      imgUrl: this.state.imgUrl,
-      description: this.state.description
-    }
-    if (this.props.id) {
-      product.id = this.props.id
-    }
+    const product = { ...this.state }
     const productId = await this.props.formAction(product)
     history.push(`/products/${productId}`)
   }
