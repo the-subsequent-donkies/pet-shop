@@ -37,11 +37,11 @@ router.get('/:orderId', async (req, res, next) => {
   }
 })
 
-router.get('/me/:userId', async (req, res, next) => {
+router.get('/me/:userId', (req, res, next) => {
   try {
     Order.find({
       where: {
-        userId: parseInt(req.params.userId),
+        userId: +req.params.userId,
         status: 'Initialized',
       },
       include: [
@@ -53,12 +53,11 @@ router.get('/me/:userId', async (req, res, next) => {
       foundOrder ?
         res.json(foundOrder) :
         Order.create({
-          userId: parseInt(req.params.userId),
+          userId: +req.params.userId,
           status: 'Initialized',
           submittedAt: Date.now()
         })
         .then((createdOrder) => {
-          console.log('createdOrder: ', createdOrder)
           return Order.findOne({
             where: {
               id: createdOrder.id
@@ -70,13 +69,12 @@ router.get('/me/:userId', async (req, res, next) => {
             ]
           })
         })
-        .then((foundOrder) => {
-          console.log('foundOrder>>>>>>>>>>>>>>>>>>>>.', foundOrder)
-          res.json(foundOrder)
+        .then((result) => {
+          res.json(result)
         })
     })
-  } catch (e) {
-    next(e)
+  } catch (err) {
+    next(err)
   }
 })
 
@@ -93,8 +91,8 @@ router.post('/', async (req, res, next) => {
 router.put('/:orderId', async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.orderId)
-    const addedOrder = await order.update(req.body)
-    res.status(200).json(addedReview)
+    const updatedOrder = await order.update(req.body)
+    res.status(200).json(updatedOrder)
   } catch (err) {
     next(err)
   }
