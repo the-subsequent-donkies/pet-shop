@@ -12,6 +12,7 @@ import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 import { Home, ProductList } from './components'
 import SelectedProduct from './components/selected-product'
+import EditReviewForm from './components/edit-review-form'
 //import { me } from './store'
 
 
@@ -33,6 +34,7 @@ class Routes extends Component {
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <Route path='/newproduct' component={NewProductForm} />
+        <Route path='/reviews/editreview/:reviewId' component={EditReviewForm} />
         <Route exact path='/products/:productId' component={SelectedProduct} />
         <Route exact path='/products/:productId/edit' component={EditProductForm} />
         <Route exact path='/categories' component={CategorySelector} />

@@ -6,6 +6,7 @@ export const GET_REVIEWS = 'GET_REVIEWS'
 export const GET_FILTERED_REVIEWS = 'GET_FILTERED_REVIEWS'
 export const POST_NEW_REVIEW = 'POST_NEW_REVIEW'
 export const UPDATE_REVIEW = 'UPDATE_REVIEW'
+export const GET_SINGLE_REVIEW = 'GET_SINGLE_REVIEW'
 
 // action creators
 const postNewReview = (newReview) => {
@@ -35,6 +36,13 @@ const getFilteredReviews = (filteredReviews) => {
   }
 }
 
+const getSingleReview = (review) => {
+  return {
+    type: GET_SINGLE_REVIEW,
+    review
+  }
+}
+
 // thunk creators
 export const postNewReviewServer = (newReview) => {
   return async (dispatch) => {
@@ -44,8 +52,9 @@ export const postNewReviewServer = (newReview) => {
 }
 
 export const updateReviewServer = (review) => {
+  console.log('updatereviewserver:', review)
   return async (dispatch) => {
-    const { data } = await axios.put(`/api/reviews/${review.id}`, review)
+    const { data } = await axios.put(`/api/reviews/editreview/${review.reviewId}`, review)
     dispatch(updateReview(data))
   }
 }
@@ -64,9 +73,17 @@ export const getFilteredReviewsServer = (id) => {
   }
 }
 
+export const getSingleReviewServer = (id) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`/api/reviews/editreview/${id}`)
+    dispatch(getSingleReview(data))
+  }
+}
+
 // reducers
 
 export const reviewsReducer = (state = [], action) => {
+  console.log('inside review reducer')
   switch (action.type) {
     case GET_REVIEWS:
       return action.reviews
@@ -77,6 +94,15 @@ export const reviewsReducer = (state = [], action) => {
       return [...otherReviews, action.review]
     case GET_FILTERED_REVIEWS:
       return action.filteredReviews
+    default:
+      return state
+  }
+}
+
+export const selectedReviewReducer = (state = {}, action) => {
+  switch (action.type) {
+    case GET_SINGLE_REVIEW:
+      return action.review
     default:
       return state
   }

@@ -35,7 +35,7 @@ class SelectedProduct extends Component {
           </div>
           {this.props.reviews && (
             this.props.reviews.map((review) => {
-              return (<SingleReview review={review} key={review.id} userId={review.userId} user={this.props.user} />)
+              return (<SingleReview review={review} key={review.id} user={review.user} loggedUser={this.props.user} />)
             }))
           }
         </div>
