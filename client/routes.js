@@ -12,7 +12,7 @@ import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 import { Home, ProductList } from './components'
 import SelectedProduct from './components/selected-product'
-import { getOrderServer } from './store/order';
+import { getOrderServer, getLocalOrderServer, createLocalOrderServer } from './store/order';
 //import { me } from './store'
 
 
@@ -22,9 +22,25 @@ import { getOrderServer } from './store/order';
 class Routes extends Component {
   constructor(props) {
     super(props)
+    // console.log(localStorage.getItem('orderId'))
     this.props.loadInitialData()
+    // .then(() => {
+    //   this.props.getOrder(this.props.user.id)
+    // })
     .then( () => {
-      this.props.getOrder(this.props.user.id)
+      if (this.props.isLoggedIn) {
+        return this.props.getOrder(this.props.user.id)
+      } else if (!localStorage.getItem('orderId') || localStorage.getItem('orderId') === 'undefined') {
+          return this.props.createLocalOrder()
+      } else {
+        return this.props.getLocalOrder(localStorage.getItem('orderId'))
+      }
+    })
+    .then(() => {
+      if (!this.props.isLoggedIn) {
+        localStorage.setItem('orderId', this.props.orderId)
+        console.log('localStorage', localStorage)
+      }
     })
   }
 
@@ -36,14 +52,14 @@ class Routes extends Component {
     return (
       <div>
         <Navbar />
-        <Route exact path='/' component={Home} />
-        <Route exact path='/categories/:categoryId' component={Home} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/signup' component={Signup} />
-        <Route path='/newproduct' component={NewProductForm} />
-        <Route exact path='/products/:productId' component={SelectedProduct} />
-        <Route exact path='/products/:productId/edit' component={EditProductForm} />
-        <Route exact path='/categories' component={CategorySelector} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/categories/:categoryId" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route path="/newproduct" component={NewProductForm} />
+        <Route exact path="/products/:productId" component={SelectedProduct} />
+        <Route exact path="/products/:productId/edit" component={EditProductForm} />
+        <Route exact path="/categories" component={CategorySelector} />
         <Route exact path="/order" component={Order} />
       </div>
     )
@@ -59,6 +75,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     user: state.user,
+    orderId: state.order.id,
     isLoggedIn: !!state.user.id
   }
 }
@@ -66,7 +83,9 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData: () => dispatch(me()),
-    getOrder: (userId) => dispatch(getOrderServer(userId))
+    getOrder: (userId) => dispatch(getOrderServer(userId)),
+    createLocalOrder: () => dispatch(createLocalOrderServer()),
+    getLocalOrder: (orderId) => dispatch(getLocalOrderServer(orderId))
   }
 }
 

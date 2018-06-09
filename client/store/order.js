@@ -5,6 +5,8 @@ const GET_ORDER = 'GET_ORDER'
 const ADD_LINEITEM_TO_ORDER = 'ADD_LINEITEM_TO_ORDER'
 const DELETE_LINEITEM = 'DELETE_LINEITEM'
 const UPDATE_LINEITEM = 'UPDATE_LINEITEM'
+const GET_LOCAL_ORDER = 'GET_LOCAL_ORDER'
+const CREATE_LOCAL_ORDER = 'CREATE_LOCAL_ORDER'
 
 const defaultOrder = {
   line_items: []
@@ -14,6 +16,8 @@ const getOrder = order => ({type: GET_ORDER, order})
 const addLineitemToOrder = lineitem => ({type: ADD_LINEITEM_TO_ORDER, lineitem})
 const deleteLineitem = lineitemId => ({type: DELETE_LINEITEM, lineitemId})
 const updateLineitem = (lineitemId, quantity) => ({type: UPDATE_LINEITEM, lineitemId, quantity})
+const getLocalOrder = order => ({type: GET_LOCAL_ORDER, order})
+const createLocalOrder = order => ({type: CREATE_LOCAL_ORDER, order})
 
 export const getOrderServer = (userId) => {
   return async (dispatch) => {
@@ -47,6 +51,20 @@ export const updateLineitemServer = (lineitemId, quantity) => {
   }
 }
 
+export const getLocalOrderServer = (orderId) => {
+  return async (dispatch) => {
+    const {data} = await axios.get(`/api/orders/${orderId}`)
+    dispatch(getLocalOrder(data))
+  }
+}
+
+export const createLocalOrderServer = () => {
+  return async (dispatch) => {
+    const {data} = await axios.post(`/api/orders`)
+    dispatch(createLocalOrder(data))
+  }
+}
+
 export default function (state = defaultOrder, action) {
   let tempItems
   switch (action.type) {
@@ -75,6 +93,10 @@ export default function (state = defaultOrder, action) {
         return lineItem
       })
       return {...state, line_items: tempItems}
+    case CREATE_LOCAL_ORDER:
+      return action.order
+    case GET_LOCAL_ORDER:
+      return action.order
     default:
       return state
   }

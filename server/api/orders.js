@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:orderId', async (req, res, next) => {
   try {
-    const response = await Order.findAll({
+    const response = await Order.findOne({
       where: { id: req.params.orderId },
       include: [
         {model: LineItem,
@@ -81,8 +81,23 @@ router.get('/me/:userId', (req, res, next) => {
 //POST routes
 router.post('/', async (req, res, next) => {
   try {
-    const addedOrder = await Order.create(req.body)
-    res.status(201).json(addedOrder)
+    const addedOrder = await Order.create({
+      ...req.body,
+      submittedAt: Date.now(),
+      status: 'Initialized'
+    })
+    const gotOrder = await Order.findOne({
+      where: {
+        id: addedOrder.id
+      },
+      include: [
+        {model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product'}]}
+      ]
+    })
+    console.log(gotOrder)
+    res.status(201).json(gotOrder)
   } catch (err) {
     next(err)
   }
