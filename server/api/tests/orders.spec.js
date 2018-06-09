@@ -31,8 +31,22 @@ describe('Order Routes', () => {
       currentPrice: '2.00',
       quantity: '1',
     }
+    const lineItemTwo = {
+      productId: '2',
+      currentPrice: '4.00',
+      quantity: '2',
+    }
     const productOne = {
       id: '1',
+      name: 'Bone',
+      inventory: '4',
+      price: '2.50',
+      imgUrl: 'https://i.imgur.com/zzD13aO.jpg',
+      description: 'This is a fun chew toy for dogs',
+      category: 'dogs'
+    }
+    const productTwo = {
+      id: '2',
       name: 'Bone',
       inventory: '4',
       price: '2.50',
@@ -50,10 +64,13 @@ describe('Order Routes', () => {
     }
     beforeEach(async () => {
       await Product.create(productOne)
-      await Order.create(orderOne)
-      await Order.create(orderTwo)
-      await LineItem.create(lineItemOne)
-
+      await Product.create(productTwo)
+      const orderWon = await Order.create(orderOne)
+      const orderToo = await Order.create(orderTwo)
+      const lineItemWon = await LineItem.create(lineItemOne)
+      const lineItemToo = await LineItem.create(lineItemTwo)
+      await orderWon.addLine_item(lineItemWon)
+      await orderToo.addLine_item(lineItemToo)
 
     })
 
@@ -73,6 +90,7 @@ describe('Order Routes', () => {
         .get('/api/orders/2')
         .expect(200)
         .then(res => {
+          console.log('what is req.body in my get by id route', res.body[0])
           expect(res.body[0]).to.be.an('object')
           expect(res.body[0].status).to.be.equal(orderTwo.status)
         })
