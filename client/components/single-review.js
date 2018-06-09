@@ -14,7 +14,7 @@ const SingleReview = (props) => {
         <ReactStars value={parseInt(props.review.stars)} edit={false} />
       </div>
       <div>
-        <h5>By: {props.user.name || "Name"} </h5>
+        <h5>By: {props.user.name} </h5>
       </div>
       {(props.review.userId === props.loggedUser.id) &&
         (

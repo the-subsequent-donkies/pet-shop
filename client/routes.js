@@ -12,7 +12,11 @@ import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 import { Home, ProductList } from './components'
 import SelectedProduct from './components/selected-product'
+<<<<<<< HEAD
 import EditReviewForm from './components/edit-review-form'
+=======
+import { getOrderServer } from './store/order';
+>>>>>>> 36be743c34d347738b0e53e3f53b5762487e34c0
 //import { me } from './store'
 
 
@@ -20,15 +24,22 @@ import EditReviewForm from './components/edit-review-form'
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
     this.props.loadInitialData()
+    .then( () => {
+      this.props.getOrder(this.props.user.id)
+    })
   }
+
+  // async componentDidMount() {
+  //   await this.props.loadInitialData()
+  // }
 
   render() {
     return (
       <div>
         <Navbar />
-        <CategorySelector />
         <Route exact path='/' component={Home} />
         <Route exact path='/categories/:categoryId' component={Home} />
         <Route exact path='/login' component={Login} />
@@ -52,15 +63,15 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
+    user: state.user,
     isLoggedIn: !!state.user.id
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData() {
-      dispatch(me())
-    }
+    loadInitialData: () => dispatch(me()),
+    getOrder: (userId) => dispatch(getOrderServer(userId))
   }
 }
 

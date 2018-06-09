@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import ProductList from './product-list';
+import CategorySelector from './category-selector'
 
 /**
  * COMPONENT
@@ -17,6 +18,7 @@ class Home extends Component {
         {isLoggedIn && (
           <h3>Welcome, {email}</h3>
         )}
+        <CategorySelector />
         <ProductList match={this.props.match || null} />
       </div>
     )
