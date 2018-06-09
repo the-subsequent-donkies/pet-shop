@@ -10,7 +10,7 @@
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
-    "heroku-postbuild": "npm run deploy & npm run seed",
+    "heroku-postbuild": "npm run build-client & npm run seed",
     "lint": "eslint ./ --ignore-path .gitignore",
     "postinstall": "touch secrets.js",
     "seed": "node bin/seed",
