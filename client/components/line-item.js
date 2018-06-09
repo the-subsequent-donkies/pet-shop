@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { deleteLineitemServer } from '../store/order'
+import { deleteLineitemServer, updateLineitemServer } from '../store/order'
 
 const tempProduct = {
   name: 'Bone',
@@ -28,27 +28,29 @@ class LineItem extends Component {
 
   handleChange = (event) => {
     this.setState({
-      quantity: event.target.value
+      quantity: parseInt(event.target.value)
     })
   }
 
-  handleUpdate = (event) => {
+  handleUpdate = async (event) => {
     // Call thunk to update lineitem (quantity)
     event.preventDefault()
-    console.log('UPDATE LINEITEM PLACEHOLDER')
+    if (this.state.quantity === 0) {
+      await this.props.deleteItem(this.props.lineItem.id)
+    } else {
+      await this.props.updateItem(this.props.lineItem.id, this.state.quantity)
+    }
   }
 
   handleDelete = async (event) => {
     // Call thunk to delete lineitem
     event.preventDefault()
     await this.props.deleteItem(this.props.lineItem.id)
-    console.log('DELETE LINEITEM PLACEHOLDER')
   }
 
   render() {
     const lineItem = this.props.lineItem
     const product = lineItem.product
-    console.log('lineItem', lineItem)
 
     return (
       <div className="line-item-container container">
@@ -78,7 +80,8 @@ class LineItem extends Component {
 
 const mapDispatch = (dispatch) => {
   return {
-    deleteItem: (id) => dispatch(deleteLineitemServer(id))
+    deleteItem: (id) => dispatch(deleteLineitemServer(id)),
+    updateItem: (id, quantity) => dispatch(updateLineitemServer(id, quantity))
   }
 }
 

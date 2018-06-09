@@ -56,15 +56,23 @@ router.get('/me/:userId', async (req, res, next) => {
           userId: parseInt(req.params.userId),
           status: 'Initialized',
           submittedAt: Date.now()
-        },
-        {
-          include: [
-            {model: LineItem,
-              as: 'line_items',
-              include: [{ model: Product, as: 'product'}]}
-          ]
-        }).then((createdOrder) => {
-          res.json(createdOrder)
+        })
+        .then((createdOrder) => {
+          console.log('createdOrder: ', createdOrder)
+          return Order.findOne({
+            where: {
+              id: createdOrder.id
+            },
+            include: [
+              {model: LineItem,
+                as: 'line_items',
+                include: [{ model: Product, as: 'product'}]}
+            ]
+          })
+        })
+        .then((foundOrder) => {
+          console.log('foundOrder>>>>>>>>>>>>>>>>>>>>.', foundOrder)
+          res.json(foundOrder)
         })
     })
   } catch (e) {
