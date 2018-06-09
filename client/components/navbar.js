@@ -19,14 +19,15 @@ const Navbar = (props) => (
           </div> :
           <button onClick={props.handleClick}>Logout</button>
       }
-      <Link to="/order">Cart ({'#_ITEMS'})</Link>
+      <Link to="/order">Cart ({props.itemNum})</Link>
     </div>
   </nav>
 )
 
 const mapState = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    itemNum: state.order.line_items.length
   }
 }
 
