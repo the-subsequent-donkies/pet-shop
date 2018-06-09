@@ -51,7 +51,7 @@ describe('Product API routes', () => {
         .get('/api/products/categories/1')
         .expect(200)
         .then(res => {
-          expect(res.body).to.be.an('string')
+          expect(res.body).to.be.an('array')
           expect(res.body[0].name).to.be.equal(newProduct.name)
         })
     })
