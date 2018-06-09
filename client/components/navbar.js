@@ -1,28 +1,76 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {logout} from '../store/user'
+import { logout } from '../store/user'
+import { Menu } from 'semantic-ui-react'
 
-const Navbar = (props) => (
-  <nav className="navbar navbar-dark bg-dark">
-    <Link to="/"><h3 style={{ margin: '0.5rem' }}>Pet Shop</h3></Link>
-    {
-      (props.user.isAdmin) ? <Link to="/newproduct"><button>New Product</button></Link> : <div />
-    }
-    <div>
-      {
-        Object.keys(props.user).length === 0 ?
-          <div>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div> :
-          <button onClick={props.handleClick}>Logout</button>
-      }
-      <Link to="/order">Cart ({props.itemNum})</Link>
-    </div>
-  </nav>
-)
+class Navbar extends Component {
+  state = {}
+
+  handleItemClick = (event, { name }) => this.setState({ activeItem: name })
+
+  render () {
+    const { activeItem } = this.state
+    const isLoggedIn = Object.keys(this.props.user).length === 1
+
+    return (
+      <Menu>
+        <Menu.Item
+          as={Link}
+          name='home'
+          to='/'
+          active={activeItem === 'home'}
+          content='Pet Shop'
+        />
+        {
+          (this.props.user.isAdmin) ?
+            <Menu.Item
+              as={Link}
+              name='newproduct'
+              to='/newproduct'
+              active={activeItem === 'newproduct'}
+              content='New Product'
+            /> : null
+        }
+        <Menu.Menu position='right'>
+          {
+            Object.keys(this.props.user).length === 0 ?
+                <Menu.Item
+                  as={Link}
+                  name='login'
+                  to='/login'
+                  active={activeItem === 'login'}
+                  content='Login'
+                /> : null
+          }
+          {
+            Object.keys(this.props.user).length === 0 ?
+                <Menu.Item
+                  as={Link}
+                  name='signup'
+                  to='/signup'
+                  active={activeItem === 'signup'}
+                  content='Sign Up'
+                /> :
+                <Menu.Item
+                  name='logout'
+                  active={activeItem === 'logout'}
+                  content='Logout'
+                  onClick={this.props.logout}
+                />
+          }
+          <Menu.Item
+            as={Link}
+            name='cart'
+            to='/order'
+            active={activeItem === 'home'}
+            content={`Cart (${this.props.itemNum})`}
+          />
+        </Menu.Menu>
+      </Menu>
+    )
+  }
+}
 
 const mapState = (state) => {
   return {
@@ -33,7 +81,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick() {
+    logout() {
       dispatch(logout())
     }
   }
