@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import { deleteLineitemServer } from '../store/order'
 
 const tempProduct = {
   name: 'Bone',
@@ -37,15 +38,17 @@ class LineItem extends Component {
     console.log('UPDATE LINEITEM PLACEHOLDER')
   }
 
-  handleDelete = (event) => {
+  handleDelete = async (event) => {
     // Call thunk to delete lineitem
     event.preventDefault()
+    await this.props.deleteItem(this.props.lineItem.id)
     console.log('DELETE LINEITEM PLACEHOLDER')
   }
 
   render() {
     const lineItem = this.props.lineItem
-    const product = this.props.product
+    const product = lineItem.product
+    console.log('lineItem', lineItem)
 
     return (
       <div className="line-item-container container">
@@ -73,11 +76,11 @@ class LineItem extends Component {
   }
 }
 
-const mapState = (state) => {
+const mapDispatch = (dispatch) => {
   return {
-    product: tempProduct //state.order.lineItem.product
+    deleteItem: (id) => dispatch(deleteLineitemServer(id))
   }
 }
 
-export default connect(mapState)(LineItem)
+export default connect(null, mapDispatch)(LineItem)
 

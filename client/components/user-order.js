@@ -33,27 +33,33 @@ const sampleOrder = {lineItems: [
 class Order extends Component {
   constructor() {
     super()
-    this.state = {
-      line_items: []
-    }
   }
 
-  async componentDidMount() {
-    console.log('props in cdm', this.props)
-    const myOrder = await this.props.getOrder(this.props.user.id)
-    await this.setState(myOrder)
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.id && nextProps.id !== prevState.id) {
+  //     return nextProps.order
+  //   }
+  //   return null
+  // }
+
+  // async componentDidMount() {
+  //   console.log('props in cdm', this.props)
+  //   if (this.props.user.id) {
+  //     await this.props.getOrder(this.props.user.id)
+  //   }
+  // }
 
   render() {
-    console.log('this.state', this.state)
     return (
       <div>
         <h3>Shopping Cart</h3>
         <div className="user-order-body container">
           { 
-            this.state.line_items.map((lineItem) => {
+            (this.props.order.line_items) ? 
+            (this.props.order.line_items.map((lineItem) => {
               return <LineItem key={lineItem.id} lineItem={lineItem} />
-            })
+            })) :
+            <div />
           }
         </div>
       </div>

@@ -12,6 +12,7 @@ import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 import { Home, ProductList } from './components'
 import SelectedProduct from './components/selected-product'
+import { getOrderServer } from './store/order';
 //import { me } from './store'
 
 
@@ -19,9 +20,17 @@ import SelectedProduct from './components/selected-product'
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
     this.props.loadInitialData()
+    .then( () => {
+      this.props.getOrder(this.props.user.id)
+    })
   }
+
+  // async componentDidMount() {
+  //   await this.props.loadInitialData()
+  // }
 
   render() {
     return (
@@ -49,15 +58,15 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
+    user: state.user,
     isLoggedIn: !!state.user.id
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData() {
-      dispatch(me())
-    }
+    loadInitialData: () => dispatch(me()),
+    getOrder: (userId) => dispatch(getOrderServer(userId))
   }
 }
 

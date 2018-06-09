@@ -1,14 +1,20 @@
 'use strict'
 
 const router = require('express').Router()
-const { Order, LineItem } = require('../db/models')
+const { Order, LineItem, Product } = require('../db/models')
 const checkAccess = require('./checkAccess')
 module.exports = router
 
 // GET Routes
 router.get('/', async (req, res, next) => {
   try {
-    const response = await Order.findAll()
+    const response = await Order.findAll({
+      include: [
+        {model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product'}]}
+      ]
+    })
     res.json(response)
   } catch (err) {
     next(err)
@@ -19,7 +25,11 @@ router.get('/:orderId', async (req, res, next) => {
   try {
     const response = await Order.findAll({
       where: { id: req.params.orderId },
-      include: [{ model: LineItem, as: 'line_items' }]
+      include: [
+        {model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product'}]}
+      ]
     })
     res.json(response)
   } catch (err) {
@@ -34,7 +44,11 @@ router.get('/me/:userId', async (req, res, next) => {
         userId: parseInt(req.params.userId),
         status: 'Initialized',
       },
-      include: [{ model: LineItem}]
+      include: [
+        {model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product'}]}
+      ]
     }).then((foundOrder) => {
       foundOrder ?
         res.json(foundOrder) :
@@ -45,13 +59,15 @@ router.get('/me/:userId', async (req, res, next) => {
         },
         {
           include: [
-            {model: LineItem}
+            {model: LineItem,
+              as: 'line_items',
+              include: [{ model: Product, as: 'product'}]}
           ]
         }).then((createdOrder) => {
           res.json(createdOrder)
         })
     })
-  } catch(e) {
+  } catch (e) {
     next(e)
   }
 })
