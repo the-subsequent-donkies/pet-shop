@@ -27,8 +27,11 @@ class LineItem extends Component {
   }
 
   handleChange = (event) => {
+    if (typeof event.target.value !== 'number') {
+      this.setState({ quantity: 0 })
+    }
     this.setState({
-      quantity: parseInt(event.target.value)
+      quantity: +event.target.value
     })
   }
 
