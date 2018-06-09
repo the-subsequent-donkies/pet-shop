@@ -19,7 +19,7 @@ router.get('/:orderId', async (req, res, next) => {
   try {
     const response = await Order.findAll({
       where: { id: req.params.orderId },
-      include: [{ model: LineItem, as: 'lineitems' }]
+      include: [{ model: LineItem }]
     })
     res.json(response)
   } catch (err) {
@@ -41,7 +41,7 @@ router.put('/:orderId', async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.orderId)
     const addedOrder = await order.update(req.body)
-    res.status(200).json(addedReview)
+    res.status(200).json(addedOrder)
   } catch (err) {
     next(err)
   }
