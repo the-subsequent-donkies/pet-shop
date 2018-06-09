@@ -21,7 +21,7 @@ router.get('/:productId', async (req, res, next) => {
       where: {
         productId: req.params.productId
       },
-      include: [User]
+      include: { model: User }
     })
     res.json(response)
   } catch (err) {
@@ -41,13 +41,28 @@ router.get('/editreview/:reviewId', async (req, res, next) => {
 // POST Routes
 
 router.post('/', async (req, res, next) => {
-  console.log("post route:", req.body)
   try {
     const review = { content: req.body.content, stars: req.body.stars }
-    const addedReview = await Review.create(review)
-    addedReview.setProduct(req.body.product.id)
-    addedReview.setUser(req.body.user.id)
-    res.status(201).json(addedReview)
+    Review.create(review)
+      .then((foundReview) => {
+        return foundReview.setProduct(req.body.product.id)
+      })
+      .then((foundReview) => {
+        return foundReview.setUser(req.body.user.id)
+      })
+      .then((foundReview) => {
+        return Review.find({
+          where: {
+            id: foundReview.id
+          },
+          include: {
+            model: User
+          }
+        })
+      })
+      .then((foundReview) => {
+        res.status(201).json(foundReview)
+      })
   } catch (err) {
     next(err)
   }

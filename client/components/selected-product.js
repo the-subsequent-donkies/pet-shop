@@ -10,8 +10,13 @@ import NewReviewForm from './new-review-form'
 class SelectedProduct extends Component {
   constructor(props) {
     super(props)
-    this.props.getSingleProductServer(this.props.match.params.productId)
-    this.props.getFilteredReviewsServer(this.props.match.params.productId)
+    this.props.getSingleProduct(this.props.match.params.productId)
+    this.props.getFilteredReviews(this.props.match.params.productId)
+  }
+
+  componentDidMount() {
+    this.props.getSingleProduct(this.props.match.params.productId)
+    this.props.getFilteredReviews(this.props.match.params.productId)
   }
 
   render() {
@@ -54,8 +59,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSingleProductServer: (selectedProductId) => dispatch(getSingleProductServer(selectedProductId)),
-    getFilteredReviewsServer: (selectedProductId) => dispatch(getFilteredReviewsServer(selectedProductId)),
+    getSingleProduct: (selectedProductId) => dispatch(getSingleProductServer(selectedProductId)),
+    getFilteredReviews: (selectedProductId) => dispatch(getFilteredReviewsServer(selectedProductId)),
   }
 }
 

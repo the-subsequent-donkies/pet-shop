@@ -52,7 +52,6 @@ export const postNewReviewServer = (newReview) => {
 }
 
 export const updateReviewServer = (review) => {
-  console.log('updatereviewserver:', review)
   return async (dispatch) => {
     const { data } = await axios.put(`/api/reviews/editreview/${review.reviewId}`, review)
     dispatch(updateReview(data))
@@ -81,9 +80,7 @@ export const getSingleReviewServer = (id) => {
 }
 
 // reducers
-
 export const reviewsReducer = (state = [], action) => {
-  console.log('inside review reducer')
   switch (action.type) {
     case GET_REVIEWS:
       return action.reviews

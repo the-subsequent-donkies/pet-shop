@@ -17,7 +17,7 @@ class ReviewForm extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.content && nextProps.content !== prevState.content) {
+    if (nextProps.content && nextProps.reviewId !== prevState.reviewId) {
       return {
         content: nextProps.content,
         stars: nextProps.stars,
@@ -33,7 +33,6 @@ class ReviewForm extends Component {
       product: this.props.product,
       user: this.props.user
     })
-    console.log("content:", this.state.content, "stars:", this.state.stars)
   }
 
   handleClick = (event) => {
