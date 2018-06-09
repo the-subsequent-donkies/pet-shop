@@ -35,14 +35,14 @@ export const addLineitemServer = (orderId, product) => {
 
 export const deleteLineitemServer = (lineitemId) => {
   return async (dispatch) => {
-    const res = await axios.delete(`/api/lineitems/${lineitemId}`)
+    await axios.delete(`/api/lineitems/${lineitemId}`)
     dispatch(deleteLineitem(lineitemId))
   }
 }
 
 export const updateLineitemServer = (lineitemId, quantity) => {
   return async (dispatch) => {
-    const {data} = await axios.put(`/api/lineitems/${lineitemId}`, {quantity: quantity})
+    await axios.put(`/api/lineitems/${lineitemId}`, {quantity: quantity})
     dispatch(updateLineitem(lineitemId, quantity))
   }
 }
@@ -54,7 +54,6 @@ export default function (state = defaultOrder, action) {
       return action.order
     case ADD_LINEITEM_TO_ORDER:
       let inStore = false
-      console.log(state)
       tempItems = state.line_items.map(lineItem => {
         if (lineItem.id === action.lineitem.id) {
           inStore = true
