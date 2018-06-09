@@ -90,6 +90,7 @@ export const getProductsByCategoryServer = (categoryId) => {
 export const productsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_PRODUCTS:
+      console.log("getting into the products reducer!")
       return action.products
     case POST_NEW_PRODUCT:
       return [...state, action.newProduct]

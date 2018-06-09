@@ -16,8 +16,7 @@ class CategorySelector extends Component {
     }
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
+  handleClick = (event) => {
     if (this.state.category === '/') {
       history.push(`/`)
       this.props.getProductsServer()
@@ -34,13 +33,12 @@ class CategorySelector extends Component {
 
     return (
       <div className='category-selector' >
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+        <form onClick={this.handleClick} onChange={this.handleChange}>
           <select className='custom-select' >
             <option>Select a Category</option>
             <option value='/'>All Products</option>
             {this.props.categories.map(category => <option value={category.id} key={category.id} >{category.name}</option>)}
           </select>
-          <button type='submit' className='btn btn-primary'>Filter</button>
         </form>
       </div>
 

@@ -1,14 +1,13 @@
 'use strict'
 
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import ProductList from './product-list';
-
+import { connect } from 'react-redux'
+import AllProducts from './all-products'
 /**
  * COMPONENT
  */
 class Home extends Component {
-  render () {
+  render() {
     const { email } = this.props.user
     const { isLoggedIn } = this.props
 
@@ -17,7 +16,7 @@ class Home extends Component {
         {isLoggedIn && (
           <h3>Welcome, {email}</h3>
         )}
-        <ProductList match={this.props.match || null} />
+        <AllProducts />
       </div>
     )
   }
