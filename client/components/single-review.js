@@ -6,13 +6,13 @@ const SingleReview = (props) => {
   return (
     <div className='single-review-container'>
       <div>
-        <h3>Reviews:</h3>
+        <h4>{props.review.content}</h4>
       </div>
       <div>
-        <h3>{props.review.content}</h3>
+        <h5>Stars: {props.review.stars}</h5>
       </div>
       <div>
-        <h3>Stars: {props.review.stars}</h3>
+        <h5>By: {props.user.name} </h5>
       </div>
     </div>
   )
