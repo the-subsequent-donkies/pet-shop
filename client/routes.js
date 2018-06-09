@@ -12,11 +12,8 @@ import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 import { Home, ProductList } from './components'
 import SelectedProduct from './components/selected-product'
-<<<<<<< HEAD
-import EditReviewForm from './components/edit-review-form'
-=======
 import { getOrderServer } from './store/order';
->>>>>>> 36be743c34d347738b0e53e3f53b5762487e34c0
+import EditReviewForm from './components/edit-review-form'
 //import { me } from './store'
 
 
@@ -27,9 +24,9 @@ class Routes extends Component {
   constructor(props) {
     super(props)
     this.props.loadInitialData()
-    .then( () => {
-      this.props.getOrder(this.props.user.id)
-    })
+      .then(() => {
+        this.props.getOrder(this.props.user.id)
+      })
   }
 
   // async componentDidMount() {
