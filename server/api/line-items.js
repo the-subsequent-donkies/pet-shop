@@ -1,7 +1,7 @@
 'use strict'
 
 const router = require('express').Router()
-const { Order, LineItem } = require('../db/models')
+const { Order, LineItem, Product } = require('../db/models')
 const checkAccess = require('./checkAccess')
 module.exports = router
 
@@ -29,8 +29,37 @@ router.get('/:orderId', async (req, res, next) => {
 //POST routes
 router.post('/', async (req, res, next) => {
   try {
-    const addedItem = await LineItem.create(req.body)
-    res.status(201).json(addedItem)
+    const lineitem = req.body
+    console.log(lineitem)
+
+    // Check if lineitem exists in db
+    const foundItem = await LineItem.findOne({
+      where: {
+        productId: lineitem.productId
+      }
+    })
+    let addedItem
+    console.log('foundItem', foundItem)
+    if (foundItem) {
+      const newQuant = foundItem.quantity + 1
+      addedItem = await foundItem.update({quantity: newQuant})
+    } else {
+      addedItem = await LineItem.create({
+        orderId: lineitem.orderId,
+        quantity: lineitem.quantity,
+        productId: lineitem.productId,
+        currentPrice: lineitem.currentPrice
+      })
+    }
+    const gotItem = await LineItem.findOne({
+      where: {
+        id: addedItem.id
+      },
+      include: [{
+        model: Product, as: 'product'
+      }]
+    })
+    res.status(201).json(gotItem)
   } catch (err) {
     next(err)
   }

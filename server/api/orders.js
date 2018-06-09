@@ -1,14 +1,20 @@
 'use strict'
 
 const router = require('express').Router()
-const { Order, LineItem } = require('../db/models')
+const { Order, LineItem, Product } = require('../db/models')
 const checkAccess = require('./checkAccess')
 module.exports = router
 
 // GET Routes
 router.get('/', async (req, res, next) => {
   try {
-    const response = await Order.findAll()
+    const response = await Order.findAll({
+      include: [
+        {model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product'}]}
+      ]
+    })
     res.json(response)
   } catch (err) {
     next(err)
@@ -19,11 +25,58 @@ router.get('/:orderId', async (req, res, next) => {
   try {
     const response = await Order.findAll({
       where: { id: req.params.orderId },
-      include: [{ model: LineItem, as: 'lineitems' }]
+      include: [
+        {model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product'}]}
+      ]
     })
     res.json(response)
   } catch (err) {
     next(err)
+  }
+})
+
+router.get('/me/:userId', async (req, res, next) => {
+  try {
+    Order.find({
+      where: {
+        userId: parseInt(req.params.userId),
+        status: 'Initialized',
+      },
+      include: [
+        {model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product'}]}
+      ]
+    }).then((foundOrder) => {
+      foundOrder ?
+        res.json(foundOrder) :
+        Order.create({
+          userId: parseInt(req.params.userId),
+          status: 'Initialized',
+          submittedAt: Date.now()
+        })
+        .then((createdOrder) => {
+          console.log('createdOrder: ', createdOrder)
+          return Order.findOne({
+            where: {
+              id: createdOrder.id
+            },
+            include: [
+              {model: LineItem,
+                as: 'line_items',
+                include: [{ model: Product, as: 'product'}]}
+            ]
+          })
+        })
+        .then((foundOrder) => {
+          console.log('foundOrder>>>>>>>>>>>>>>>>>>>>.', foundOrder)
+          res.json(foundOrder)
+        })
+    })
+  } catch (e) {
+    next(e)
   }
 })
 
