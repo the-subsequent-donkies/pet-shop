@@ -90,9 +90,17 @@ describe('Order Routes', () => {
         .get('/api/orders/2')
         .expect(200)
         .then(res => {
-          console.log('what is req.body in my get by id route', res.body[0])
           expect(res.body[0]).to.be.an('object')
           expect(res.body[0].status).to.be.equal(orderTwo.status)
+        })
+    })
+
+    it("GET /api/orders/:orderId eagerly loads the line items", () => {
+      return request(app)
+        .get('/api/orders/2')
+        .expect(200)
+        .then(res => {
+          expect(res.body[0].line_items).to.be.an('array')
         })
     })
 
@@ -121,9 +129,6 @@ describe('Order Routes', () => {
           expect(res.body.status).to.be.equal('Initialized')
         })
     })
-
-
-
 
   })
 })
