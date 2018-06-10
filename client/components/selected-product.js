@@ -23,7 +23,7 @@ class SelectedProduct extends Component {
         </div>
         <p>{this.props.product.description}</p>
         <div>
-          <h2>Price: {this.props.product.price}</h2>
+          <h2>Price: ${this.props.product.price}</h2>
           <h2>Inventory: {this.props.product.inventory}</h2>
         </div>
         <div className='reviews-condensed'>

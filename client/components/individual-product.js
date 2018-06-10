@@ -34,7 +34,7 @@ class IndividualProduct extends Component {
             {product.name}
           </Card.Header>
           <Card.Meta>
-            <strong>Price:</strong> {product.price} <strong>Inventory:</strong> {product.inventory}
+            <strong>Price $</strong>{product.price} - <strong>Inventory</strong> {product.inventory}
           </Card.Meta>
           <Card.Description
             style={{ clear: 'none' }}
