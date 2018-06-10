@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactStars from 'react-stars'
+import history from '../history'
 
 class ReviewForm extends Component {
   constructor(props) {
@@ -44,6 +45,11 @@ class ReviewForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     this.invokeSubmit()
+    this.setState({
+      content: '',
+      stars: 0,
+      reviewId: 0
+    })
   }
 
   invokeSubmit = async () => {
@@ -63,6 +69,7 @@ class ReviewForm extends Component {
       await this.props.formAction(newReview)
     } else {
       await this.props.formAction(updateReview)
+      history.push(`/products/${this.props.product.id}`)
     }
   }
 
@@ -70,7 +77,7 @@ class ReviewForm extends Component {
     return (
       <div>
         <div>
-          <h2>Add Review:</h2>
+          <h2>Review:</h2>
         </div>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
           <div>
