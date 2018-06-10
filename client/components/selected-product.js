@@ -68,32 +68,6 @@ class SelectedProduct extends Component {
       </div>
     )
   }
-
-  // render() {
-  //   return (
-  //     <div className='selected-product-container'>
-  //       <h1>{this.props.product.name}</h1>
-  //       <div className='selected-product-img-bound'>
-  //         <img className='selected-product-img' src={this.props.product.imgUrl} />
-  //       </div>
-  //       <p>{this.props.product.description}</p>
-  //       <div>
-  //         <h2>Price: ${this.props.product.price}</h2>
-  //         <h2>Inventory: {this.props.product.inventory}</h2>
-  //       </div>
-  //       <div className='reviews-condensed'>
-  //         <div>
-  //           <NewReviewForm />
-  //         </div>
-  //         {this.props.reviews && (
-  //           this.props.reviews.map((review) => {
-  //             return (<SingleReview review={review} key={review.id} user={review.user} loggedUser={this.props.user} />)
-  //           }))
-  //         }
-  //       </div>
-  //     </div>
-  //   )
-  // }
 }
 
 const mapStateToProps = state => {
