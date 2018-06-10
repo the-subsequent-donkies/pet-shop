@@ -11,7 +11,7 @@ class ReviewForm extends Component {
     super(props)
     this.state = {
       content: this.props.content || '',
-      stars: +this.props.stars || 0,
+      stars: this.props.stars || 0,
       reviewId: '',
       product: this.props.product || {},
       user: this.props.user || {}
@@ -29,7 +29,7 @@ class ReviewForm extends Component {
     return null
   }
 
-  handleChange = (event) => {
+  handleTextChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
       product: this.props.product,
@@ -37,7 +37,7 @@ class ReviewForm extends Component {
     })
   }
 
-  handleClick = (event) => {
+  handleStarClick = (event) => {
     this.setState({
       stars: event
     })
@@ -54,7 +54,7 @@ class ReviewForm extends Component {
   }
 
   invokeSubmit = async () => {
-    const updateReview = {
+    const updatedReview = {
       content: this.state.content,
       stars: this.state.stars,
       reviewId: this.state.reviewId
@@ -69,7 +69,7 @@ class ReviewForm extends Component {
     if (this.props.actionProp === 'post') {
       await this.props.formAction(newReview)
     } else {
-      await this.props.formAction(updateReview)
+      await this.props.formAction(updatedReview)
       history.push(`/products/${this.props.product.id}`)
     }
   }
@@ -81,14 +81,14 @@ class ReviewForm extends Component {
     return (
       <Form
         onSubmit={this.handleSubmit}
-        onChange={this.handleChange}
       >
         <Form.Field
           name='content'
           control={TextArea}
           label='Already bought this product? Write a review!'
-          value={this.state.content}
+          value={content}
           style={{ marginTop: '0.75rem' }}
+          onChange={this.handleTextChange}
         />
         <div
           className='review-form-submit-row'
@@ -97,7 +97,8 @@ class ReviewForm extends Component {
             name='stars'
             control={ReactStars}
             label='Your rating'
-            value={stars}
+            value={parseInt(stars, 10)}
+            onChange={this.handleStarClick}
           />
           <Button
             type='submit'
