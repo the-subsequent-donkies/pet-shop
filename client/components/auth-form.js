@@ -1,19 +1,18 @@
 'use strict'
 
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React from 'react'
+import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import PropTypes from 'prop-types'
-import {auth} from '../store/user'
+import { auth } from '../store/user'
 import { Form, Input, Button } from 'semantic-ui-react'
-import history from '../history'
 
 const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error, user} = props
   const isLoggedIn = Object.keys(user).length > 0 && !user.error
 
   return (
-    <div>
+    <div className='custom-form'>
       {
         isLoggedIn ?
           <Redirect to="/" />

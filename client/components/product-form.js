@@ -48,7 +48,7 @@ class ProductForm extends Component {
 
   render() {
     return (
-      <div className='product-form'>
+      <div className='custom-form'>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <div className='form-group row'>
             <label className='col-sm-3 col-form-label'>Name</label>

@@ -65,18 +65,18 @@ nav a {
   align-items: flex-end;
 }
 
-.product-form {
+.custom-form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.product-form form {
+.custom-form form {
   margin: 2rem;
   width: 50%;
 }
 
-.product-form .col-form-label {
+.custom-form .col-form-label {
   display: flex;
   align-items: center;
 }
