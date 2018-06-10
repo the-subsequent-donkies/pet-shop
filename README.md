@@ -16,14 +16,20 @@ https://pet-shop-fullstack.herokuapp.com/
   * Express
   * Sequelize
   * PostgreSQL
-  * Google OAuth with Passport
+  * Passport for Google OAuth
 * React
   * React-Router
   * Semantic UI React
 * Redux
   * React-Redux
-* Travis CI for Continuous Integration
+* Mocha
+  * Chai
+  * Supertest
+  * Enzyme
+  * Axios-Mock-Adapter
+  * Redux-Mock-Adapter
+* Travis CI
 * Heroku
-  * Integrated with GitHub for auto-deployment
+  * Integrated with GitHub
 
 #### Thanks for stopping by!
