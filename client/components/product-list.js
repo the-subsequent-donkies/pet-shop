@@ -31,7 +31,7 @@ class ProductList extends Component {
       products = []
     }
     return (
-      <div id='product-list'>
+      <div className='center-container'>
         {products.map(product => <IndividualProduct product={product} key={product.id} />)}
       </div>
     )

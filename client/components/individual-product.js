@@ -20,11 +20,11 @@ class IndividualProduct extends Component {
         fluid
       >
         <Card.Content>
-          <div className='badge-img-bound'>
-          <Image
-            src={product.imgUrl}
-            size='small'
-          />
+          <div className='product-list-img-bound'>
+            <Image
+              src={product.imgUrl}
+              size='small'
+            />
           </div>
           <Card.Header
             as={Link}
