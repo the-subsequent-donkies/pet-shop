@@ -23,5 +23,7 @@ https://pet-shop-fullstack.herokuapp.com/
 * Redux
   * React-Redux
 * Travis CI for Continuous Integration
+* Heroku
+  * Integrated with GitHub for auto-deployment
 
 #### Thanks for stopping by!
