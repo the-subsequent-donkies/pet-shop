@@ -29,7 +29,7 @@ class IndividualProduct extends Component {
           <Card.Header
             as={Link}
             to={`/products/${product.id}`}
-            style={{ marginTop: '1rem' }}
+            style={{ margin: '1rem 0 .5rem 0' }}
           >
             {product.name}
           </Card.Header>
