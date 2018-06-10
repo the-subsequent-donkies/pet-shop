@@ -1,10 +1,23 @@
-## Pet Shop (Grace Shopper)
+# Pet Shop (Grace Shopper)
 
-## Project By
+An e-commerce web app created within 10 days, as part of the curriculum for [FullStack Academy](https://www.fullstackacademy.com/)'s Chicago April 18 cohort.
+
+#### By
 
 The Subsequent Donkies (Eric, Cody, Lamine, Jake)
 
-## Seeding
+## Deployed at
 
-1. Initialize db with `createdb grace-shopper`
-2. Use `npm run seed` to seed the database
+https://pet-shop-fullstack.herokuapp.com/
+
+### Our stack
+
+* Node.js
+  * Express
+  * Sequelize
+  * PostgreSQL
+* React
+  * Semantic UI React
+* Redux
+  * React-Redux
+* Continuous Integration with Travis CI
