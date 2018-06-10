@@ -1,3 +1,5 @@
+'use strict'
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -11,7 +13,7 @@ class Navbar extends Component {
 
   render () {
     const { activeItem } = this.state
-    const notLoggedIn = Object.keys(this.props.user).length === 0
+    const isLoggedIn = Object.keys(this.props.user).length > 0
 
     return (
       <Menu>
@@ -34,30 +36,30 @@ class Navbar extends Component {
         }
         <Menu.Menu position='right'>
           {
-            notLoggedIn ?
+            isLoggedIn ? null :
                 <Menu.Item
                   as={Link}
                   name='login'
                   to='/login'
                   active={activeItem === 'login'}
                   content='Login'
-                /> : null
+                />
           }
           {
-            notLoggedIn ?
-                <Menu.Item
-                  as={Link}
-                  name='signup'
-                  to='/signup'
-                  active={activeItem === 'signup'}
-                  content='Sign Up'
-                /> :
+            isLoggedIn ?
                 <Menu.Item
                   name='logout'
                   active={activeItem === 'logout'}
                   content='Logout'
                   onClick={this.props.logout}
                 />
+                : <Menu.Item
+                    as={Link}
+                    name='signup'
+                    to='/signup'
+                    active={activeItem === 'signup'}
+                    content='Sign Up'
+                  />
           }
           <Menu.Item
             as={Link}
