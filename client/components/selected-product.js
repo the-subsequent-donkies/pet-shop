@@ -14,11 +14,6 @@ class SelectedProduct extends Component {
     this.props.getFilteredReviews(this.props.match.params.productId)
   }
 
-  componentDidMount() {
-    this.props.getSingleProduct(this.props.match.params.productId)
-    this.props.getFilteredReviews(this.props.match.params.productId)
-  }
-
   render() {
     return (
       <div className='selected-product-container'>
@@ -34,9 +29,6 @@ class SelectedProduct extends Component {
         <div className='reviews-condensed'>
           <div>
             <NewReviewForm />
-          </div>
-          <div>
-            <h2>Reviews:</h2>
           </div>
           {this.props.reviews && (
             this.props.reviews.map((review) => {
