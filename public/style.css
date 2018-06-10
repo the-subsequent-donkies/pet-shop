@@ -84,6 +84,11 @@ nav a {
   padding: 1rem;
 }
 
+.review-form-submit-row {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Order + Line Items */
 
 .user-order-body {

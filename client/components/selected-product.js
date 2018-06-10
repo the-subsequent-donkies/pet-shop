@@ -40,7 +40,7 @@ class SelectedProduct extends Component {
               {product.description}
               <Header
                 as='h3'
-                style={{ margin: '1.25rem 0.25rem 0 0.25rem' }}
+                style={{ marginTop: '1.25rem', marginBottom: '0' }}
               >
                 Price: ${product.price}
               </Header>

@@ -4,13 +4,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ReactStars from 'react-stars'
 import history from '../history'
+import { Form, TextArea, Button } from 'semantic-ui-react'
 
 class ReviewForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
       content: this.props.content || '',
-      stars: this.props.stars || 0,
+      stars: +this.props.stars || 0,
       reviewId: '',
       product: this.props.product || {},
       user: this.props.user || {}
@@ -74,25 +75,62 @@ class ReviewForm extends Component {
   }
 
   render() {
+
+    const { content, stars } = this.state
+
     return (
-      <div>
-        <div>
-          <h2>Review:</h2>
+      <Form
+        onSubmit={this.handleSubmit}
+        onChange={this.handleChange}
+      >
+        <Form.Field
+          name='inventory'
+          control={TextArea}
+          label='Already bought this product? Write a review!'
+          placeholder='Leave your thoughts here'
+          value={content}
+          style={{ marginTop: '0.75rem' }}
+        />
+        <div
+          className='review-form-submit-row'
+        >
+          <Form.Field
+            name='stars'
+            control={ReactStars}
+            label='Your rating'
+            value={stars}
+          />
+          <Button
+            type='submit'
+            style={{ margin: '1rem' }}
+          >
+            Submit
+          </Button>
         </div>
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
-          <div>
-            <textarea name='content' value={this.state.content} cols='40' rows='5' placeholder='Add your review' />
-          </div>
-          <div>
-            <ReactStars value={parseInt(this.state.stars)} name='stars' onChange={this.handleClick} />
-          </div>
-          <div>
-            <button type='submit'>Submit</button>
-          </div>
-        </form>
-      </div>
+      </Form>
     )
   }
+
+  // render() {
+  //   return (
+  //     <div>
+  //       <div>
+  //         <h2>Review:</h2>
+  //       </div>
+  //       <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
+  //         <div>
+  //           <textarea name='content' value={this.state.content} cols='40' rows='5' placeholder='Add your review' />
+  //         </div>
+  //         <div>
+  //           <ReactStars value={this.state.stars} name='stars' onChange={this.handleClick} />
+  //         </div>
+  //         <div>
+  //           <button type='submit'>Submit</button>
+  //         </div>
+  //       </form>
+  //     </div>
+  //   )
+  // }
 }
 
 const mapStateToProps = state => {
