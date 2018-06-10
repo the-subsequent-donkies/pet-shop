@@ -13,7 +13,6 @@ class FilteredProducts extends Component {
     this.props.getProductsByCategoryServer(this.props.match.params.categoryId)
   }
   render() {
-    console.log('getting here and checking props', this.props.filteredProducts)
     let products = this.props.filteredProducts
     return (
 
