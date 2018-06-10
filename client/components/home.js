@@ -14,7 +14,6 @@ class Home extends Component {
     const { email } = this.props.user
     const { isLoggedIn } = this.props
     const unFiltered = Object.keys(this.props.match.params).length < 1
-    console.log(unFiltered)
     return (
       <div>
         {isLoggedIn && (
