@@ -18,6 +18,7 @@ class IndividualProduct extends Component {
     return (
       <Card
         fluid
+        raised
       >
         <Card.Content>
           <div className='product-list-img-bound'>

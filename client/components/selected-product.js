@@ -21,8 +21,8 @@ class SelectedProduct extends Component {
       <div className='home-wrapper'>
         <div className='center-container'>
           <Segment
-            raised
             padded
+            attached='top'
           >
             <Header
               as='h1'
@@ -52,18 +52,19 @@ class SelectedProduct extends Component {
               </Header>
             </div>
             <NewReviewForm />
-            {reviews && (
-              reviews.map((review) => {
-                return (
-                  <SingleReview
-                    review={review}
-                    key={review.id}
-                    user={review.user}
-                    loggedUser={user}
-                  />)
-              }))
-            }
           </Segment>
+          {reviews && (
+            reviews.map((review) => {
+              return (
+                <SingleReview
+                  review={review}
+                  key={review.id}
+                  user={review.user}
+                  loggedUser={user}
+                />)
+            }))
+          }
+          <Segment attached='bottom' />
         </div>
       </div>
     )

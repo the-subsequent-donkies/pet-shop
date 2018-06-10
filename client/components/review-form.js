@@ -85,7 +85,7 @@ class ReviewForm extends Component {
         <Form.Field
           name='content'
           control={TextArea}
-          label='Already bought this product? Write a review!'
+          label='Leave your thoughts here'
           value={content}
           style={{ marginTop: '0.75rem' }}
           onChange={this.handleTextChange}

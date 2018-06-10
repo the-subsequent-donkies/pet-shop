@@ -89,6 +89,12 @@ nav a {
   justify-content: space-between;
 }
 
+.review-rating-row {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
 /* Order + Line Items */
 
 .user-order-body {
