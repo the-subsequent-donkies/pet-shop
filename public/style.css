@@ -27,36 +27,14 @@ nav a {
   align-items: center;
 }
 
-#product-badge {
-  display: flex;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: .25rem;
-  margin: 10px;
-}
-
-#badge-img-bound {
-  width: 200px;
-  height: 200px;
+.badge-img-bound {
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-}
-
-#badge-img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-#badge-body {
-  padding-top: 8%;
-  padding-right: 5px;
+  margin: 20px;
+  float: left;
 }
 
 .navbar {

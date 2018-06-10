@@ -4,8 +4,10 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { addLineitemServer } from '../store/order';
 import { connect } from 'react-redux';
+import { Card, Image, Button } from 'semantic-ui-react'
 
 class IndividualProduct extends Component {
+
   handleAdd = async (evt) => {
     evt.preventDefault()
     await this.props.addToOrder(this.props.orderId, this.props.product)
@@ -14,19 +16,40 @@ class IndividualProduct extends Component {
   render() {
     const { product } = this.props
     return (
-      <div id="product-badge" style={{ width: '23%' }}>
-        <div id="badge-img-bound">
-          <img id="badge-img" src={product.imgUrl} alt={product.name} />
-        </div>
-        <div id="badge-body">
-          <Link to={`/products/${product.id}`} key={product.id}>
-            <h3>{product.name}</h3>
-          </Link>
-          <strong>Price:</strong> {product.price} <strong>Inventory:</strong> {product.inventory}
-          <p style={{ marginTop: '0.5rem' }}>{product.description}</p>
-          <button onClick={this.handleAdd}>Add To Cart</button>
-        </div>
-      </div>
+      <Card
+        fluid
+      >
+        <Card.Content>
+          <div className='badge-img-bound'>
+          <Image
+            src={product.imgUrl}
+            size='small'
+          />
+          </div>
+          <Card.Header
+            as={Link}
+            to={`/products/${product.id}`}
+            style={{ marginTop: '1rem' }}
+          >
+            {product.name}
+          </Card.Header>
+          <Card.Meta>
+            <strong>Price:</strong> {product.price} <strong>Inventory:</strong> {product.inventory}
+          </Card.Meta>
+          <Card.Description
+            style={{ clear: 'none' }}
+          >
+            {product.description}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content>
+          <Button
+            content='Add to Cart'
+            onClick={this.handleAdd}
+            style={{ float: 'right' }}
+          />
+        </Card.Content>
+      </Card>
     )
   }
 }
