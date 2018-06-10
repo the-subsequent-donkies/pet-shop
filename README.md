@@ -12,12 +12,16 @@ https://pet-shop-fullstack.herokuapp.com/
 
 ### Our stack
 
-* Node.js
+* Node
   * Express
   * Sequelize
   * PostgreSQL
+  * Google OAuth with Passport
 * React
+  * React-Router
   * Semantic UI React
 * Redux
   * React-Redux
-* Continuous Integration with Travis CI
+* Travis CI for Continuous Integration
+
+#### Thanks for stopping by!
