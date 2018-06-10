@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import IndividualProduct from './individual-product'
 import { getProductsByCategoryServer } from '../store/product'
-
+import CategorySelector from './category-selector'
 class FilteredProducts extends Component {
   constructor(props) {
     super(props)
@@ -15,11 +15,12 @@ class FilteredProducts extends Component {
   render() {
     let products = this.props.filteredProducts
     return (
-
-      <div id='product-list'>
-        {products.map(product => <IndividualProduct product={product} key={product.id} />)}
+      <div>
+        <CategorySelector />
+        <div id='product-list'>
+          {products.map(product => <IndividualProduct product={product} key={product.id} />)}
+        </div>
       </div>
-
     )
   }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import LineItem from './line-item';
+import {getOrderServer} from '../store/order'
 
 const sampleOrder = {lineItems: [
   {
@@ -30,15 +31,35 @@ const sampleOrder = {lineItems: [
 ]}
 
 class Order extends Component {
+  constructor() {
+    super()
+  }
+
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.id && nextProps.id !== prevState.id) {
+  //     return nextProps.order
+  //   }
+  //   return null
+  // }
+
+  // async componentDidMount() {
+  //   console.log('props in cdm', this.props)
+  //   if (this.props.user.id) {
+  //     await this.props.getOrder(this.props.user.id)
+  //   }
+  // }
+
   render() {
     return (
       <div>
         <h3>Shopping Cart</h3>
         <div className="user-order-body container">
-          {
-            this.props.order.lineItems.map((lineItem) => {
+          { 
+            (this.props.order.line_items) ? 
+            (this.props.order.line_items.map((lineItem) => {
               return <LineItem key={lineItem.id} lineItem={lineItem} />
-            })
+            })) :
+            <div />
           }
         </div>
       </div>
@@ -48,8 +69,15 @@ class Order extends Component {
 
 const mapState = (state) => {
   return {
-    order: sampleOrder
+    user: state.user,
+    order: state.order
   }
 }
 
-export default connect(mapState)(Order)
+const mapDispatch = (dispatch) => {
+  return {
+    getOrder: (userId) => dispatch(getOrderServer(userId)),
+  }
+}
+
+export default connect(mapState, mapDispatch)(Order)

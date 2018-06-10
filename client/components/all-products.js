@@ -13,7 +13,6 @@ class AllProducts extends Component {
     this.props.getProductsServer()
   }
   render() {
-    console.log('getting here and checking props', this.props.filteredProducts)
     let products = this.props.products
     return (
 

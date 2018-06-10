@@ -15,7 +15,7 @@ install:
   - npm i -g npm # delete once default travis npm supports `ci` command
   - npm ci       # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "grace-shopper-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
 # before_deploy:
 #   - npm run build-client # make the bundle
@@ -23,6 +23,6 @@ before_script:
 # deploy:
 #   skip_cleanup: true # prevents travis from deleting the build
 #   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
+#   app: pet-shop-fullstack # see README
 #   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+#     secure: "Gk5ZmLk5ApVjzHCiaZx560o9OJCjyP93gbJQEhLotoy7nev3ffPSHg+1eBsyaBwvpZEOOeiThxE7wLJRO5lEKKGitPAsSEPHISeV0CytZTVulSTqZyYErCFsDDm/ULDS0pVJVr/e82zxN4ZVqGZ+7DMk8GzS+lzdFRyznDNij0aw9EDeO/wHRq3lV/N+TizabdFXq6EXARYwLuS90F2aCx3Xj6qqLfXUVmyGQzyeQ2PQzP5GgFohntiTHbFz18s8tFh/6tjI9EPsAyiYQfhsYNJRi1wu+8evBp2DZaMM4w9ZiPmHZUM13yLy6PyYfanp7N9PWnP1z+ozEwNnat6B1FFpZNQ7aPnrrDwzgPG6CBUx4taNdLjY/TdOG7xgrfTUQ4ocLt8BtbrQnOBVCHpiO9+Zjtb1v5D/uHkD5hAJ3/f5rIF9h/yo8+Lphp/c0y5JKKf9Fn0Ir1PlCCeCvHUQjIt+ZOP0MgeiSRbTgdmIRXn+RiaQ+rKLNvmYVHIXrGQrrQ9E6XGXDXsD0tGbSECIWRvFacnZtA5qwV/Xc1AQM/WIEPAJNR677+o/RfgStSenoMxZUrPij/3jmF6MMjr1Y0UcftRcQmMYAl2W6ZbNvHaMr9XxbDGKC2+hyJfVuF6mWujUhoGo5XGYy4bdU/CrQuj/uJ5BP8g4EA2uk8uf0ag="

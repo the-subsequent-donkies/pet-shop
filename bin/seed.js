@@ -48,5 +48,5 @@ seed().catch(error => {
 
     ${error.stack}
 
-`)
+  `)
 })

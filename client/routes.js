@@ -13,6 +13,8 @@ import CategorySelector from './components/category-selector'
 import { Home, ProductList } from './components'
 import SelectedProduct from './components/selected-product'
 import FilteredProducts from './components/filtered-products'
+import { getOrderServer } from './store/order';
+import EditReviewForm from './components/edit-review-form'
 //import { me } from './store'
 
 
@@ -20,20 +22,28 @@ import FilteredProducts from './components/filtered-products'
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
     this.props.loadInitialData()
+      .then(() => {
+        this.props.getOrder(this.props.user.id)
+      })
   }
+
+  // async componentDidMount() {
+  //   await this.props.loadInitialData()
+  // }
 
   render() {
     return (
       <div>
         <Navbar />
-        <CategorySelector />
         <Route exact path='/' component={Home} />
         <Route exact path='/categories/:categoryId' component={FilteredProducts} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <Route path='/newproduct' component={NewProductForm} />
+        <Route path='/reviews/editreview/:reviewId' component={EditReviewForm} />
         <Route exact path='/products/:productId' component={SelectedProduct} />
         <Route exact path='/products/:productId/edit' component={EditProductForm} />
         <Route exact path='/categories' component={CategorySelector} />
@@ -51,15 +61,15 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
+    user: state.user,
     isLoggedIn: !!state.user.id
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData() {
-      dispatch(me())
-    }
+    loadInitialData: () => dispatch(me()),
+    getOrder: (userId) => dispatch(getOrderServer(userId))
   }
 }
 
