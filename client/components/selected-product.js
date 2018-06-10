@@ -27,9 +27,8 @@ class SelectedProduct extends Component {
           <h2>Inventory: {this.props.product.inventory}</h2>
         </div>
         <div className='reviews-condensed'>
-          <NewReviewForm />
           <div>
-            <h2>Reviews:</h2>
+            <NewReviewForm />
           </div>
           {this.props.reviews && (
             this.props.reviews.map((review) => {
