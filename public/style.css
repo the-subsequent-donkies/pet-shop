@@ -124,3 +124,27 @@ nav a {
   margin: 5px;
   padding: 5px;
 }
+
+@media screen and (max-width: 600px) {
+  #product-list {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 600px) {
+  #product-list {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 998px) and (min-width: 768px)  {
+  #product-list {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 1400px) and (min-width: 998px)  {
+  #product-list {
+    width: 60%;
+  }
+}
