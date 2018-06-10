@@ -6,7 +6,7 @@ import { getSingleProductServer } from '../store/product'
 import { getFilteredReviewsServer } from '../store/reviews'
 import SingleReview from './single-review'
 import NewReviewForm from './new-review-form'
-import { Segment, Header, Image, Button } from 'semantic-ui-react'
+import { Segment, Header, Image } from 'semantic-ui-react'
 
 class SelectedProduct extends Component {
   constructor(props) {

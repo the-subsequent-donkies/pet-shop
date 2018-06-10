@@ -12,6 +12,7 @@
     "deploy": "script/deploy",
     "heroku-postbuild": "npm run build-client & npm run seed",
     "lint": "eslint ./ --ignore-path .gitignore",
+    "postinstall": "touch secrets.js",
     "seed": "node bin/seed",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
