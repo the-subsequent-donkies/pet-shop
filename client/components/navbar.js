@@ -11,7 +11,7 @@ class Navbar extends Component {
 
   render () {
     const { activeItem } = this.state
-    const isLoggedIn = Object.keys(this.props.user).length === 1
+    const notLoggedIn = Object.keys(this.props.user).length === 0
 
     return (
       <Menu>
@@ -34,7 +34,7 @@ class Navbar extends Component {
         }
         <Menu.Menu position='right'>
           {
-            Object.keys(this.props.user).length === 0 ?
+            notLoggedIn ?
                 <Menu.Item
                   as={Link}
                   name='login'
@@ -44,7 +44,7 @@ class Navbar extends Component {
                 /> : null
           }
           {
-            Object.keys(this.props.user).length === 0 ?
+            notLoggedIn ?
                 <Menu.Item
                   as={Link}
                   name='signup'
