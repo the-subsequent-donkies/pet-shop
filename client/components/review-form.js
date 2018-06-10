@@ -84,11 +84,10 @@ class ReviewForm extends Component {
         onChange={this.handleChange}
       >
         <Form.Field
-          name='inventory'
+          name='content'
           control={TextArea}
           label='Already bought this product? Write a review!'
-          placeholder='Leave your thoughts here'
-          value={content}
+          value={this.state.content}
           style={{ marginTop: '0.75rem' }}
         />
         <div
@@ -110,27 +109,6 @@ class ReviewForm extends Component {
       </Form>
     )
   }
-
-  // render() {
-  //   return (
-  //     <div>
-  //       <div>
-  //         <h2>Review:</h2>
-  //       </div>
-  //       <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
-  //         <div>
-  //           <textarea name='content' value={this.state.content} cols='40' rows='5' placeholder='Add your review' />
-  //         </div>
-  //         <div>
-  //           <ReactStars value={this.state.stars} name='stars' onChange={this.handleClick} />
-  //         </div>
-  //         <div>
-  //           <button type='submit'>Submit</button>
-  //         </div>
-  //       </form>
-  //     </div>
-  //   )
-  // }
 }
 
 const mapStateToProps = state => {
