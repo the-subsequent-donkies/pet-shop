@@ -14,7 +14,7 @@ class Home extends Component {
     const { isLoggedIn } = this.props
 
     return (
-      <div>
+      <div className='home-wrapper'>
         {isLoggedIn && (
           <h3>Welcome, {email}</h3>
         )}
