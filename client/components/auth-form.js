@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router'
+import { Redirect } from 'react-router'
 import PropTypes from 'prop-types'
 import {auth} from '../store/user'
 import { Form, Input, Button } from 'semantic-ui-react'
@@ -18,34 +18,32 @@ const AuthForm = (props) => {
         isLoggedIn ?
           <Redirect to="/" />
         : (
-            <Form
-              onSubmit={handleSubmit}
-              name={name}
-            >
+            <Form name={name}>
               <Form.Group widths='equal'>
                 <Form.Field
-                  id='email'
+                  name='email'
                   control={Input}
                   label='Email'
                   placeholder='Your email'
                 />
                 <Form.Field
-                  id='password'
+                  name='password'
                   control={Input}
+                  type='password'
                   label='Password'
                   placeholder='Enter your password'
                 />
               </Form.Group>
               <Form.Group>
                 <Form.Field
-                  id='form-button-control-public'
                   control={Button}
                   content={displayName}
+                  onClick={handleSubmit}
                 />
-                <Form.Field
-                  id='form-button-control-public'
-                  control={Button}
+                <Button
                   content={`${displayName} with Google`}
+                  as='a'
+                  href='/auth/google'
                 />
               </Form.Group>
               {error && error.response && <div> {error.response.data} </div>}
@@ -56,43 +54,6 @@ const AuthForm = (props) => {
   )
 }
 
-// const AuthForm = (props) => {
-//   const {name, displayName, handleSubmit, error, user} = props
-
-//   return (
-//     <div>
-//       {
-//         Object.keys(user).length > 0 && !user.error ?
-//         <Redirect to="/" /> :
-//         <div>
-//           <form onSubmit={handleSubmit} name={name}>
-//             <div>
-//               <label htmlFor="email"><small>Email</small></label>
-//               <input name="email" type="text" />
-//             </div>
-//             <div>
-//               <label htmlFor="password"><small>Password</small></label>
-//               <input name="password" type="password" />
-//             </div>
-//             <div>
-//               <button type="submit">{displayName}</button>
-//             </div>
-//             {error && error.response && <div> {error.response.data} </div>}
-//           </form>
-//           <a href="/auth/google">{displayName} with Google</a>
-//         </div>
-//       }
-//     </div>
-//   )
-// }
-
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = (state) => {
   return {
     name: 'login',
