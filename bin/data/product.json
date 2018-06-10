@@ -5,7 +5,7 @@
     "price": "2.50",
     "imgUrl": "https://i.imgur.com/zzD13aO.jpg",
     "description": "This is a fun chew toy for dogs",
-    "category": "dogs"
+    "category": "Dogs"
   },
   {
     "name": "Scratch Post",
@@ -13,7 +13,7 @@
     "price": "22.50",
     "imgUrl": "https://i.imgur.com/jI1kMrK.jpg",
     "description": "Cats will scratch this",
-    "category": "cats"
+    "category": "Cats"
   },
   {
     "name": "Fake Mouse",
@@ -21,7 +21,7 @@
     "price": "5.00",
     "imgUrl": "https://i.imgur.com/dQ7u2Wg.jpg",
     "description": "Fake Mouse from the failing Meowyork times",
-    "category": "cats"
+    "category": "Cats"
   },
   {
     "name": "Hamster Wheel",
@@ -29,13 +29,13 @@
     "price": "7.50",
     "imgUrl": "https://i.imgur.com/fFptBSA.jpg",
     "description": "You spin my head right round",
-    "category": "hamsters"
+    "category": "Hamsters"
   },
   {
     "name": "Doggie Bed",
     "inventory": "12",
     "price": "47.50",
     "description": "For those sleepy extra big doggos",
-    "category": "dogs"
+    "category": "Dogs"
   }
 ]
