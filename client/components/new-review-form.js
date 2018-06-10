@@ -7,7 +7,7 @@ import ReviewForm from './review-form'
 
 const NewReviewForm = (props) => {
   return (
-    <ReviewForm formAction={props.postNewReview} />
+    <ReviewForm formAction={props.postNewReview} actionProp="post" />
   )
 }
 

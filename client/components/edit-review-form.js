@@ -8,16 +8,22 @@ import ReviewForm from './review-form'
 class EditReviewForm extends Component {
   constructor(props) {
     super(props)
-    this.props.getReview(this.props.reviewId)
+    this.props.getReview(this.props.match.params.reviewId)
   }
 
   render() {
+    console.log('in edit review form: ', this.props.selectedReview)
     return (
-      <ReviewForm content={this.props.content} stars={this.props.stars} formAction={this.props.updateReview} />
+      <ReviewForm content={this.props.selectedReview.content} stars={this.props.selectedReview.stars} reviewId={this.props.selectedReview.id} user={this.props.user} formAction={this.props.updateReview} />
     )
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    selectedReview: state.selectedReview
+  }
+}
 const mapDispatchToProps = dispatch => {
   return {
     getReview: reviewId => dispatch(getSingleReviewServer(reviewId)),
@@ -25,4 +31,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(EditReviewForm)
+export default connect(mapStateToProps, mapDispatchToProps)(EditReviewForm)
