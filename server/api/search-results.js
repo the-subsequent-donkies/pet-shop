@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { Category, Product } = require('../db/models')
 const checkAccess = require('./checkAccess')
+const Sequelize = require('sequelize')
 module.exports = router
 
 // from front end build a query string that looks liek this:
@@ -8,29 +9,41 @@ module.exports = router
 // product = 'someProd'
 
 
-router.get('/category', async (req, res, next) => {
+router.get('/products', async (req, res, next) => {
   try {
-    console.log('getting to the search route')
-    // we will use the req.query.key ?
-    console.log("what is my req.query", req.query)
-    res.json(req.query)
-    // assign req.query.state to a variable in the body
-    // do a sequelize request for the query param
-    // res.send the json needed
+    Product.findAll({
+      where: {
+        name: {
+          [Sequelize.Op.iLike]: '%' + req.query.search + '%'
+        },
+        status: 'inStock',
+      },
+      include: [{ model: Category }]
+    }).then((foundProduct) => {
+      foundProduct.length > 0 ?
+        res.json(foundProduct) :
+        res.json("hi")
+    })
   } catch (err) {
     next(err)
   }
 })
 
-router.get('/product', async (req, res, next) => {
+router.get('/categories', async (req, res, next) => {
   try {
-    console.log('getting to the search route')
-    // we will use the req.query.key ?
-    console.log("what is my req.query", req.query)
-    res.json(req.query)
-    // assign req.query.state to a variable in the body
-    // do a sequelize request for the query param
-    // res.send the json needed
+
+    Category.findAll({
+      where: {
+        name: {
+          [Sequelize.Op.iLike]: '%' + req.query.search + '%'
+        },
+      },
+      include: [{ model: Product }]
+    }).then((foundProduct) => {
+      foundProduct[0].products.length > 0 ?
+        res.json(foundProduct[0].products) :
+        res.send("product not found or out of stock!")
+    })
   } catch (err) {
     next(err)
   }

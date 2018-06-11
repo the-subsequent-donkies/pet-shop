@@ -23,15 +23,18 @@ const Product = db.define('product', {
   description: {
     type: Sequelize.TEXT,
     allowNull: false
+  },
+  status: {
+    type: Sequelize.ENUM('inStock', 'outOfStock')
   }
 }, {
-  hooks: {
-    beforeCreate: product => {
-      if (product.imgUrl === '') {
-        product.imgUrl = '../../images/default-product.jpg'
+    hooks: {
+      beforeCreate: product => {
+        if (product.imgUrl === '') {
+          product.imgUrl = '../../images/default-product.jpg'
+        }
       }
     }
-  }
-})
+  })
 
 module.exports = Product
