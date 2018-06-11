@@ -63,7 +63,7 @@ router.put('/:productId', checkAccess, async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.productId)
     const updatedProduct = await product.update({ name, inventory, price, imgUrl, description })
-    if (categories.length > 0) {
+    if (categories && categories.length > 0) {
       categories.forEach(async category => {
         const returnedCategory = await Category.findOne({ where: { id: category.id }})
           .then(() => product.addCategory(returnedCategory))

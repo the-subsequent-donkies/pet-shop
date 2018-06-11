@@ -11,9 +11,9 @@ class Order extends Component {
   handleClick = async (evt) => {
     await this.props.updateStatus(this.props.order, 'Completed', this.props.user.id)
   }
-    
+
   render() {
-    let order = props.order
+    let order = this.props.order
     return (
       <div className='home-wrapper'>
         <div className='center-container'>
@@ -25,32 +25,37 @@ class Order extends Component {
               <Header as='h1'>
                 Shopping Cart
               </Header>
-              <Divider />
               {
                 order.line_items ?
                   order.line_items.map(lineItem => {
                     return <LineItem key={lineItem.id} lineItem={lineItem} />
                   }) : null
               }
-              {
-                order.line_items && order.line_items.length > 0 ?
-                  <Segment
-                    padded
-                    style={{ clear: 'both' }}
+            </Segment>
+            {
+              order.line_items && order.line_items.length > 0 ?
+                <Segment
+                  padded
+                  style={{ clear: 'both' }}
+                >
+                  Order Total: ${this.props.getOrderCost(order)}
+                  <Button
+                    onClick={this.handleClick}
+                    style={{ float: 'right' }}
                   >
-                    Order Total: ${this.props.getOrderCost(order)}
-                  </Segment>
-                  : null
-              }
-              <Button onClick={this.handleClick}>
-                Submit Order
-              </Button>
-            </Segment.Group>
-          </div>
+                    Submit Order
+                  </Button>
+                </Segment>
+                :
+                <Segment padded>
+                  Your cart is empty, start shopping to add items to it!
+                </Segment>
+            }
+          </Segment.Group>
         </div>
-      )
+      </div>
+    )
   }
-  
 }
 
 const mapState = (state) => {
