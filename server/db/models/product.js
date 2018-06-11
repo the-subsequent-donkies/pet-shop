@@ -25,7 +25,7 @@ const Product = db.define('product', {
     allowNull: false
   },
   status: {
-    type: Sequelize.ENUM('inStock', 'outOfStock')
+    type: Sequelize.ENUM('inStock', 'outOfStock', 'unavailable')
   }
 }, {
     hooks: {

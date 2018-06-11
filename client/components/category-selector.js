@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getCategoriesServer } from '../store/category'
 import { getProductsByCategoryServer, getProductsServer } from '../store/product'
 import history from '../history'
-import { Form, Select, Dropdown } from 'semantic-ui-react'
+import { Form, Select } from 'semantic-ui-react'
 
 class CategorySelector extends Component {
   constructor(props) {
