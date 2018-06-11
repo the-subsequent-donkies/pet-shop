@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getCategoriesServer } from '../store/category'
 import { getProductsByCategoryServer, getProductsServer } from '../store/product'
-import { Redirect } from 'react-router-dom'
 import history from '../history'
-// refactor the redux store
-// add a action to get the products by id
-// use history to push the redirect
+import { Form, Select, Dropdown } from 'semantic-ui-react'
+
 class CategorySelector extends Component {
   constructor(props) {
     super(props)
@@ -17,35 +15,45 @@ class CategorySelector extends Component {
 
   }
 
-  handleClick = async (event) => {
-    await this.setState({ category: event.target.value })
-    if (this.state.category === "") {
-      let currentLocation = history.location.pathname
-      history.push(currentLocation)
-    } else if (this.state.category === '/') {
-      this.props.getProductsServer()
+  handleChange = async (event, data) => {
+    await this.setState({ category: data.value })
+    if (this.state.category === '/') {
+      await this.props.getProductsServer()
       history.push(`/`)
     } else {
-      this.props.getProductsByCategoryServer(this.state.category)
+      await this.props.getProductsByCategoryServer(this.state.category)
       history.push(`/categories/${this.state.category}`)
     }
   }
 
   render() {
-    return (
-      <div className='category-selector' >
-        <form onSubmit={(event) => event.preventDefault()} onClick={this.handleClick}>
-          <select className='custom-select' >
-            <option value='' selected={'' === this.state.category && 'selected'} > Select a Category</option>
-            <option value='/' selected={'/' === this.state.category && 'selected'}>All Products</option>
-            {this.props.categories.map(category => <option value={category.id} key={category.id} selected={category.id === this.state.category && 'selected'} >{category.name}</option>)}
-          </select>
-        </form>
-      </div>
+    const categoryOptions = []
+    if (this.state.category !== '') {
+      categoryOptions.push({
+        text: 'All Products',
+        value: '/',
+      })
+    }
+    this.props.categories.forEach(category => {
+      categoryOptions.push({
+        key: category.id,
+        text: category.name,
+        value: category.id,
+      })
+    })
 
+    return (
+      <Form>
+        <Form.Field
+          as={Select}
+          placeholder='Select a Category'
+          options={categoryOptions}
+          onChange={this.handleChange}
+          value={this.state.category}
+        />
+      </Form>
     )
   }
-
 }
 
 const mapStateToProps = (state) => {

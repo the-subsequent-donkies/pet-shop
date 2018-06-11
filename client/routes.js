@@ -10,7 +10,6 @@ import Navbar from './components/navbar'
 import { Login, Signup } from './components/auth-form'
 import Order from './components/order'
 import { me, logout } from './store/user'
-import CategorySelector from './components/category-selector'
 import { Home } from './components'
 import SelectedProduct from './components/selected-product'
 import FilteredProducts from './components/filtered-products'
@@ -39,7 +38,6 @@ class Routes extends Component {
         <Route path='/reviews/editreview/:reviewId' component={EditReviewForm} />
         <Route exact path='/products/:productId' component={SelectedProduct} />
         <Route exact path='/products/:productId/edit' component={EditProductForm} />
-        <Route exact path='/categories' component={CategorySelector} />
         <Route exact path="/order" component={Order} />
       </div>
     )
