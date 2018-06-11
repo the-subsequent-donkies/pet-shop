@@ -40,7 +40,7 @@ export const auth = (email, password, name, address, method) =>
     })
       .then(res => {
         dispatch(getUser(res.data))
-        history.push('/')
+        history.push('/') // add home here
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
         dispatch(getUser({ error: authError }))
       })
