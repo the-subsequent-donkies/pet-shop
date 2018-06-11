@@ -16,15 +16,15 @@ describe('Order Routes', () => {
 
     const orderOne = {
       status: 'Initialized',
-      submittedAt: "2018-04-01 08:22:52.7-05"
+      submittedAt: '2018-04-01 08:22:52.7-05'
     }
     const orderTwo = {
       status: 'Processing',
-      submittedAt: "2018-03-01 08:22:52.7-05"
+      submittedAt: '2018-03-01 08:22:52.7-05'
     }
     const orderThree = {
       status: 'Completed',
-      submittedAt: "2018-03-01 08:29:52.7-05"
+      submittedAt: '2018-03-01 08:29:52.7-05'
     }
     const lineItemOne = {
       productId: '1',
@@ -57,20 +57,20 @@ describe('Order Routes', () => {
       category: 'dogs'
     }
     const categoryOne = {
-      name: "dogs",
-      description: "Canis lupus familiaris"
+      name: 'dogs',
+      description: 'Canis lupus familiaris'
     }
     const productCategoryOne = {
-      productId: "1",
-      categoryId: "2"
+      productId: '1',
+      categoryId: '2'
     }
     const userOne = {
-      name: "lamine",
-      email: "lams101@gmail.com",
+      name: 'lamine',
+      email: 'lams101@gmail.com',
       isAdmin: false,
-      password: "password",
-      address: "111 south one ave",
-      credentials: "placeHolderCreds"
+      password: 'password',
+      address: '111 south one ave',
+      credentials: 'placeHolderCreds'
     }
     beforeEach(async () => {
       await Product.create(productOne)
@@ -103,21 +103,21 @@ describe('Order Routes', () => {
         .get('/api/orders/2')
         .expect(200)
         .then(res => {
-          expect(res.body[0]).to.be.an('object')
-          expect(res.body[0].status).to.be.equal(orderTwo.status)
+          expect(res.body).to.be.an('object')
+          expect(res.body.status).to.be.equal(orderTwo.status)
         })
     })
 
-    it("GET /api/orders/:orderId eagerly loads the line items", () => {
+    it('GET /api/orders/:orderId eagerly loads the line items', () => {
       return request(app)
         .get('/api/orders/2')
         .expect(200)
         .then(res => {
-          expect(res.body[0].line_items).to.be.an('array')
+          expect(res.body.line_items).to.be.an('array')
         })
     })
 
-    it("GET /api/orders/me/1 gets a users orders and eagerly loads line items and products", () => {
+    it('GET /api/orders/me/1 gets a users orders and eagerly loads line items and products', () => {
       return request(app)
         .get('/api/orders/me/1')
         .expect(200)

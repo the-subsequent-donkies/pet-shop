@@ -5,6 +5,8 @@ const GET_ORDER = 'GET_ORDER'
 const ADD_LINEITEM_TO_ORDER = 'ADD_LINEITEM_TO_ORDER'
 const DELETE_LINEITEM = 'DELETE_LINEITEM'
 const UPDATE_LINEITEM = 'UPDATE_LINEITEM'
+const GET_LOCAL_ORDER = 'GET_LOCAL_ORDER'
+const CREATE_LOCAL_ORDER = 'CREATE_LOCAL_ORDER'
 
 const defaultOrder = {
   line_items: []
@@ -14,6 +16,8 @@ const getOrder = order => ({type: GET_ORDER, order})
 const addLineitemToOrder = lineitem => ({type: ADD_LINEITEM_TO_ORDER, lineitem})
 const deleteLineitem = lineitemId => ({type: DELETE_LINEITEM, lineitemId})
 const updateLineitem = (lineitemId, quantity) => ({type: UPDATE_LINEITEM, lineitemId, quantity})
+const getLocalOrder = order => ({type: GET_LOCAL_ORDER, order})
+const createLocalOrder = order => ({type: CREATE_LOCAL_ORDER, order})
 
 export const getOrderServer = (userId) => {
   return async (dispatch) => {
@@ -29,6 +33,7 @@ export const addLineitemServer = (orderId, product) => {
         quantity: 1,
         productId: product.id,
         currentPrice: product.price })
+
     dispatch(addLineitemToOrder(data))
   }
 }
@@ -44,6 +49,42 @@ export const updateLineitemServer = (lineitemId, quantity) => {
   return async (dispatch) => {
     await axios.put(`/api/lineitems/${lineitemId}`, {quantity: quantity})
     dispatch(updateLineitem(lineitemId, quantity))
+  }
+}
+
+export const getLocalOrderServer = (orderId) => {
+  return async (dispatch) => {
+    const {data} = await axios.get(`/api/orders/${orderId}`)
+    dispatch(getLocalOrder(data))
+  }
+}
+
+export const createLocalOrderServer = () => {
+  return async (dispatch) => {
+    const {data} = await axios.post(`/api/orders`)
+    dispatch(createLocalOrder(data))
+    localStorage.setItem('orderId', data.id)
+  }
+}
+
+export const mergeOrdersServer = (localOrderId, userId) => {
+  return async (dispatch) => {
+    const localRes = await axios.get(`/api/orders/${localOrderId}`)
+    const localOrder = localRes.data
+    const accountRes = await axios.get(`/api/orders/me/${userId}`)
+    const accountOrder = accountRes.data
+
+    // Get product id's for account order
+    let productIds = []
+    accountOrder.line_items.forEach((lineItem) => {
+      productIds.push(lineItem.productId)
+    })
+
+    localOrder.line_items.forEach((localLineitem) => {
+      if (!productIds.includes(localLineitem.productId)) {
+        dispatch(addLineitemServer(accountOrder.id, localLineitem.product))
+      }
+    })
   }
 }
 
@@ -75,6 +116,10 @@ export default function (state = defaultOrder, action) {
         return lineItem
       })
       return {...state, line_items: tempItems}
+    case CREATE_LOCAL_ORDER:
+      return action.order
+    case GET_LOCAL_ORDER:
+      return action.order
     default:
       return state
   }

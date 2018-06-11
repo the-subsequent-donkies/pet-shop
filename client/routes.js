@@ -10,36 +10,57 @@ import Navbar from './components/navbar'
 import { Login, Signup } from './components/auth-form'
 import Order from './components/order'
 import { me, logout } from './store/user'
-import CategorySelector from './components/category-selector'
 import { Home } from './components'
 import SelectedProduct from './components/selected-product'
+import { getOrderServer, getLocalOrderServer, createLocalOrderServer, mergeOrdersServer } from './store/order';
+
 import FilteredProducts from './components/filtered-products'
-import { getOrderServer } from './store/order';
 import EditReviewForm from './components/edit-review-form'
 
 
 class Routes extends Component {
   constructor(props) {
     super(props)
+    // console.log(localStorage.getItem('orderId'))
     this.props.loadInitialData()
-      .then(() => {
-        this.props.getOrder(this.props.user.id)
-      })
+    .then( () => {
+      if (this.props.isLoggedIn) {
+        if (localStorage.getItem('orderId') && localStorage.getItem('orderId') !== 'undefined') {
+          // this.props.getLocalOrder(localStorage.getItem('orderId'))
+          this.props.getOrder(this.props.user.id)
+          .then(() => {
+            console.log(localStorage)
+            return this.props.mergeOrders(parseInt(localStorage.getItem('orderId')), this.props.user.id)
+          })
+
+          // localStorage.removeItem('orderId')
+        }
+        return this.props.getOrder(this.props.user.id)
+      } else if (!localStorage.getItem('orderId') || localStorage.getItem('orderId') === 'undefined') {
+          return this.props.createLocalOrder()
+      } else {
+        return this.props.getLocalOrder(localStorage.getItem('orderId'))
+      }
+    })
+    .then(() => {
+      if (!this.props.isLoggedIn) {
+        localStorage.setItem('orderId', this.props.orderId)
+      }
+    })
   }
 
   render() {
     return (
       <div>
         <Navbar />
-        <Route exact path='/' component={Home} />
-        <Route exact path='/categories/:categoryId' component={FilteredProducts} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/signup' component={Signup} />
-        <Route path='/newproduct' component={NewProductForm} />
-        <Route path='/reviews/editreview/:reviewId' component={EditReviewForm} />
-        <Route exact path='/products/:productId' component={SelectedProduct} />
-        <Route exact path='/products/:productId/edit' component={EditProductForm} />
-        <Route exact path='/categories' component={CategorySelector} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/categories/:categoryId" component={FilteredProducts} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route path="/newproduct" component={NewProductForm} />
+        <Route path="/reviews/editreview/:reviewId" component={EditReviewForm} />
+        <Route exact path="/products/:productId" component={SelectedProduct} />
+        <Route exact path="/products/:productId/edit" component={EditProductForm} />
         <Route exact path="/order" component={Order} />
       </div>
     )
@@ -49,6 +70,7 @@ class Routes extends Component {
 const mapState = (state) => {
   return {
     user: state.user,
+    orderId: state.order.id,
     isLoggedIn: !!state.user.id
   }
 }
@@ -56,7 +78,10 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData: () => dispatch(me()),
-    getOrder: (userId) => dispatch(getOrderServer(userId))
+    getOrder: (userId) => dispatch(getOrderServer(userId)),
+    createLocalOrder: () => dispatch(createLocalOrderServer()),
+    getLocalOrder: (orderId) => dispatch(getLocalOrderServer(orderId)),
+    mergeOrders: (localOrderId, userId) => dispatch(mergeOrdersServer(localOrderId, userId))
   }
 }
 
