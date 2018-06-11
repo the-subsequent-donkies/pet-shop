@@ -31,7 +31,7 @@ class Routes extends Component {
             this.props.getOrder(this.props.user.id)
               .then(() => {
                 console.log(localStorage)
-                return this.props.mergeOrders(parseInt(localStorage.getItem('orderId')), this.props.user.id)
+                return this.props.mergeOrders(parseInt(localStorage.getItem('orderId'), 10), this.props.user.id)
               })
 
             // localStorage.removeItem('orderId')

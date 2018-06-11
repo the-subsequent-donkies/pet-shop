@@ -33,13 +33,6 @@ const Product = db.define('product', {
       }
     }
   }
-}, {
-  getterMethods: {
-    categories: function () {
-      const categories = this.getCategories()
-      return categories.map(category => category.id)
-    }
-  }
 })
 
 module.exports = Product

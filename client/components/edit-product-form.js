@@ -15,7 +15,7 @@ class EditProductForm extends Component {
     const {
       name, inventory, price, imgUrl, description, id, categories
     } = this.props.selectedProduct
-    console.log(categories)
+    console.log(this.props.selectedProduct)
     return (
       <ProductForm
         name={name}

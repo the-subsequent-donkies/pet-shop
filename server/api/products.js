@@ -18,7 +18,10 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
-    const response = await Product.findById(req.params.productId)
+    const response = await Product.findOne({
+      where: { id: req.params.productId },
+      include: [{ model: Category, attributes: ['id'] }]
+    })
     res.json(response)
   } catch (err) {
     next(err)
