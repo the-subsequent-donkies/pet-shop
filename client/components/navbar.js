@@ -3,6 +3,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+
+import { createLocalOrderServer } from '../store/order';
+
 import { logout } from '../store/user'
 import { Menu } from 'semantic-ui-react'
 
@@ -19,52 +22,52 @@ class Navbar extends Component {
       <Menu>
         <Menu.Item
           as={Link}
-          name='home'
-          to='/'
+          name="home"
+          to="/"
           active={activeItem === 'home'}
-          content='Pet Shop'
+          content="Pet Shop"
         />
         {
           (this.props.user.isAdmin) ?
             <Menu.Item
               as={Link}
-              name='newproduct'
-              to='/newproduct'
+              name="newproduct"
+              to="/newproduct"
               active={activeItem === 'newproduct'}
-              content='New Product'
+              content="New Product"
             /> : null
         }
-        <Menu.Menu position='right'>
+        <Menu.Menu position="right">
           {
             isLoggedIn ? null :
                 <Menu.Item
                   as={Link}
-                  name='login'
-                  to='/login'
+                  name="login"
+                  to="/login"
                   active={activeItem === 'login'}
-                  content='Login'
+                  content="Login"
                 />
           }
           {
             isLoggedIn ?
                 <Menu.Item
-                  name='logout'
+                  name="logout"
                   active={activeItem === 'logout'}
-                  content='Logout'
+                  content="Logout"
                   onClick={this.props.logout}
                 />
                 : <Menu.Item
                     as={Link}
-                    name='signup'
-                    to='/signup'
+                    name="signup"
+                    to="/signup"
                     active={activeItem === 'signup'}
-                    content='Sign Up'
+                    content="Sign Up"
                   />
           }
           <Menu.Item
             as={Link}
-            name='cart'
-            to='/order'
+            name="cart"
+            to="/order"
             active={activeItem === 'home'}
             content={`Cart (${this.props.itemNum})`}
           />
@@ -77,7 +80,8 @@ class Navbar extends Component {
 const mapState = (state) => {
   return {
     user: state.user,
-    itemNum: state.order.line_items.length
+    itemNum: state.order.line_items.length,
+    orderId: state.order.id
   }
 }
 
@@ -85,6 +89,7 @@ const mapDispatch = (dispatch) => {
   return {
     logout() {
       dispatch(logout())
+      dispatch(createLocalOrderServer())
     }
   }
 }
