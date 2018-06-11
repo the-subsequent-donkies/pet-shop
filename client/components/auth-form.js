@@ -8,16 +8,15 @@ import { auth } from '../store/user'
 import { Form, Input, Button } from 'semantic-ui-react'
 
 const AuthForm = (props) => {
-  const {name, displayName, handleSubmit, error, user} = props
+  const { name, displayName, handleSubmit, error, user } = props
   const isLoggedIn = Object.keys(user).length > 0 && !user.error
-
   return (
     <div className='custom-form'>
       {
         isLoggedIn ?
           <Redirect to="/" />
-        : (
-            <Form name={name}>
+          : (
+            <Form name={name} onSubmit={handleSubmit}>
               <Form.Group widths='equal'>
                 <Form.Field
                   name='email'
@@ -33,11 +32,27 @@ const AuthForm = (props) => {
                   placeholder='Enter your password'
                 />
               </Form.Group>
+              {props.name === 'signup' && (
+                <Form.Group widths='equal'>
+                  <Form.Field
+                    name='firstName'
+                    control={Input}
+                    label='Name'
+                    placeholder='Your Full Name'
+                  />
+                  <Form.Field
+                    name='address'
+                    control={Input}
+                    label='Address'
+                    placeholder='Your Address'
+                  />
+                </Form.Group>
+              )}
               <Form.Group>
                 <Form.Field
                   control={Button}
                   content={displayName}
-                  onClick={handleSubmit}
+                //onClick={handleSubmit}
                 />
                 <Button
                   content={`${displayName} with Google`}
@@ -47,7 +62,7 @@ const AuthForm = (props) => {
               </Form.Group>
               {error && error.response && <div> {error.response.data} </div>}
             </Form>
-        )
+          )
       }
     </div>
   )
@@ -73,12 +88,15 @@ const mapSignup = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleSubmit (evt) {
+    handleSubmit(evt) {
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const name = evt.target.firstName.value
+      const address = evt.target.address.value
+      console.log(evt.target.name, formName, email, password, name, address)
+      dispatch(auth(email, password, name, address, formName))
     }
   }
 }

@@ -51,7 +51,6 @@ router.post('/', checkAccess, async (req, res, next) => {
 
 
 // PUT Routes
-
 router.put('/:productId', checkAccess, async (req, res, next) => {
   const { name, inventory, price, imgUrl, description } = req.body
   try {
