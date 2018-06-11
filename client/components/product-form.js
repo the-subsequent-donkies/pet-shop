@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import history from '../history'
+import { Form, Input, TextArea, Button } from 'semantic-ui-react'
 
 class ProductForm extends Component {
   constructor (props) {
@@ -37,83 +38,72 @@ class ProductForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.invokeSubmit()
+    this.invokeSubmit(event.target)
   }
 
-  invokeSubmit = async () => {
+  invokeSubmit = async (form) => {
     const product = { ...this.state }
     const productId = await this.props.formAction(product)
     history.push(`/products/${productId}`)
   }
 
   render() {
+    const {
+      name,
+      inventory,
+      price,
+      imgUrl,
+      description,
+    } = this.state
+
     return (
-      <div className='product-form'>
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-          <div className='form-group row'>
-            <label className='col-sm-3 col-form-label'>Name</label>
-            <div className='col-sm-9'>
-              <input
-                type='text'
-                name='name'
-                className='form-control'
-                value={this.state.name}
-                placeholder='Enter Product Name'
-              />
-            </div>
-          </div>
-          <div className='form-group row'>
-            <label className='col-sm-3 col-form-label'>Inventory</label>
-            <div className='col-sm-9'>
-              <input
-                type='text'
-                name='inventory'
-                className='form-control'
-                value={this.state.inventory}
-                placeholder='Set Inventory'
-              />
-            </div>
-          </div>
-          <div className='form-group row'>
-          <label className='col-sm-3 col-form-label'>Price</label>
-            <div className='col-sm-9'>
-              <input
-                type='text'
-                name='price'
-                className='form-control'
-                value={this.state.price}
-                placeholder='Set Price'
-              />
-            </div>
-          </div>
-          <div className='form-group row'>
-            <label className='col-sm-3 col-form-label'>Description</label>
-            <div className='col-sm-9'>
-              <textarea
-                name='description'
-                className='form-control'
-                value={this.state.description}
-                cols='40'
-                rows='5'
-                placeholder='Add a Description'
-              />
-            </div>
-          </div>
-          <div className='form-group row'>
-            <label className='col-sm-3 col-form-label'>Image URL</label>
-            <div className='col-sm-9'>
-              <input
-                type='text'
-                name='imgUrl'
-                className='form-control'
-                value={this.state.imgUrl}
-                placeholder='Upload an Image' />
-              </div>
-          </div>
-          <div className='button-row'>
-            <button className='btn btn-primary' type='submit'>{this.props.buttonAction}</button>
-          </div>
-        </form>
+      <div className='custom-form'>
+        <Form
+          onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
+        >
+          <Form.Field
+            name='name'
+            control={Input}
+            label='Name'
+            placeholder='Enter Product Name'
+            value={name}
+          />
+          <Form.Field
+            name='inventory'
+            control={Input}
+            label='Inventory'
+            placeholder='Set Inventory'
+            value={inventory}
+          />
+          <Form.Field
+            name='price'
+            control={Input}
+            label='Price'
+            placeholder='Set Price'
+            value={price}
+          />
+          <Form.Field
+            name='description'
+            control={TextArea}
+            label='Description'
+            placeholder='Add a Description'
+            value={description}
+            autoHeight
+          />
+          <Form.Field
+            name='imgUrl'
+            control={Input}
+            label='Image URL'
+            placeholder='Upload an Image'
+            value={imgUrl}
+          />
+          <Form.Field
+            control={Button}
+            type='submit'
+            content={this.props.buttonAction}
+          />
+        </Form>
       </div>
     )
   }

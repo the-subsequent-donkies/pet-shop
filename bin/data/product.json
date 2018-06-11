@@ -4,38 +4,38 @@
     "inventory": "4",
     "price": "2.50",
     "imgUrl": "https://i.imgur.com/zzD13aO.jpg",
-    "description": "This is a fun chew toy for dogs",
-    "category": "dogs"
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+    "category": "Dogs"
   },
   {
     "name": "Scratch Post",
     "inventory": "6",
     "price": "22.50",
     "imgUrl": "https://i.imgur.com/jI1kMrK.jpg",
-    "description": "Cats will scratch this",
-    "category": "cats"
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+    "category": "Cats"
   },
   {
     "name": "Fake Mouse",
     "inventory": "9",
     "price": "5.00",
     "imgUrl": "https://i.imgur.com/dQ7u2Wg.jpg",
-    "description": "Fake Mouse from the failing Meowyork times",
-    "category": "cats"
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+    "category": "Cats"
   },
   {
     "name": "Hamster Wheel",
     "inventory": "9",
     "price": "7.50",
     "imgUrl": "https://i.imgur.com/fFptBSA.jpg",
-    "description": "You spin my head right round",
-    "category": "hamsters"
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+    "category": "Hamsters"
   },
   {
     "name": "Doggie Bed",
     "inventory": "12",
     "price": "47.50",
-    "description": "For those sleepy extra big doggos",
-    "category": "dogs"
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+    "category": "Dogs"
   }
 ]
