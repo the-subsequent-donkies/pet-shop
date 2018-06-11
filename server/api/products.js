@@ -46,10 +46,11 @@ router.post('/', checkAccess, async (req, res, next) => {
   const { name, inventory, price, imgUrl, description, categories } = req.body
   try {
     const addedProduct = await Product.create({ name, inventory, price, imgUrl, description })
-    const categoryArray =
+    if (categories) {
       await Promise.all(categories
         .map(categoryId => Category.findById(categoryId)))
-    categoryArray.forEach(category => addedProduct.addCategory(category))
+        .then(foundCategories => foundCategories.forEach(category => addedProduct.addCategory(category)))
+    }
     res.status(201).json(addedProduct)
   } catch (err) {
     next(err)
