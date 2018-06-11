@@ -1,3 +1,4 @@
+
 const { expect } = require('chai')
 const request = require('supertest')
 const app = require('../../index')
@@ -10,8 +11,8 @@ const axios = require('axios')
 //   submittedAt: "2018-04-01 08:22:52.7-05"
 // }))
 
-describe('Order Routes', () => {
-  describe('api/orders', () => {
+describe('Line-Item Routes', () => {
+  describe('api/line-items', () => {
     // create seed data here
 
     const orderOne = {
@@ -26,6 +27,10 @@ describe('Order Routes', () => {
       status: 'Completed',
       submittedAt: "2018-03-01 08:29:52.7-05"
     }
+    const orderFour = {
+      status: 'Processing',
+      submittedAt: "2017-03-01 08:22:52.7-05"
+    }
     const lineItemOne = {
       productId: '1',
       currentPrice: '2.00',
@@ -37,6 +42,12 @@ describe('Order Routes', () => {
       currentPrice: '4.00',
       quantity: '2',
       orderId: '2'
+    }
+    const lineItemThree = {
+      productId: '3',
+      currentPrice: '4.00',
+      quantity: '2',
+      orderId: '3'
     }
     const productOne = {
       id: '1',
@@ -52,6 +63,15 @@ describe('Order Routes', () => {
       name: 'Bone',
       inventory: '4',
       price: '2.50',
+      imgUrl: 'https://i.imgur.com/zzD13aO.jpg',
+      description: 'This is a fun chew toy for dogs',
+      category: 'dogs'
+    }
+    const productThree = {
+      id: '3',
+      name: 'Rope',
+      inventory: '6',
+      price: '3.50',
       imgUrl: 'https://i.imgur.com/zzD13aO.jpg',
       description: 'This is a fun chew toy for dogs',
       category: 'dogs'
@@ -72,43 +92,56 @@ describe('Order Routes', () => {
       address: "111 south one ave",
       credentials: "placeHolderCreds"
     }
+    const userTwo = {
+      name: "enimal",
+      email: "101smal@gmail.com",
+      isAdmin: false,
+      password: "password",
+      address: "111 htuos eno eva",
+      credentials: "sdreCredloHecalp"
+    }
+
     beforeEach(async () => {
       await Product.create(productOne)
       await Product.create(productTwo)
       const orderWon = await Order.create(orderOne)
       const orderToo = await Order.create(orderTwo)
       const lineItemWon = await LineItem.create(lineItemOne)
-
       const lineItemToo = await LineItem.create(lineItemTwo)
       await orderWon.addLine_item(lineItemWon)
       await orderToo.addLine_item(lineItemToo)
       const userWon = await User.create(userOne)
+      const userToo = await User.create(userTwo)
       orderWon.setUser(userWon)
-
+      orderToo.setUser(userToo)
     })
 
 
-    it('GET /api/orders returns an array of orders', () => {
+    it('GET /api/lineitems returns an array of orders', () => {
       return request(app)
-        .get('/api/orders')
+        .get('/api/lineitems')
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('array')
-          expect(res.body[0].status).to.be.equal(orderOne.status)
         })
     })
 
-    it('GET /api/orders/:orderId returns an order object', () => {
+    it('GET /api/lineitems/:orderId returns a line items belonging to the correct order ', async () => {
+      await Product.create(productThree)
+      const orderTres = await Order.create(orderThree)
+      const lineItemTres = await LineItem.create(lineItemThree)
+      await orderTres.addLine_item(lineItemTres)
+      const userTres = await User.create(user)
       return request(app)
-        .get('/api/orders/2')
+        .get('/api/lineitems/1')
         .expect(200)
         .then(res => {
           expect(res.body[0]).to.be.an('object')
-          expect(res.body[0].status).to.be.equal(orderTwo.status)
+          expect(res.body[0].orderId).to.be(orderWon.id)
         })
     })
 
-    it("GET /api/orders/:orderId eagerly loads the line items", () => {
+    xit("GET /api/orders/:orderId eagerly loads the line items", () => {
       return request(app)
         .get('/api/orders/2')
         .expect(200)
@@ -117,18 +150,19 @@ describe('Order Routes', () => {
         })
     })
 
-    it("GET /api/orders/me/1 gets a users orders and eagerly loads line items and products", () => {
+    xit("GET /api/orders/me/1 gets a users orders and eagerly loads line items and products", () => {
       return request(app)
         .get('/api/orders/me/1')
         .expect(200)
         .then(res => {
+          console.log("what is res.body here", res.body)
           expect(res.body).to.be.an('object')
           expect(res.body.line_items).to.be.an('array')
           expect(res.body.line_items[0].product).to.be.an('object')
         })
     })
 
-    it('POST /api/orders', () => {
+    xit('POST /api/orders', () => {
       return request(app)
         .post('/api/orders')
         .send(orderThree)
@@ -139,7 +173,7 @@ describe('Order Routes', () => {
         })
     })
 
-    it('PUT /api/orders/:orderId', async () => {
+    xit('PUT /api/orders/:orderId', async () => {
       await Order.create(orderThree)
       return request(app)
         .put('/api/orders/3')
