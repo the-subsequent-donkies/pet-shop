@@ -7,6 +7,7 @@ router.use('/categories', require('./categories'))
 router.use('/reviews', require('./reviews'))
 router.use('/orders', require('./orders'))
 router.use('/lineitems', require('./line-items'))
+router.use('/users', require('./users'))
 
 
 router.use((req, res, next) => {
