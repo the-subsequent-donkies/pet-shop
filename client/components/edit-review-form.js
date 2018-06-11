@@ -12,10 +12,6 @@ class EditReviewForm extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-=======
-
->>>>>>> 0158a06ac8d80daecf365cd3934e174ce7cf327d
     return (
       <ReviewForm
         content={this.props.selectedReview.content}
