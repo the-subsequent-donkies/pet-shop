@@ -1,11 +1,11 @@
 'use strict'
 
-import React, { Component } from 'react'
+import React from 'react'
 import { Segment, Header, Divider, Icon } from 'semantic-ui-react'
-import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const UserHome = (props) => {
-  console.log('userhome props: ', props)
   return (
     <div>
       <Segment.Group
@@ -17,13 +17,9 @@ const UserHome = (props) => {
             Welcome, {props.user.name}!
           </Header>
           <Divider />
-          {
-            props.isLoggedIn ?
-            <Header as="h4">
-              Member since {props.user.createdAt.toString().slice(0, 4)}
-            </Header> :
-            <Header />
-          }
+          <Header as='h4'>
+            Member Since {props.user.createdAt.toString().slice(0, 4)}
+          </Header>
         </Segment>
       </Segment.Group>
       {
@@ -33,15 +29,15 @@ const UserHome = (props) => {
             raised
             style={{ width: '100%' }}
           >
-            <Segment padded color="blue">
+            <Segment padded color="blue" >
               <Segment padded>
-                <Header as="h4">
+                <Header as={Link} to="/">
                   <Icon name="user circle" />
                   Update Profile
                 </Header>
               </Segment>
               <Segment padded>
-                <Header as="h4">
+                <Header as={Link} to="/">
                   <Icon name="cart arrow down" />
                   Order History
                 </Header>
@@ -59,27 +55,27 @@ const UserHome = (props) => {
             >
               <Segment padded color="green">
                 <Segment padded>
-                  <Header as="h4">
+                  <Header as={Link} to="/">
                     <Icon name="cart" />
                     Edit Orders
                   </Header>
                 </Segment>
                 <Segment padded>
-                  <Header as="h4">
+                  <Header as={Link} to="/">
                     <Icon name="users" />
                     Edit Users
                   </Header>
                 </Segment>
                 <Segment padded>
-                  <Header as="h4">
+                  <Header as={Link} to="/">
                     <Icon name="tags" />
                     Edit Categories
                   </Header>
                 </Segment>
                 <Segment padded>
-                  <Header as="h4">
+                  <Header as={Link} to="/newproduct">
                     <Icon name="edit" />
-                    Edit Products
+                    Add Products
                   </Header>
                 </Segment>
               </Segment>
@@ -90,10 +86,11 @@ const UserHome = (props) => {
   )
 }
 
-const mapState = (state) => {
+const mapStateToProps = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    user: state.user
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapStateToProps, null)(UserHome)
+
