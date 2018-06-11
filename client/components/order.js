@@ -9,14 +9,14 @@ import { Segment, Header, Divider } from 'semantic-ui-react'
 const Order = ({ order }) => {
 
   return (
-    <div className='home-wrapper'>
-      <div className='center-container'>
+    <div className="home-wrapper">
+      <div className="center-container">
         <Segment.Group
           raised
           style={{ width: '100%' }}
         >
           <Segment padded>
-            <Header as='h1'>
+            <Header as="h1">
               Shopping Cart
             </Header>
             <Divider />
@@ -38,7 +38,7 @@ const Order = ({ order }) => {
                 padded
                 style={{ clear: 'both' }}
               >
-                Order Total: Soon to come!
+                Order Total: ${getOrderCost(order)}
               </Segment>
             : null
           }
@@ -59,6 +59,13 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getOrder: (userId) => dispatch(getOrderServer(userId)),
+    getOrderCost: (order) => {
+      let ret = 0.00
+      order.line_items.forEach(lineItem => {
+        ret = ret + lineItem.currentPrice
+      })
+      return ret
+    }
   }
 }
 
