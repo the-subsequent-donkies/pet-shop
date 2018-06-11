@@ -59,15 +59,13 @@ class LineItem extends Component {
             size='tiny'
           />
         </div>
-        <div className='line-item-name-description'>
-          <Header
-            as='h3'
-            style={{ marginTop: '0.25rem', marginBottom: '0.25rem' }}
-          >
-            {product.name}
-          </Header>
-          <p>{product.description}</p>
-        </div>
+        <Header
+          as='h3'
+          style={{ marginTop: '0.25rem', marginBottom: '0.25rem' }}
+        >
+          {product.name}
+        </Header>
+        <p>{product.description}</p>
       </Segment>
     )
   // }

@@ -86,6 +86,11 @@ nav a {
   padding: 1rem;
 }
 
+.single-review-edit-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .review-form-submit-row {
   display: flex;
   justify-content: space-between;
@@ -125,10 +130,6 @@ nav a {
   float: left;
   padding-bottom: 1rem;
   padding-right: 1rem;
-}
-
-.line-item-name-description {
-  padding-left: 1.5rem;
 }
 
 @media screen and (max-width: 998px) {

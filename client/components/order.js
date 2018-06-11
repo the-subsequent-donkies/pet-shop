@@ -24,7 +24,7 @@ const Order = ({ order }) => {
               order.line_items && order.line_items.length === 0 ?
                 <p>Your cart is currently empty - start shopping and adding items to your cart!</p>
               : <p>Thank you for choosing the Pet Shop for all your pet supply needs!</p>
-              }
+            }
           </Segment>
           {
             order.line_items ?
@@ -41,7 +41,7 @@ const Order = ({ order }) => {
                 Order Total: Soon to come!
               </Segment>
             : null
-            }
+          }
         </Segment.Group>
       </div>
     </div>

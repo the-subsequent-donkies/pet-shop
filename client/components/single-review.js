@@ -23,13 +23,14 @@ const SingleReview = (props) => {
       {props.review.content}
       {(props.review.userId === props.loggedUser.id) &&
         (
-          <Button
-            as={Link}
-            to={`../reviews/editreview/${props.review.id}`}
-            style={{ clear: 'right', float: 'right' }}
-          >
-            Edit
-          </Button>
+          <div className='single-review-edit-row'>
+            <Button
+              as={Link}
+              to={`../reviews/editreview/${props.review.id}`}
+            >
+              Edit
+            </Button>
+          </div>
         )}
     </Segment>
   )
