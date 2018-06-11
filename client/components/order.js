@@ -42,7 +42,7 @@ const Order = (props) => {
                 padded
                 style={{ clear: 'both' }}
               >
-                Order Total: ${getOrderCost(order)}
+                Order Total: ${props.getOrderCost(order)}
               </Segment>
               : null
           }
@@ -64,10 +64,11 @@ const mapDispatch = (dispatch) => {
   return {
     getOrder: (userId) => dispatch(getOrderServer(userId)),
     getOrderCost: (order) => {
-      let ret = 0.00
+      let ret = 0
       order.line_items.forEach(lineItem => {
-        ret = ret + lineItem.currentPrice
+        ret = ret + parseFloat(Math.round(lineItem.currentPrice * lineItem.quantity * 100) / 100)
       })
+      ret = parseFloat(Math.round(ret * 100) / 100).toFixed(2)
       return ret
     }
   }

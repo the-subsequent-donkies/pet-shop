@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { Segment, Header, Divider, Icon } from 'semantic-ui-react'
+import { connect } from 'react-redux';
 
 const UserHome = (props) => {
   console.log('userhome props: ', props)
@@ -11,14 +12,18 @@ const UserHome = (props) => {
         raised
         style={{ width: '100%' }}
       >
-        <Segment padded color='red'>
-          <Header as='h1'>
+        <Segment padded color="red">
+          <Header as="h1">
             Welcome, {props.user.name}!
           </Header>
           <Divider />
-          <Header as='h4'>
-            Member since {props.user.createdAt.toString().slice(0, 4)}
-          </Header>
+          {
+            props.isLoggedIn ?
+            <Header as="h4">
+              Member since {props.user.createdAt.toString().slice(0, 4)}
+            </Header> :
+            <Header />
+          }
         </Segment>
       </Segment.Group>
       {
@@ -30,16 +35,16 @@ const UserHome = (props) => {
           >
             <Segment padded color="blue">
               <Segment padded>
-                <Header as='h4'>
+                <Header as="h4">
                   <Icon name="user circle" />
                   Update Profile
-            </Header>
+                </Header>
               </Segment>
               <Segment padded>
-                <Header as='h4'>
+                <Header as="h4">
                   <Icon name="cart arrow down" />
                   Order History
-            </Header>
+                </Header>
               </Segment>
             </Segment>
           </Segment.Group>
@@ -54,25 +59,25 @@ const UserHome = (props) => {
             >
               <Segment padded color="green">
                 <Segment padded>
-                  <Header as='h4'>
+                  <Header as="h4">
                     <Icon name="cart" />
                     Edit Orders
                   </Header>
                 </Segment>
                 <Segment padded>
-                  <Header as='h4'>
+                  <Header as="h4">
                     <Icon name="users" />
                     Edit Users
                   </Header>
                 </Segment>
                 <Segment padded>
-                  <Header as='h4'>
+                  <Header as="h4">
                     <Icon name="tags" />
                     Edit Categories
                   </Header>
                 </Segment>
                 <Segment padded>
-                  <Header as='h4'>
+                  <Header as="h4">
                     <Icon name="edit" />
                     Edit Products
                   </Header>
@@ -85,4 +90,10 @@ const UserHome = (props) => {
   )
 }
 
-export default UserHome
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
+}
+
+export default connect(mapState)(UserHome)
