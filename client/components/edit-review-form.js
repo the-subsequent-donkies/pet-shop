@@ -12,9 +12,14 @@ class EditReviewForm extends Component {
   }
 
   render() {
-
     return (
-      <ReviewForm content={this.props.selectedReview.content} stars={this.props.selectedReview.stars} reviewId={this.props.selectedReview.id} user={this.props.user} formAction={this.props.updateReview} />
+      <ReviewForm
+        content={this.props.selectedReview.content}
+        stars={this.props.selectedReview.stars}
+        reviewId={this.props.selectedReview.id}
+        user={this.props.user}
+        formAction={this.props.updateReview}
+      />
     )
   }
 }

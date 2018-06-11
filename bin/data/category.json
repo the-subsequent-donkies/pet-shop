@@ -1,14 +1,14 @@
 [
   {
-    "name": "cats",
+    "name": "Cats",
     "description": "Felis catus"
   },
   {
-    "name": "dogs",
+    "name": "Dogs",
     "description": "Canis lupus familiaris"
   },
   {
-    "name": "hamsters",
+    "name": "Hamsters",
     "description": "Cricetinae"
   }
 ]
