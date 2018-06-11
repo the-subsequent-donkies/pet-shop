@@ -16,6 +16,7 @@ import { getOrderServer, getLocalOrderServer, createLocalOrderServer, mergeOrder
 
 import FilteredProducts from './components/filtered-products'
 import EditReviewForm from './components/edit-review-form'
+import UserHome from './components/user-home';
 
 
 class Routes extends Component {
@@ -23,30 +24,30 @@ class Routes extends Component {
     super(props)
     // console.log(localStorage.getItem('orderId'))
     this.props.loadInitialData()
-    .then( () => {
-      if (this.props.isLoggedIn) {
-        if (localStorage.getItem('orderId') && localStorage.getItem('orderId') !== 'undefined') {
-          // this.props.getLocalOrder(localStorage.getItem('orderId'))
-          this.props.getOrder(this.props.user.id)
-          .then(() => {
-            console.log(localStorage)
-            return this.props.mergeOrders(parseInt(localStorage.getItem('orderId')), this.props.user.id)
-          })
+      .then(() => {
+        if (this.props.isLoggedIn) {
+          if (localStorage.getItem('orderId') && localStorage.getItem('orderId') !== 'undefined') {
+            // this.props.getLocalOrder(localStorage.getItem('orderId'))
+            this.props.getOrder(this.props.user.id)
+              .then(() => {
+                console.log(localStorage)
+                return this.props.mergeOrders(parseInt(localStorage.getItem('orderId')), this.props.user.id)
+              })
 
-          // localStorage.removeItem('orderId')
-        }
-        return this.props.getOrder(this.props.user.id)
-      } else if (!localStorage.getItem('orderId') || localStorage.getItem('orderId') === 'undefined') {
+            // localStorage.removeItem('orderId')
+          }
+          return this.props.getOrder(this.props.user.id)
+        } else if (!localStorage.getItem('orderId') || localStorage.getItem('orderId') === 'undefined') {
           return this.props.createLocalOrder()
-      } else {
-        return this.props.getLocalOrder(localStorage.getItem('orderId'))
-      }
-    })
-    .then(() => {
-      if (!this.props.isLoggedIn) {
-        localStorage.setItem('orderId', this.props.orderId)
-      }
-    })
+        } else {
+          return this.props.getLocalOrder(localStorage.getItem('orderId'))
+        }
+      })
+      .then(() => {
+        if (!this.props.isLoggedIn) {
+          localStorage.setItem('orderId', this.props.orderId)
+        }
+      })
   }
 
   render() {
@@ -62,6 +63,7 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SelectedProduct} />
         <Route exact path="/products/:productId/edit" component={EditProductForm} />
         <Route exact path="/order" component={Order} />
+        <Route exact path="/profile" component={UserHome} />
       </div>
     )
   }
