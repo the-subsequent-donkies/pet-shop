@@ -4,12 +4,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LineItem from './line-item';
 import { getOrderServer } from '../store/order'
+import UserHome from './user-home'
 import { Segment, Header, Divider } from 'semantic-ui-react'
 
-const Order = ({ order }) => {
-
+const Order = (props) => {
+  let order = props.order
   return (
     <div className='home-wrapper'>
+      <div>
+        <UserHome user={props.user} />
+      </div>
       <div className='center-container'>
         <Segment.Group
           raised
