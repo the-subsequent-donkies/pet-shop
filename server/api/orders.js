@@ -63,23 +63,23 @@ router.get('/me/:userId', (req, res, next) => {
           status: 'Initialized',
           submittedAt: Date.now()
         })
-          .then((createdOrder) => {
-            return Order.findOne({
-              where: {
-                id: createdOrder.id
-              },
-              include: [
-                {
-                  model: LineItem,
-                  as: 'line_items',
-                  include: [{ model: Product, as: 'product' }]
-                }
-              ]
-            })
+        .then((createdOrder) => {
+          return Order.findOne({
+            where: {
+              id: createdOrder.id
+            },
+            include: [
+              {
+                model: LineItem,
+                as: 'line_items',
+                include: [{ model: Product, as: 'product' }]
+              }
+            ]
           })
-          .then((result) => {
-            res.json(result)
-          })
+        })
+        .then((result) => {
+          res.json(result)
+        })
     })
   } catch (err) {
     next(err)
@@ -92,7 +92,6 @@ router.post('/', async (req, res, next) => {
     const addedOrder = await Order.create({
       ...req.body,
       submittedAt: Date.now(),
-      status: 'Initialized'
     })
     const gotOrder = await Order.findOne({
       where: {
@@ -104,7 +103,6 @@ router.post('/', async (req, res, next) => {
           include: [{ model: Product, as: 'product'}]}
       ]
     })
-    console.log(gotOrder)
     res.status(201).json(gotOrder)
 
   } catch (err) {
