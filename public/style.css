@@ -99,7 +99,7 @@ nav a {
 
 /* Order + Line Items */
 
-.user-order-body {
+/* .user-order-body {
   flex-direction: column;
   justify-content: center;
 }
@@ -116,21 +116,19 @@ nav a {
 .line-item-container img {
   width: 95%;
   height: auto;
-}
+} */
 
 .line-item-img-bound {
-  width: 200px;
-  height: 200px;
-  margin: 5px;
+  max-height: 150px;
   justify-content: center;
   align-items: center;
-  padding: 5px;
+  float: left;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
 }
 
 .line-item-name-description {
-  width: 60%;
-  margin: 5px;
-  padding: 5px;
+  padding-left: 1.5rem;
 }
 
 @media screen and (max-width: 998px) {

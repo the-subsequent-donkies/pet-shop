@@ -3,6 +3,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { deleteLineitemServer, updateLineitemServer } from '../store/order'
+import { Segment, Image, Header, Form, Input, Button } from 'semantic-ui-react'
 
 class LineItem extends Component {
   constructor() {
@@ -49,28 +50,50 @@ class LineItem extends Component {
     const product = lineItem.product
 
     return (
-      <div className="line-item-container container">
-        <div className="line-item-img-bound container">
-          <img src={product.imgUrl} />
+      <Segment padded>
+        <div
+          className='line-item-img-bound'
+        >
+          <Image
+            src={product.imgUrl}
+            size='tiny'
+          />
         </div>
-        <div className="line-item-name-description">
-          <h4>{product.name}</h4>
+        <div className='line-item-name-description'>
+          <Header
+            as='h3'
+            style={{ marginTop: '0.25rem', marginBottom: '0.25rem' }}
+          >
+            {product.name}
+          </Header>
           <p>{product.description}</p>
         </div>
-        <p>Price: ${product.price}</p>
-        <form onChange={this.handleChange}>
-          Quantity:
-          <input
-            name="quantity-input"
-            className="form-control"
-            type="text"
-            value={this.state.quantity}
-          />
-          <button onClick={this.handleUpdate}>Update</button>
-          <button onClick={this.handleDelete}>Delete</button>
-        </form>
-      </div>
+      </Segment>
     )
+  // }
+  //   return (
+  //     <div className="line-item-container container">
+  //       <div className="line-item-img-bound container">
+  //         <img src={product.imgUrl} />
+  //       </div>
+  //       <div className="line-item-name-description">
+  //         <h4>{product.name}</h4>
+  //         <p>{product.description}</p>
+  //       </div>
+  //       <p>Price: ${product.price}</p>
+  //       <form onChange={this.handleChange}>
+  //         Quantity:
+  //         <input
+  //           name="quantity-input"
+  //           className="form-control"
+  //           type="text"
+  //           value={this.state.quantity}
+  //         />
+  //         <button onClick={this.handleUpdate}>Update</button>
+  //         <button onClick={this.handleDelete}>Delete</button>
+  //       </form>
+  //     </div>
+  //   )
   }
 }
 

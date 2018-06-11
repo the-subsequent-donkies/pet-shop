@@ -20,51 +20,49 @@ class SelectedProduct extends Component {
     return (
       <div className='home-wrapper'>
         <div className='center-container'>
-          <Segment
-            padded
-            attached='top'
-          >
-            <Header
-              as='h1'
-              style={{ marginBottom: '0.25rem' }}
-            >
-              {product.name}
-            </Header>
-            <div className='selected-product-img-bound'>
-              <Image
-                src={product.imgUrl}
-                className='selected-product-img'
-              />
-            </div>
-            <div className='selected-product-content'>
-              {product.description}
+          <Segment.Group raised>
+            <Segment padded>
               <Header
-                as='h3'
-                style={{ marginTop: '1.25rem', marginBottom: '0' }}
+                as='h1'
+                style={{ marginBottom: '0.25rem' }}
               >
-                Price: ${product.price}
+                {product.name}
               </Header>
-              <Header
-                as='h4'
-                style={{ marginTop: '0' }}
-              >
-                Inventory: {product.inventory}
-              </Header>
-            </div>
-            <NewReviewForm />
-          </Segment>
-          {reviews && (
-            reviews.map((review) => {
-              return (
-                <SingleReview
-                  review={review}
-                  key={review.id}
-                  user={review.user}
-                  loggedUser={user}
-                />)
-            }))
-          }
-          <Segment attached='bottom' />
+              <div className='selected-product-img-bound'>
+                <Image
+                  src={product.imgUrl}
+                  className='selected-product-img'
+                />
+              </div>
+              <div className='selected-product-content'>
+                {product.description}
+                <Header
+                  as='h3'
+                  style={{ marginTop: '1.25rem', marginBottom: '0' }}
+                >
+                  Price: ${product.price}
+                </Header>
+                <Header
+                  as='h4'
+                  style={{ marginTop: '0' }}
+                >
+                  Inventory: {product.inventory}
+                </Header>
+              </div>
+              <NewReviewForm />
+            </Segment>
+            {reviews && (
+              reviews.map((review) => {
+                return (
+                  <SingleReview
+                    review={review}
+                    key={review.id}
+                    user={review.user}
+                    loggedUser={user}
+                  />)
+              }))
+            }
+          </Segment.Group>
         </div>
       </div>
     )
