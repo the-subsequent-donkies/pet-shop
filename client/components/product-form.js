@@ -27,7 +27,8 @@ class ProductForm extends Component {
         price: nextProps.price,
         imgUrl: nextProps.imgUrl,
         description: nextProps.description,
-        id: nextProps.id
+        id: nextProps.id,
+        categories: nextProps.categoriesArr
       }
     }
     return null
@@ -123,6 +124,7 @@ class ProductForm extends Component {
             placeholder='Select one or more categories'
             options={categoryOptions}
             onChange={this.handleCategoryChange}
+            value={this.state.categories}
           />
           <Form.Field
             control={Button}

@@ -15,7 +15,8 @@ class EditProductForm extends Component {
     const {
       name, inventory, price, imgUrl, description, id, categories
     } = this.props.selectedProduct
-    console.log(this.props.selectedProduct)
+    const categoriesArr = categories ? categories.map(category => category.id) : undefined
+
     return (
       <ProductForm
         name={name}
@@ -24,6 +25,7 @@ class EditProductForm extends Component {
         imgUrl={imgUrl}
         description={description}
         id={id}
+        categoriesArr={categoriesArr}
         formAction={this.props.updateProduct}
         getCategories={this.props.getCategories}
         buttonAction='Save changes'
