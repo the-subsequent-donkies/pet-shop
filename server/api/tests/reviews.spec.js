@@ -58,7 +58,7 @@ describe('Review API routes', () => {
         })
     })
 
-    it('GET /api/reviews/editreview/:reviewId returns a single review', () => {
+    xit('GET /api/reviews/editreview/:reviewId returns a single review', () => {
       return request(app)
         .get('/api/reviews/editreview/1')
         .expect(200)
