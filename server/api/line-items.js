@@ -30,7 +30,6 @@ router.get('/:orderId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const lineitem = req.body
-    console.log(lineitem)
 
     // Check if lineitem exists in db
     const foundItem = await LineItem.findOne({
@@ -39,10 +38,10 @@ router.post('/', async (req, res, next) => {
       }
     })
     let addedItem
-    console.log('foundItem', foundItem)
+
     if (foundItem) {
       const newQuant = foundItem.quantity + 1
-      addedItem = await foundItem.update({quantity: newQuant})
+      addedItem = await foundItem.update({ quantity: newQuant })
     } else {
       addedItem = await LineItem.create({
         orderId: lineitem.orderId,

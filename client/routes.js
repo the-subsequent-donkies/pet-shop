@@ -12,6 +12,7 @@ import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 import { Home, ProductList } from './components'
 import SelectedProduct from './components/selected-product'
+import FilteredProducts from './components/filtered-products'
 import { getOrderServer } from './store/order';
 import EditReviewForm from './components/edit-review-form'
 //import { me } from './store'
@@ -38,7 +39,7 @@ class Routes extends Component {
       <div>
         <Navbar />
         <Route exact path='/' component={Home} />
-        <Route exact path='/categories/:categoryId' component={Home} />
+        <Route exact path='/categories/:categoryId' component={FilteredProducts} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={Signup} />
         <Route path='/newproduct' component={NewProductForm} />
