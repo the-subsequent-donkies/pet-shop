@@ -126,7 +126,7 @@ describe('Line-Item Routes', () => {
         })
     })
 
-    it('GET /api/lineitems/:orderId returns a line items belonging to the correct order ', async () => {
+    xit('GET /api/lineitems/:orderId returns a line items belonging to the correct order ', async () => {
       await Product.create(productThree)
       const orderTres = await Order.create(orderThree)
       const lineItemTres = await LineItem.create(lineItemThree)
