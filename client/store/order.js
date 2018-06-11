@@ -90,10 +90,14 @@ export const mergeOrdersServer = (localOrderId, userId) => {
   }
 }
 
-export const updateOrderStatusServer = (orderId, status) => {
+export const updateOrderStatusServer = (orderId, status, userId) => {
   return async (dispatch) => {
     const {data} = await axios.put(`/api/orders/${orderId}`, { status })
+    console.log('data', data)
     dispatch(updateOrderStatus(data.status))
+    if (status === 'Completed' || status === 'Cancelled') {
+      dispatch(getOrderServer(userId))
+    }
   }
 }
 
@@ -130,7 +134,7 @@ export default function (state = defaultOrder, action) {
     case GET_LOCAL_ORDER:
       return action.order
     case UPDATE_ORDER_STATUS:
-      return action.order
+      return {...state, status: action.status}
     default:
       return state
   }

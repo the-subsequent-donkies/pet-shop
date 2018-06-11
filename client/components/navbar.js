@@ -18,6 +18,8 @@ class Navbar extends Component {
     const { activeItem } = this.state
     const isLoggedIn = Object.keys(this.props.user).length > 0
 
+    console.log('order', this.props.orderId)
+
     return (
       <Menu>
         <Menu.Item
