@@ -1,25 +1,27 @@
 'use strict'
 
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import ProductList from './product-list';
+import { connect } from 'react-redux'
+import AllProducts from './all-products';
 import CategorySelector from './category-selector'
-
+import FilteredProducts from './filtered-products';
 /**
  * COMPONENT
  */
 class Home extends Component {
-  render () {
+  render() {
     const { email } = this.props.user
     const { isLoggedIn } = this.props
-
+    const unFiltered = Object.keys(this.props.match.params).length < 1
     return (
-      <div>
+      <div className='home-wrapper'>
         {isLoggedIn && (
           <h3>Welcome, {email}</h3>
         )}
         <CategorySelector />
-        <ProductList match={this.props.match || null} />
+        <AllProducts />
+
+
       </div>
     )
   }

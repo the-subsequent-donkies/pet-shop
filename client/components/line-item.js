@@ -1,15 +1,9 @@
+'use strict'
+
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { deleteLineitemServer, updateLineitemServer } from '../store/order'
-
-const tempProduct = {
-  name: 'Bone',
-  inventory: 4,
-  price: 2.50,
-  imgUrl: 'https://i.imgur.com/zzD13aO.jpg',
-  description: 'This is a fun chew toy for dogs',
-  category: 'dogs'
-}
+import { Segment, Image, Header, Form, Input, Button } from 'semantic-ui-react'
 
 class LineItem extends Component {
   constructor() {
@@ -52,31 +46,53 @@ class LineItem extends Component {
   }
 
   render() {
-    const lineItem = this.props.lineItem
-    const product = lineItem.product
+    const { product } = this.props.lineItem
 
     return (
-      <div className="line-item-container container">
-        <div className="line-item-img-bound container">
-          <img src={product.imgUrl} />
-        </div>
-        <div className="line-item-name-description">
-          <h4>{product.name}</h4>
-          <p>{product.description}</p>
-        </div>
-        <p>Price: ${product.price}</p>
-        <form onChange={this.handleChange}>
-          Quantity:
-          <input
-            name="quantity-input"
-            className="form-control"
-            type="text"
-            value={this.state.quantity}
+      <Segment
+        padded
+        style={{ minHeight: '13rem' }}
+      >
+        <div
+          className='line-item-img-bound'
+        >
+          <Image
+            src={product.imgUrl}
+            size='tiny'
           />
-          <button onClick={this.handleUpdate}>Update</button>
-          <button onClick={this.handleDelete}>Delete</button>
-        </form>
-      </div>
+        </div>
+        <Header
+          as='h3'
+          style={{ marginTop: '0', marginBottom: '0.25rem', paddingTop: '0' }}
+        >
+          {product.name}
+        </Header>
+        <p>{product.description}</p>
+        <Form
+          onChange={this.handleChange}
+          style={{ float: 'right' }}
+        >
+          <Form.Group>
+            <Form.Field
+              name='quantity-input'
+              control={Input}
+              value={this.state.quantity}
+            />
+            <Form.Field
+              as={Button}
+              onClick={this.handleUpdate}
+              content='Update'
+              style={{ margin: '0 .5rem' }}
+            />
+            <Form.Field
+              as={Button}
+              onClick={this.handleDelete}
+              content='Delete'
+              style={{ marginRight: '.5rem' }}
+            />
+          </Form.Group>
+        </Form>
+      </Segment>
     )
   }
 }

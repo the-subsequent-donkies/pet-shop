@@ -1,29 +1,81 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+'use strict'
+
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {logout} from '../store/user'
+
 import { createLocalOrderServer } from '../store/order';
 
-const Navbar = (props) => (
-  <nav className="navbar navbar-dark bg-dark">
-    <Link to="/"><h3 style={{ margin: '0.5rem' }}>Pet Shop</h3></Link>
-    {
-      (props.user.isAdmin) ? <Link to="/newproduct"><button>New Product</button></Link> : <div />
-    }
-    <div>
-      {
-        Object.keys(props.user).length === 0 ?
-          <div>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div> :
-          <button onClick={props.handleClick}>Logout</button>
-      }
-      <Link to="/order">Cart ({props.itemNum})</Link>
-    </div>
-  </nav>
-)
+import { logout } from '../store/user'
+import { Menu } from 'semantic-ui-react'
+
+class Navbar extends Component {
+  state = {}
+
+  handleItemClick = (event, { name }) => this.setState({ activeItem: name })
+
+  render () {
+    const { activeItem } = this.state
+    const isLoggedIn = Object.keys(this.props.user).length > 0
+
+    return (
+      <Menu>
+        <Menu.Item
+          as={Link}
+          name="home"
+          to="/"
+          active={activeItem === 'home'}
+          content="Pet Shop"
+        />
+        {
+          (this.props.user.isAdmin) ?
+            <Menu.Item
+              as={Link}
+              name="newproduct"
+              to="/newproduct"
+              active={activeItem === 'newproduct'}
+              content="New Product"
+            /> : null
+        }
+        <Menu.Menu position="right">
+          {
+            isLoggedIn ? null :
+                <Menu.Item
+                  as={Link}
+                  name="login"
+                  to="/login"
+                  active={activeItem === 'login'}
+                  content="Login"
+                />
+          }
+          {
+            isLoggedIn ?
+                <Menu.Item
+                  name="logout"
+                  active={activeItem === 'logout'}
+                  content="Logout"
+                  onClick={this.props.logout}
+                />
+                : <Menu.Item
+                    as={Link}
+                    name="signup"
+                    to="/signup"
+                    active={activeItem === 'signup'}
+                    content="Sign Up"
+                  />
+          }
+          <Menu.Item
+            as={Link}
+            name="cart"
+            to="/order"
+            active={activeItem === 'home'}
+            content={`Cart (${this.props.itemNum})`}
+          />
+        </Menu.Menu>
+      </Menu>
+    )
+  }
+}
 
 const mapState = (state) => {
   return {
@@ -35,7 +87,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick() {
+    logout() {
       dispatch(logout())
       dispatch(createLocalOrderServer())
     }
@@ -43,56 +95,3 @@ const mapDispatch = (dispatch) => {
 }
 
 export default connect(mapState, mapDispatch)(Navbar)
-
-// import {logout} from '../store'
-
-// const Navbar = ({ handleClick, isLoggedIn }) => (
-//   <div>
-//     <h1>BOILERMAKER</h1>
-//     <nav>
-//       {isLoggedIn ? (
-//         <div>
-//           {/* The navbar will show these links after you log in */}
-//           <Link to="/home">Home</Link>
-//           <a href="#" onClick={handleClick}>
-//             Logout
-//           </a>
-//         </div>
-//       ) : (
-//         <div>
-//           {/* The navbar will show these links before you log in */}
-//           <Link to="/login">Login</Link>
-//           <Link to="/signup">Sign Up</Link>
-//         </div>
-//       )}
-//     </nav>
-//     <hr />
-//   </div>
-// )
-
-// /**
-//  * CONTAINER
-//  */
-// const mapState = state => {
-//   return {
-//     isLoggedIn: !!state.user.id
-//   }
-// }
-
-// const mapDispatch = dispatch => {
-//   return {
-//     handleClick() {
-//       dispatch(logout())
-//     }
-//   }
-// }
-
-// export default connect(mapState, mapDispatch)(Navbar)
-
-// /**
-//  * PROP TYPES
-//  */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired
-// }

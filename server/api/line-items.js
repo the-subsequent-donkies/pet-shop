@@ -38,10 +38,11 @@ router.post('/', async (req, res, next) => {
         orderId: lineitem.orderId
       }
     })
+
     let addedItem
     if (foundItem) {
       const newQuant = foundItem.quantity + 1
-      addedItem = await foundItem.update({quantity: newQuant})
+      addedItem = await foundItem.update({ quantity: newQuant })
     } else {
       addedItem = await LineItem.create({
         orderId: lineitem.orderId,

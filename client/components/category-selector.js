@@ -14,33 +14,32 @@ class CategorySelector extends Component {
     this.state = {
       category: '',
     }
+
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    if (this.state.category === '/') {
-      history.push(`/`)
+  handleClick = async (event) => {
+    await this.setState({ category: event.target.value })
+    if (this.state.category === "") {
+      let currentLocation = history.location.pathname
+      history.push(currentLocation)
+    } else if (this.state.category === '/') {
       this.props.getProductsServer()
+      history.push(`/`)
     } else {
-      history.push(`/categories/${this.state.category}`)
       this.props.getProductsByCategoryServer(this.state.category)
+      history.push(`/categories/${this.state.category}`)
     }
   }
 
-  handleChange = (event) => {
-    this.setState({ category: event.target.value })
-  }
   render() {
-
     return (
       <div className='category-selector' >
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+        <form onSubmit={(event) => event.preventDefault()} onClick={this.handleClick}>
           <select className='custom-select' >
-            <option>Select a Category</option>
-            <option value='/'>All Products</option>
-            {this.props.categories.map(category => <option value={category.id} key={category.id} >{category.name}</option>)}
+            <option value='' selected={'' === this.state.category && 'selected'} > Select a Category</option>
+            <option value='/' selected={'/' === this.state.category && 'selected'}>All Products</option>
+            {this.props.categories.map(category => <option value={category.id} key={category.id} selected={category.id === this.state.category && 'selected'} >{category.name}</option>)}
           </select>
-          <button type='submit' className='btn btn-primary'>Filter</button>
         </form>
       </div>
 

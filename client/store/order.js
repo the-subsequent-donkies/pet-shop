@@ -28,8 +28,6 @@ export const getOrderServer = (userId) => {
 
 export const addLineitemServer = (orderId, product) => {
   return async (dispatch) => {
-    console.log('orderId', orderId)
-    console.log('product', product)
     const {data} = await axios.post('/api/lineitems/',
       { orderId,
         quantity: 1,
@@ -75,9 +73,6 @@ export const mergeOrdersServer = (localOrderId, userId) => {
     const localOrder = localRes.data
     const accountRes = await axios.get(`/api/orders/me/${userId}`)
     const accountOrder = accountRes.data
-
-    console.log('localOrder', localOrder)
-    console.log('accountOrder', accountOrder)
 
     // Get product id's for account order
     let productIds = []
