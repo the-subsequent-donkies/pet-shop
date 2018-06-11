@@ -52,7 +52,6 @@ const AuthForm = (props) => {
                 <Form.Field
                   control={Button}
                   content={displayName}
-                //onClick={handleSubmit}
                 />
                 <Button
                   content={`${displayName} with Google`}
