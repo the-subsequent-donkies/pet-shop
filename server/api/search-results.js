@@ -8,11 +8,26 @@ module.exports = router
 // product = 'someProd'
 
 
-router.get('/', async (req, res, next) => {
+router.get('/category', async (req, res, next) => {
   try {
     console.log('getting to the search route')
     // we will use the req.query.key ?
     console.log("what is my req.query", req.query)
+    res.json(req.query)
+    // assign req.query.state to a variable in the body
+    // do a sequelize request for the query param
+    // res.send the json needed
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/product', async (req, res, next) => {
+  try {
+    console.log('getting to the search route')
+    // we will use the req.query.key ?
+    console.log("what is my req.query", req.query)
+    res.json(req.query)
     // assign req.query.state to a variable in the body
     // do a sequelize request for the query param
     // res.send the json needed
