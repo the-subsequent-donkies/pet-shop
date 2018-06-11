@@ -85,6 +85,14 @@ export const getProductsByCategoryServer = (categoryId) => {
   }
 }
 
+export const manageInventoryServer = (order) => {
+  return async (dispatch) => {
+    order.line_items.forEach(lineItem => {
+      dispatch(updateProductServer({...lineItem.product, inventory: lineItem.product.inventory - lineItem.quantity }))
+    })
+  }
+}
+
 // reducers
 
 export const productsReducer = (state = [], action) => {

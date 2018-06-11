@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import { manageInventoryServer } from './product'
 
 const GET_ORDER = 'GET_ORDER'
 const ADD_LINEITEM_TO_ORDER = 'ADD_LINEITEM_TO_ORDER'
@@ -8,6 +9,7 @@ const UPDATE_LINEITEM = 'UPDATE_LINEITEM'
 const GET_LOCAL_ORDER = 'GET_LOCAL_ORDER'
 const CREATE_LOCAL_ORDER = 'CREATE_LOCAL_ORDER'
 const GET_ORDERS_BY_USER = 'GET_ORDERS_BY_USER'
+const UPDATE_ORDER_STATUS = 'UPDATE_ORDER_STATUS'
 
 const defaultOrder = {
   line_items: []
@@ -19,6 +21,7 @@ const deleteLineitem = lineitemId => ({ type: DELETE_LINEITEM, lineitemId })
 const updateLineitem = (lineitemId, quantity) => ({ type: UPDATE_LINEITEM, lineitemId, quantity })
 const getLocalOrder = order => ({ type: GET_LOCAL_ORDER, order })
 const createLocalOrder = order => ({ type: CREATE_LOCAL_ORDER, order })
+const updateOrderStatus = status => ({ type: UPDATE_ORDER_STATUS, status })
 const getOrdersByUser = orders => ({ type: GET_ORDERS_BY_USER, orders })
 
 export const getOrdersByUserServer = (userId) => {
@@ -99,7 +102,24 @@ export const mergeOrdersServer = (localOrderId, userId) => {
   }
 }
 
+<<<<<<< HEAD
 export const orderReducer = (state = defaultOrder, action) => {
+=======
+export const updateOrderStatusServer = (order, status, userId) => {
+  return async (dispatch) => {
+    if (status === 'Completed') {
+      dispatch(manageInventoryServer(order))
+    }
+    const {data} = await axios.put(`/api/orders/${order.id}`, { status })
+    dispatch(updateOrderStatus(data.status))
+    if (status === 'Completed' || status === 'Cancelled') {
+      dispatch(getOrderServer(userId))
+    }
+  }
+}
+
+export default function (state = defaultOrder, action) {
+>>>>>>> ed659ddc9b2c02a53c2ddb6b171793c12678bd92
   let tempItems
   switch (action.type) {
     case GET_ORDER:
@@ -132,6 +152,8 @@ export const orderReducer = (state = defaultOrder, action) => {
       return action.order
     case GET_LOCAL_ORDER:
       return action.order
+    case UPDATE_ORDER_STATUS:
+      return { ...state, status: action.status }
     default:
       return state
   }

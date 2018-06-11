@@ -1,8 +1,8 @@
 'use strict'
 
 const db = require('../server/db/db')
-const { User, LineItem, Order, Product, Review, Category, ProductCategory } = require('../server/db/models')
-const { productData, categoryData, productCategoryData, reviewData, userData } = require('./data')
+const { User, LineItem, Order, Product, Review, Category } = require('../server/db/models')
+const { productData, categoryData, reviewData, userData } = require('./data')
 
 const seed = async () => {
 

@@ -15,9 +15,10 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', checkAccess, async (req, res, next) => {
+  const { name, description } = req.body
   try {
-    let newCat = await Category.create(req.body)
-    res.status(201).json(newCat)
+    const response = await Category.create({ name, description })
+    res.json(response)
   } catch (err) {
     next(err)
   }
