@@ -46,11 +46,13 @@ class LineItem extends Component {
   }
 
   render() {
-    const lineItem = this.props.lineItem
-    const product = lineItem.product
+    const { product } = this.props.lineItem
 
     return (
-      <Segment padded>
+      <Segment
+        padded
+        style={{ minHeight: '13rem' }}
+      >
         <div
           className='line-item-img-bound'
         >
@@ -66,32 +68,32 @@ class LineItem extends Component {
           {product.name}
         </Header>
         <p>{product.description}</p>
+        <Form
+          onChange={this.handleChange}
+          style={{ float: 'right' }}
+        >
+          <Form.Group>
+            <Form.Field
+              name='quantity-input'
+              control={Input}
+              value={this.state.quantity}
+            />
+            <Form.Field
+              as={Button}
+              onClick={this.handleUpdate}
+              content='Update'
+              style={{ margin: '0 .5rem' }}
+            />
+            <Form.Field
+              as={Button}
+              onClick={this.handleDelete}
+              content='Delete'
+              style={{ marginRight: '.5rem' }}
+            />
+          </Form.Group>
+        </Form>
       </Segment>
     )
-  // }
-  //   return (
-  //     <div className="line-item-container container">
-  //       <div className="line-item-img-bound container">
-  //         <img src={product.imgUrl} />
-  //       </div>
-  //       <div className="line-item-name-description">
-  //         <h4>{product.name}</h4>
-  //         <p>{product.description}</p>
-  //       </div>
-  //       <p>Price: ${product.price}</p>
-  //       <form onChange={this.handleChange}>
-  //         Quantity:
-  //         <input
-  //           name="quantity-input"
-  //           className="form-control"
-  //           type="text"
-  //           value={this.state.quantity}
-  //         />
-  //         <button onClick={this.handleUpdate}>Update</button>
-  //         <button onClick={this.handleDelete}>Delete</button>
-  //       </form>
-  //     </div>
-  //   )
   }
 }
 
