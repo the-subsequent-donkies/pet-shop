@@ -12,7 +12,7 @@ import { me, logout } from './store/user'
 import CategorySelector from './components/category-selector'
 import { Home, ProductList } from './components'
 import SelectedProduct from './components/selected-product'
-import { getOrderServer, getLocalOrderServer, createLocalOrderServer } from './store/order';
+import { getOrderServer, getLocalOrderServer, createLocalOrderServer, mergeOrdersServer } from './store/order';
 //import { me } from './store'
 
 
@@ -24,11 +24,18 @@ class Routes extends Component {
     super(props)
     // console.log(localStorage.getItem('orderId'))
     this.props.loadInitialData()
-    // .then(() => {
-    //   this.props.getOrder(this.props.user.id)
-    // })
     .then( () => {
       if (this.props.isLoggedIn) {
+        if (localStorage.getItem('orderId') && localStorage.getItem('orderId') !== 'undefined') {
+          // this.props.getLocalOrder(localStorage.getItem('orderId'))
+          this.props.getOrder(this.props.user.id)
+          .then(() => {
+            console.log(localStorage)
+            return this.props.mergeOrders(parseInt(localStorage.getItem('orderId')), this.props.user.id)
+          })
+
+          // localStorage.removeItem('orderId')
+        }
         return this.props.getOrder(this.props.user.id)
       } else if (!localStorage.getItem('orderId') || localStorage.getItem('orderId') === 'undefined') {
           return this.props.createLocalOrder()
@@ -39,7 +46,6 @@ class Routes extends Component {
     .then(() => {
       if (!this.props.isLoggedIn) {
         localStorage.setItem('orderId', this.props.orderId)
-        console.log('localStorage', localStorage)
       }
     })
   }
@@ -85,7 +91,8 @@ const mapDispatch = (dispatch) => {
     loadInitialData: () => dispatch(me()),
     getOrder: (userId) => dispatch(getOrderServer(userId)),
     createLocalOrder: () => dispatch(createLocalOrderServer()),
-    getLocalOrder: (orderId) => dispatch(getLocalOrderServer(orderId))
+    getLocalOrder: (orderId) => dispatch(getLocalOrderServer(orderId)),
+    mergeOrders: (localOrderId, userId) => dispatch(mergeOrdersServer(localOrderId, userId))
   }
 }
 

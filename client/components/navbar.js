@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {logout} from '../store/user'
+import { createLocalOrderServer } from '../store/order';
 
 const Navbar = (props) => (
   <nav className="navbar navbar-dark bg-dark">
@@ -27,7 +28,8 @@ const Navbar = (props) => (
 const mapState = (state) => {
   return {
     user: state.user,
-    itemNum: state.order.line_items.length
+    itemNum: state.order.line_items.length,
+    orderId: state.order.id
   }
 }
 
@@ -35,6 +37,7 @@ const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout())
+      dispatch(createLocalOrderServer())
     }
   }
 }

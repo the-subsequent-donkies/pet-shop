@@ -28,11 +28,14 @@ export const getOrderServer = (userId) => {
 
 export const addLineitemServer = (orderId, product) => {
   return async (dispatch) => {
+    console.log('orderId', orderId)
+    console.log('product', product)
     const {data} = await axios.post('/api/lineitems/',
       { orderId,
         quantity: 1,
         productId: product.id,
         currentPrice: product.price })
+
     dispatch(addLineitemToOrder(data))
   }
 }
@@ -62,6 +65,31 @@ export const createLocalOrderServer = () => {
   return async (dispatch) => {
     const {data} = await axios.post(`/api/orders`)
     dispatch(createLocalOrder(data))
+    localStorage.setItem('orderId', data.id)
+  }
+}
+
+export const mergeOrdersServer = (localOrderId, userId) => {
+  return async (dispatch) => {
+    const localRes = await axios.get(`/api/orders/${localOrderId}`)
+    const localOrder = localRes.data
+    const accountRes = await axios.get(`/api/orders/me/${userId}`)
+    const accountOrder = accountRes.data
+
+    console.log('localOrder', localOrder)
+    console.log('accountOrder', accountOrder)
+
+    // Get product id's for account order
+    let productIds = []
+    accountOrder.line_items.forEach((lineItem) => {
+      productIds.push(lineItem.productId)
+    })
+
+    localOrder.line_items.forEach((localLineitem) => {
+      if (!productIds.includes(localLineitem.productId)) {
+        dispatch(addLineitemServer(accountOrder.id, localLineitem.product))
+      }
+    })
   }
 }
 
