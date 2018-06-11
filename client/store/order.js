@@ -95,7 +95,6 @@ export const updateOrderStatusServer = (order, status, userId) => {
   return async (dispatch) => {
     console.log('status', status)
     if (status === 'Completed') {
-
       dispatch(manageInventoryServer(order))
     }
     const {data} = await axios.put(`/api/orders/${order.id}`, { status })
