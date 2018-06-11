@@ -12,7 +12,7 @@ Order.belongsTo(User)
 User.hasMany(Order)
 
 LineItem.belongsTo(Product)
-Product.hasMany(LineItem)
+Product.hasMany(LineItem, { as: "lineitems" })
 
 Order.hasMany(LineItem)
 LineItem.belongsTo(Order)

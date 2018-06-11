@@ -10,9 +10,11 @@ router.get('/', async (req, res, next) => {
   try {
     const response = await Order.findAll({
       include: [
-        {model: LineItem,
+        {
+          model: LineItem,
           as: 'line_items',
-          include: [{ model: Product, as: 'product'}]}
+          include: [{ model: Product, as: 'product' }]
+        }
       ]
     })
     res.json(response)
@@ -26,9 +28,11 @@ router.get('/:orderId', async (req, res, next) => {
     const response = await Order.findAll({
       where: { id: req.params.orderId },
       include: [
-        {model: LineItem,
+        {
+          model: LineItem,
           as: 'line_items',
-          include: [{ model: Product, as: 'product'}]}
+          include: [{ model: Product, as: 'product' }]
+        }
       ]
     })
     res.json(response)
@@ -45,9 +49,11 @@ router.get('/me/:userId', (req, res, next) => {
         status: 'Initialized',
       },
       include: [
-        {model: LineItem,
+        {
+          model: LineItem,
           as: 'line_items',
-          include: [{ model: Product, as: 'product'}]}
+          include: [{ model: Product, as: 'product' }]
+        }
       ]
     }).then((foundOrder) => {
       foundOrder ?
@@ -57,21 +63,23 @@ router.get('/me/:userId', (req, res, next) => {
           status: 'Initialized',
           submittedAt: Date.now()
         })
-        .then((createdOrder) => {
-          return Order.findOne({
-            where: {
-              id: createdOrder.id
-            },
-            include: [
-              {model: LineItem,
-                as: 'line_items',
-                include: [{ model: Product, as: 'product'}]}
-            ]
+          .then((createdOrder) => {
+            return Order.findOne({
+              where: {
+                id: createdOrder.id
+              },
+              include: [
+                {
+                  model: LineItem,
+                  as: 'line_items',
+                  include: [{ model: Product, as: 'product' }]
+                }
+              ]
+            })
           })
-        })
-        .then((result) => {
-          res.json(result)
-        })
+          .then((result) => {
+            res.json(result)
+          })
     })
   } catch (err) {
     next(err)
@@ -81,7 +89,8 @@ router.get('/me/:userId', (req, res, next) => {
 //POST routes
 router.post('/', async (req, res, next) => {
   try {
-    const addedOrder = await Order.create(req.body)
+    const { ...data } = req.body
+    const addedOrder = await Order.create(data)
     res.status(201).json(addedOrder)
   } catch (err) {
     next(err)
@@ -90,8 +99,9 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:orderId', async (req, res, next) => {
   try {
+    const { ...data } = req.body
     const order = await Order.findById(req.params.orderId)
-    const updatedOrder = await order.update(req.body)
+    const updatedOrder = await order.update(data)
     res.status(200).json(updatedOrder)
   } catch (err) {
     next(err)

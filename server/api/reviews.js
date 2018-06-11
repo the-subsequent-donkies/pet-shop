@@ -71,12 +71,11 @@ router.post('/', checkAccess, async (req, res, next) => {
 
 
 // PUT Routes
-
 router.put('/editreview/:reviewId', checkAccess, async (req, res, next) => {
-  console.log('put route: ', req.body)
+  const reviewBody = { content: req.body.content, stars: req.body.stars }
   try {
     const review = await Review.findById(req.params.reviewId)
-    const addedReview = await review.update(req.body)
+    const addedReview = await review.update(reviewBody)
     res.status(200).json(addedReview)
   } catch (err) {
     next(err)
