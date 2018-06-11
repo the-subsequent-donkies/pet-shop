@@ -40,9 +40,13 @@ router.get('/categories/:categoryId', async (req, res, next) => {
 // POST Routes /api/products
 
 router.post('/', checkAccess, async (req, res, next) => {
-  const { name, inventory, price, imgUrl, description } = req.body
+  const { name, inventory, price, imgUrl, description, categories } = req.body
   try {
     const addedProduct = await Product.create({ name, inventory, price, imgUrl, description })
+    const categoryArray =
+      await Promise.all(categories
+        .map(categoryId => Category.findById(categoryId)))
+    categoryArray.forEach(category => addedProduct.addCategory(category))
     res.status(201).json(addedProduct)
   } catch (err) {
     next(err)
@@ -52,10 +56,16 @@ router.post('/', checkAccess, async (req, res, next) => {
 
 // PUT Routes
 router.put('/:productId', checkAccess, async (req, res, next) => {
-  const { name, inventory, price, imgUrl, description } = req.body
+  const { name, inventory, price, imgUrl, description, categories } = req.body
   try {
     const product = await Product.findById(req.params.productId)
     const updatedProduct = await product.update({ name, inventory, price, imgUrl, description })
+    if (categories.length > 0) {
+      categories.forEach(async category => {
+        const returnedCategory = await Category.findOne({ where: { id: category.id }})
+          .then(() => product.addCategory(returnedCategory))
+      })
+    }
     res.status(200).json(updatedProduct)
   } catch (err) {
     next(err)

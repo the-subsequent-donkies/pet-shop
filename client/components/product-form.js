@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react'
 import history from '../history'
-import { Form, Input, TextArea, Button } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Form, Input, TextArea, Button, Dropdown } from 'semantic-ui-react'
 
 class ProductForm extends Component {
   constructor (props) {
@@ -12,8 +13,10 @@ class ProductForm extends Component {
       inventory: '',
       price: '',
       imgUrl: '',
-      description: ''
+      description: '',
+      categories: []
     }
+    this.props.getCategories()
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -41,10 +44,14 @@ class ProductForm extends Component {
     this.invokeSubmit(event.target)
   }
 
-  invokeSubmit = async (form) => {
+  invokeSubmit = async () => {
     const product = { ...this.state }
     const productId = await this.props.formAction(product)
     history.push(`/products/${productId}`)
+  }
+
+  handleCategoryChange = async (event, data) => {
+    await this.setState({ categories: data.value })
   }
 
   render() {
@@ -55,6 +62,15 @@ class ProductForm extends Component {
       imgUrl,
       description,
     } = this.state
+
+    const categoryOptions = []
+    this.props.categories.forEach(category => {
+      categoryOptions.push({
+        key: category.id,
+        text: category.name,
+        value: category.id,
+      })
+    })
 
     return (
       <div className='custom-form'>
@@ -99,6 +115,16 @@ class ProductForm extends Component {
             value={imgUrl}
           />
           <Form.Field
+            name='categories'
+            control={Dropdown}
+            fluid
+            multiple search selection
+            label='Categories'
+            placeholder='Select one or more categories'
+            options={categoryOptions}
+            onChange={this.handleCategoryChange}
+          />
+          <Form.Field
             control={Button}
             type='submit'
             content={this.props.buttonAction}
@@ -109,4 +135,10 @@ class ProductForm extends Component {
   }
 }
 
-export default ProductForm
+const mapStateToProps = state => {
+  return {
+    categories: state.categories
+  }
+}
+
+export default connect(mapStateToProps)(ProductForm)

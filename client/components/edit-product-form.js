@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getSingleProductServer, updateProductServer } from '../store/product'
+import { getCategoriesServer } from '../store/category'
 import ProductForm from './product-form'
 
 class EditProductForm extends Component {
@@ -23,6 +24,7 @@ class EditProductForm extends Component {
         description={description}
         id={id}
         formAction={this.props.updateProduct}
+        getCategories={this.props.getCategories}
         buttonAction='Save changes'
       />
     )
@@ -38,7 +40,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProduct: productId => dispatch(getSingleProductServer(productId)),
-    updateProduct: updatedProduct => dispatch(updateProductServer(updatedProduct))
+    updateProduct: updatedProduct => dispatch(updateProductServer(updatedProduct)),
+    getCategories: () => dispatch(getCategoriesServer())
   }
 }
 
