@@ -2,6 +2,7 @@
 
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Category = require('./category')
 
 const Product = db.define('product', {
   name: {
@@ -30,6 +31,13 @@ const Product = db.define('product', {
       if (product.imgUrl === '') {
         product.imgUrl = '../../images/default-product.jpg'
       }
+    }
+  }
+}, {
+  getterMethods: {
+    categories: function () {
+      const categories = this.getCategories()
+      return categories.map(category => category.id)
     }
   }
 })
