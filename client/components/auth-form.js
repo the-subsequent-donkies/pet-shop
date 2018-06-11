@@ -17,6 +17,22 @@ const AuthForm = (props) => {
           <Redirect to="/" />
           : (
             <Form name={name} onSubmit={handleSubmit}>
+              {props.name === 'signup' && (
+                <Form.Group widths='equal'>
+                  <Form.Field
+                    name='firstName'
+                    control={Input}
+                    label='Name'
+                    placeholder='Your full name'
+                  />
+                  <Form.Field
+                    name='address'
+                    control={Input}
+                    label='Address'
+                    placeholder='Enter your address'
+                  />
+                </Form.Group>
+              )}
               <Form.Group widths='equal'>
                 <Form.Field
                   name='email'
@@ -32,22 +48,6 @@ const AuthForm = (props) => {
                   placeholder='Enter your password'
                 />
               </Form.Group>
-              {props.name === 'signup' && (
-                <Form.Group widths='equal'>
-                  <Form.Field
-                    name='firstName'
-                    control={Input}
-                    label='Name'
-                    placeholder='Your Full Name'
-                  />
-                  <Form.Field
-                    name='address'
-                    control={Input}
-                    label='Address'
-                    placeholder='Your Address'
-                  />
-                </Form.Group>
-              )}
               <Form.Group>
                 <Form.Field
                   control={Button}
@@ -95,7 +95,6 @@ const mapDispatch = (dispatch) => {
       const password = evt.target.password.value
       const name = evt.target.firstName.value
       const address = evt.target.address.value
-      console.log(evt.target.name, formName, email, password, name, address)
       dispatch(auth(email, password, name, address, formName))
     }
   }
