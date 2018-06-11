@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import AllProducts from './all-products';
 import CategorySelector from './category-selector'
 import FilteredProducts from './filtered-products';
-
 /**
  * COMPONENT
  */
@@ -19,7 +18,6 @@ class Home extends Component {
         {isLoggedIn && (
           <h3>Welcome, {email}</h3>
         )}
-
         <CategorySelector />
         <AllProducts />
 

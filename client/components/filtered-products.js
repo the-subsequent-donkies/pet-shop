@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import IndividualProduct from './individual-product'
 import { getProductsByCategoryServer } from '../store/product'
 import CategorySelector from './category-selector'
+
 class FilteredProducts extends Component {
   constructor(props) {
     super(props)
