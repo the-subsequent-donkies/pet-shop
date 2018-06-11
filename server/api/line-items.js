@@ -34,11 +34,12 @@ router.post('/', async (req, res, next) => {
     // Check if lineitem exists in db
     const foundItem = await LineItem.findOne({
       where: {
-        productId: lineitem.productId
+        productId: lineitem.productId,
+        orderId: lineitem.orderId
       }
     })
-    let addedItem
 
+    let addedItem
     if (foundItem) {
       const newQuant = foundItem.quantity + 1
       addedItem = await foundItem.update({ quantity: newQuant })

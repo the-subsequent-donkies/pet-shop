@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:orderId', async (req, res, next) => {
   try {
-    const response = await Order.findAll({
+    const response = await Order.findOne({
       where: { id: req.params.orderId },
       include: [
         {
@@ -63,23 +63,23 @@ router.get('/me/:userId', (req, res, next) => {
           status: 'Initialized',
           submittedAt: Date.now()
         })
-          .then((createdOrder) => {
-            return Order.findOne({
-              where: {
-                id: createdOrder.id
-              },
-              include: [
-                {
-                  model: LineItem,
-                  as: 'line_items',
-                  include: [{ model: Product, as: 'product' }]
-                }
-              ]
-            })
+        .then((createdOrder) => {
+          return Order.findOne({
+            where: {
+              id: createdOrder.id
+            },
+            include: [
+              {
+                model: LineItem,
+                as: 'line_items',
+                include: [{ model: Product, as: 'product' }]
+              }
+            ]
           })
-          .then((result) => {
-            res.json(result)
-          })
+        })
+        .then((result) => {
+          res.json(result)
+        })
     })
   } catch (err) {
     next(err)
@@ -89,9 +89,22 @@ router.get('/me/:userId', (req, res, next) => {
 //POST routes
 router.post('/', async (req, res, next) => {
   try {
-    const { ...data } = req.body
-    const addedOrder = await Order.create(data)
-    res.status(201).json(addedOrder)
+    const addedOrder = await Order.create({
+      ...req.body,
+      submittedAt: Date.now(),
+    })
+    const gotOrder = await Order.findOne({
+      where: {
+        id: addedOrder.id
+      },
+      include: [
+        {model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product'}]}
+      ]
+    })
+    res.status(201).json(gotOrder)
+
   } catch (err) {
     next(err)
   }
