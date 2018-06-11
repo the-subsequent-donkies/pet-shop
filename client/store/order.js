@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import { manageInventoryServer } from './product'
 
 const GET_ORDER = 'GET_ORDER'
 const ADD_LINEITEM_TO_ORDER = 'ADD_LINEITEM_TO_ORDER'
@@ -7,6 +8,7 @@ const DELETE_LINEITEM = 'DELETE_LINEITEM'
 const UPDATE_LINEITEM = 'UPDATE_LINEITEM'
 const GET_LOCAL_ORDER = 'GET_LOCAL_ORDER'
 const CREATE_LOCAL_ORDER = 'CREATE_LOCAL_ORDER'
+const UPDATE_ORDER_STATUS = 'UPDATE_ORDER_STATUS'
 
 const defaultOrder = {
   line_items: []
@@ -18,6 +20,7 @@ const deleteLineitem = lineitemId => ({type: DELETE_LINEITEM, lineitemId})
 const updateLineitem = (lineitemId, quantity) => ({type: UPDATE_LINEITEM, lineitemId, quantity})
 const getLocalOrder = order => ({type: GET_LOCAL_ORDER, order})
 const createLocalOrder = order => ({type: CREATE_LOCAL_ORDER, order})
+const updateOrderStatus = status => ({type: UPDATE_ORDER_STATUS, status})
 
 export const getOrderServer = (userId) => {
   return async (dispatch) => {
@@ -88,6 +91,19 @@ export const mergeOrdersServer = (localOrderId, userId) => {
   }
 }
 
+export const updateOrderStatusServer = (order, status, userId) => {
+  return async (dispatch) => {
+    if (status === 'Completed') {
+      dispatch(manageInventoryServer(order))
+    }
+    const {data} = await axios.put(`/api/orders/${order.id}`, { status })
+    dispatch(updateOrderStatus(data.status))
+    if (status === 'Completed' || status === 'Cancelled') {
+      dispatch(getOrderServer(userId))
+    }
+  }
+}
+
 export default function (state = defaultOrder, action) {
   let tempItems
   switch (action.type) {
@@ -120,6 +136,8 @@ export default function (state = defaultOrder, action) {
       return action.order
     case GET_LOCAL_ORDER:
       return action.order
+    case UPDATE_ORDER_STATUS:
+      return {...state, status: action.status}
     default:
       return state
   }

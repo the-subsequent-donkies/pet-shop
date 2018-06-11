@@ -16,6 +16,7 @@ import { getOrderServer, getLocalOrderServer, createLocalOrderServer, mergeOrder
 import SearchBar from './components/search-bar'///$$$$$$$remove here just for testing
 import FilteredProducts from './components/filtered-products'
 import EditReviewForm from './components/edit-review-form'
+import UserHome from './components/user-home';
 
 
 class Routes extends Component {
@@ -30,7 +31,11 @@ class Routes extends Component {
             this.props.getOrder(this.props.user.id)
               .then(() => {
                 console.log(localStorage)
+<<<<<<< HEAD
                 return this.props.mergeOrders(parseInt(localStorage.getItem('orderId')), this.props.user.id)
+=======
+                return this.props.mergeOrders(parseInt(localStorage.getItem('orderId'), 10), this.props.user.id)
+>>>>>>> ed659ddc9b2c02a53c2ddb6b171793c12678bd92
               })
 
             // localStorage.removeItem('orderId')
@@ -62,7 +67,11 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SelectedProduct} />
         <Route exact path="/products/:productId/edit" component={EditProductForm} />
         <Route exact path="/order" component={Order} />
+<<<<<<< HEAD
         <Route exact path="/search" component={SearchBar} />
+=======
+        <Route exact path="/profile" component={UserHome} />
+>>>>>>> ed659ddc9b2c02a53c2ddb6b171793c12678bd92
       </div>
     )
   }

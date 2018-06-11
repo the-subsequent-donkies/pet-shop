@@ -14,7 +14,7 @@ class Navbar extends Component {
 
   handleItemClick = (event, { name }) => this.setState({ activeItem: name })
 
-  render () {
+  render() {
     const { activeItem } = this.state
     const isLoggedIn = Object.keys(this.props.user).length > 0
 
@@ -40,30 +40,40 @@ class Navbar extends Component {
         <Menu.Menu position="right">
           {
             isLoggedIn ? null :
-                <Menu.Item
-                  as={Link}
-                  name="login"
-                  to="/login"
-                  active={activeItem === 'login'}
-                  content="Login"
-                />
+              <Menu.Item
+                as={Link}
+                name="login"
+                to="/login"
+                active={activeItem === 'login'}
+                content="Login"
+              />
           }
           {
             isLoggedIn ?
-                <Menu.Item
-                  name="logout"
-                  active={activeItem === 'logout'}
-                  content="Logout"
-                  onClick={this.props.logout}
-                />
-                : <Menu.Item
-                    as={Link}
-                    name="signup"
-                    to="/signup"
-                    active={activeItem === 'signup'}
-                    content="Sign Up"
-                  />
+              <Menu.Item
+                name="logout"
+                active={activeItem === 'logout'}
+                content="Logout"
+                onClick={this.props.logout}
+              />
+              : <Menu.Item
+                as={Link}
+                name="signup"
+                to="/signup"
+                active={activeItem === 'signup'}
+                content="Sign Up"
+              />
           }
+          {
+            isLoggedIn && (
+              <Menu.Item
+                as={Link}
+                name="profile"
+                to="/profile"
+                active={activeItem === 'profile'}
+                content="My Profile"
+              />
+            )}
           <Menu.Item
             as={Link}
             name="cart"
