@@ -2,6 +2,7 @@
 
 const router = require('express').Router()
 const { Product, Category, Review, User } = require('../db/models')
+const checkAccess = require('./check-access-user')
 module.exports = router
 
 // GET Routes
@@ -29,7 +30,7 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.get('/editreview/:reviewId', async (req, res, next) => {
+router.get('/editreview/:reviewId', checkAccess, async (req, res, next) => {
   try {
     const response = await Review.findById(req.params.reviewId)
     res.json(response)
@@ -40,7 +41,7 @@ router.get('/editreview/:reviewId', async (req, res, next) => {
 
 // POST Routes
 
-router.post('/', async (req, res, next) => {
+router.post('/', checkAccess, async (req, res, next) => {
   try {
     const review = { content: req.body.content, stars: req.body.stars }
     Review.create(review)
@@ -71,7 +72,7 @@ router.post('/', async (req, res, next) => {
 
 // PUT Routes
 
-router.put('/editreview/:reviewId', async (req, res, next) => {
+router.put('/editreview/:reviewId', checkAccess, async (req, res, next) => {
   console.log('put route: ', req.body)
   try {
     const review = await Review.findById(req.params.reviewId)
