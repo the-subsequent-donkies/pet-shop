@@ -102,15 +102,12 @@ export const mergeOrdersServer = (localOrderId, userId) => {
   }
 }
 
-<<<<<<< HEAD
-export const orderReducer = (state = defaultOrder, action) => {
-=======
 export const updateOrderStatusServer = (order, status, userId) => {
   return async (dispatch) => {
     if (status === 'Completed') {
       dispatch(manageInventoryServer(order))
     }
-    const {data} = await axios.put(`/api/orders/${order.id}`, { status })
+    const { data } = await axios.put(`/api/orders/${order.id}`, { status })
     dispatch(updateOrderStatus(data.status))
     if (status === 'Completed' || status === 'Cancelled') {
       dispatch(getOrderServer(userId))
@@ -118,8 +115,7 @@ export const updateOrderStatusServer = (order, status, userId) => {
   }
 }
 
-export default function (state = defaultOrder, action) {
->>>>>>> ed659ddc9b2c02a53c2ddb6b171793c12678bd92
+export const orderReducer = (state = defaultOrder, action) => {
   let tempItems
   switch (action.type) {
     case GET_ORDER:
