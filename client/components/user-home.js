@@ -12,8 +12,8 @@ const UserHome = (props) => {
         raised
         style={{ width: '100%' }}
       >
-        <Segment padded color='red'>
-          <Header as='h1'>
+        <Segment padded color="red">
+          <Header as="h1">
             Welcome, {props.user.name}!
           </Header>
           <Divider />
@@ -93,3 +93,4 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, null)(UserHome)
+
