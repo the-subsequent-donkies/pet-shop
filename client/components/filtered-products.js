@@ -18,7 +18,7 @@ class FilteredProducts extends Component {
     return (
       <div>
         <CategorySelector />
-        <div id='product-list'>
+        <div className='center-container'>
           {products.map(product => <IndividualProduct product={product} key={product.id} />)}
         </div>
       </div>
