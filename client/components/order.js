@@ -4,16 +4,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LineItem from './line-item';
 import { getOrderServer } from '../store/order'
-import UserHome from './user-home'
 import { Segment, Header, Divider } from 'semantic-ui-react'
 
-const Order = (props) => {
-  let order = props.order
+const Order = ({ order }) => {
+
   return (
     <div className='home-wrapper'>
-      <div>
-        <UserHome user={props.user} />
-      </div>
       <div className='center-container'>
         <Segment.Group
           raised
@@ -27,7 +23,7 @@ const Order = (props) => {
             {
               order.line_items && order.line_items.length === 0 ?
                 <p>Your cart is currently empty - start shopping and adding items to your cart!</p>
-                : <p>Thank you for choosing the Pet Shop for all your pet supply needs!</p>
+              : <p>Thank you for choosing the Pet Shop for all your pet supply needs!</p>
             }
           </Segment>
           {
@@ -44,7 +40,7 @@ const Order = (props) => {
               >
                 Order Total: Soon to come!
               </Segment>
-              : null
+            : null
           }
         </Segment.Group>
       </div>
