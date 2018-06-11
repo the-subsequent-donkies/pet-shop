@@ -72,7 +72,6 @@ router.post('/', async (req, res, next) => {
 // PUT Routes
 
 router.put('/editreview/:reviewId', async (req, res, next) => {
-  console.log('put route: ', req.body)
   try {
     const review = await Review.findById(req.params.reviewId)
     const addedReview = await review.update(req.body)

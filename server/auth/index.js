@@ -3,7 +3,7 @@ const User = require('../db/models/user')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  User.findOne({where: {email: req.body.email}})
+  User.findOne({ where: { email: req.body.email } })
     .then(user => {
       if (!user) {
         console.log('No such user found:', req.body.email)
@@ -19,7 +19,6 @@ router.post('/login', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-  console.log('req.body', req.body)
   User.create(req.body)
     .then(user => {
       res.json(user)
