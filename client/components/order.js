@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
+'use strict'
+
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LineItem from './line-item';
-import {getOrderServer} from '../store/order'
+import { getOrderServer } from '../store/order'
 
 const sampleOrder = {lineItems: [
   {
@@ -54,8 +56,8 @@ class Order extends Component {
       <div>
         <h3>Shopping Cart</h3>
         <div className="user-order-body container">
-          { 
-            (this.props.order.line_items) ? 
+          {
+            (this.props.order.line_items) ?
             (this.props.order.line_items.map((lineItem) => {
               return <LineItem key={lineItem.id} lineItem={lineItem} />
             })) :

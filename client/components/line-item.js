@@ -1,15 +1,8 @@
+'use strict'
+
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { deleteLineitemServer, updateLineitemServer } from '../store/order'
-
-const tempProduct = {
-  name: 'Bone',
-  inventory: 4,
-  price: 2.50,
-  imgUrl: 'https://i.imgur.com/zzD13aO.jpg',
-  description: 'This is a fun chew toy for dogs',
-  category: 'dogs'
-}
 
 class LineItem extends Component {
   constructor() {

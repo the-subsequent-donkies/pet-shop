@@ -69,6 +69,8 @@ nav a {
 .selected-product-img-bound {
   max-width: 400px;
   padding: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,6 +131,12 @@ nav a {
   width: 60%;
   margin: 5px;
   padding: 5px;
+}
+
+@media screen and (max-width: 998px) {
+  .selected-product-img-bound {
+    margin-right: 0;
+  }
 }
 
 @media screen and (max-width: 600px) {

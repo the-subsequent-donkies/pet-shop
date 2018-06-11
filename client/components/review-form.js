@@ -102,7 +102,7 @@ class ReviewForm extends Component {
           />
           <Button
             type='submit'
-            style={{ margin: '1rem' }}
+            style={{ marginTop: '1rem', marginBottom: '1rem' }}
           >
             Submit
           </Button>
