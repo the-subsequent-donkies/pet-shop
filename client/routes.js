@@ -17,6 +17,7 @@ import { getOrderServer, getLocalOrderServer, createLocalOrderServer, mergeOrder
 import FilteredProducts from './components/filtered-products'
 import EditReviewForm from './components/edit-review-form'
 import UserHome from './components/user-home';
+import UserOrders from './components/user-orders';
 
 
 class Routes extends Component {
@@ -64,6 +65,7 @@ class Routes extends Component {
         <Route exact path="/products/:productId/edit" component={EditProductForm} />
         <Route exact path="/order" component={Order} />
         <Route exact path="/profile" component={UserHome} />
+        <Route exact path="/user/orders" component={UserOrders} />
       </div>
     )
   }

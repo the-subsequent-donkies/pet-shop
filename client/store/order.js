@@ -7,32 +7,43 @@ const DELETE_LINEITEM = 'DELETE_LINEITEM'
 const UPDATE_LINEITEM = 'UPDATE_LINEITEM'
 const GET_LOCAL_ORDER = 'GET_LOCAL_ORDER'
 const CREATE_LOCAL_ORDER = 'CREATE_LOCAL_ORDER'
+const GET_ORDERS_BY_USER = 'GET_ORDERS_BY_USER'
 
 const defaultOrder = {
   line_items: []
 }
 
-const getOrder = order => ({type: GET_ORDER, order})
-const addLineitemToOrder = lineitem => ({type: ADD_LINEITEM_TO_ORDER, lineitem})
-const deleteLineitem = lineitemId => ({type: DELETE_LINEITEM, lineitemId})
-const updateLineitem = (lineitemId, quantity) => ({type: UPDATE_LINEITEM, lineitemId, quantity})
-const getLocalOrder = order => ({type: GET_LOCAL_ORDER, order})
-const createLocalOrder = order => ({type: CREATE_LOCAL_ORDER, order})
+const getOrder = order => ({ type: GET_ORDER, order })
+const addLineitemToOrder = lineitem => ({ type: ADD_LINEITEM_TO_ORDER, lineitem })
+const deleteLineitem = lineitemId => ({ type: DELETE_LINEITEM, lineitemId })
+const updateLineitem = (lineitemId, quantity) => ({ type: UPDATE_LINEITEM, lineitemId, quantity })
+const getLocalOrder = order => ({ type: GET_LOCAL_ORDER, order })
+const createLocalOrder = order => ({ type: CREATE_LOCAL_ORDER, order })
+const getOrdersByUser = orders => ({ type: GET_ORDERS_BY_USER, orders })
+
+export const getOrdersByUserServer = (userId) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`api/orders/user/${userId}`)
+    dispatch(getOrdersByUser(data))
+  }
+}
 
 export const getOrderServer = (userId) => {
   return async (dispatch) => {
-    const {data} = await axios.get(`/api/orders/me/${userId}`)
+    const { data } = await axios.get(`/api/orders/me/${userId}`)
     dispatch(getOrder(data))
   }
 }
 
 export const addLineitemServer = (orderId, product) => {
   return async (dispatch) => {
-    const {data} = await axios.post('/api/lineitems/',
-      { orderId,
+    const { data } = await axios.post('/api/lineitems/',
+      {
+        orderId,
         quantity: 1,
         productId: product.id,
-        currentPrice: product.price })
+        currentPrice: product.price
+      })
 
     dispatch(addLineitemToOrder(data))
   }
@@ -47,21 +58,21 @@ export const deleteLineitemServer = (lineitemId) => {
 
 export const updateLineitemServer = (lineitemId, quantity) => {
   return async (dispatch) => {
-    await axios.put(`/api/lineitems/${lineitemId}`, {quantity: quantity})
+    await axios.put(`/api/lineitems/${lineitemId}`, { quantity: quantity })
     dispatch(updateLineitem(lineitemId, quantity))
   }
 }
 
 export const getLocalOrderServer = (orderId) => {
   return async (dispatch) => {
-    const {data} = await axios.get(`/api/orders/${orderId}`)
+    const { data } = await axios.get(`/api/orders/${orderId}`)
     dispatch(getLocalOrder(data))
   }
 }
 
 export const createLocalOrderServer = () => {
   return async (dispatch) => {
-    const {data} = await axios.post(`/api/orders`)
+    const { data } = await axios.post(`/api/orders`)
     dispatch(createLocalOrder(data))
     localStorage.setItem('orderId', data.id)
   }
@@ -88,7 +99,7 @@ export const mergeOrdersServer = (localOrderId, userId) => {
   }
 }
 
-export default function (state = defaultOrder, action) {
+export const orderReducer = (state = defaultOrder, action) => {
   let tempItems
   switch (action.type) {
     case GET_ORDER:
@@ -98,28 +109,38 @@ export default function (state = defaultOrder, action) {
       tempItems = state.line_items.map(lineItem => {
         if (lineItem.id === action.lineitem.id) {
           inStore = true
-          return {...lineItem, quantity: lineItem.quantity + 1} }
+          return { ...lineItem, quantity: lineItem.quantity + 1 }
+        }
         return lineItem
       })
       if (inStore) {
-        return {...state, line_items: tempItems}
+        return { ...state, line_items: tempItems }
       }
-      return {...state, line_items: [...state.line_items, action.lineitem]}
+      return { ...state, line_items: [...state.line_items, action.lineitem] }
     case DELETE_LINEITEM:
       tempItems = state.line_items.filter(lineItem => {
         return lineItem.id !== action.lineitemId
       })
-      return {...state, line_items: tempItems}
+      return { ...state, line_items: tempItems }
     case UPDATE_LINEITEM:
       tempItems = state.line_items.map(lineItem => {
         if (lineItem.id === action.lineitemId) { lineItem.quantity = action.quantity }
         return lineItem
       })
-      return {...state, line_items: tempItems}
+      return { ...state, line_items: tempItems }
     case CREATE_LOCAL_ORDER:
       return action.order
     case GET_LOCAL_ORDER:
       return action.order
+    default:
+      return state
+  }
+}
+
+export const orderByUserReducer = (state = [], action) => {
+  switch (action.type) {
+    case GET_ORDERS_BY_USER:
+      return action.orders
     default:
       return state
   }
