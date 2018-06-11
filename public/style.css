@@ -107,8 +107,8 @@ nav a {
   justify-content: center;
   align-items: center;
   float: left;
-  padding-bottom: 1rem;
-  padding-right: 1rem;
+  padding-right: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 @media screen and (max-width: 998px) {

@@ -26,7 +26,7 @@ const SingleReview = (props) => {
           <div className='single-review-edit-row'>
             <Button
               as={Link}
-              to={`../reviews/editreview/${props.review.id}`}
+              to={`/reviews/editreview/${props.review.id}`}
             >
               Edit
             </Button>

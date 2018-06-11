@@ -61,7 +61,7 @@ class LineItem extends Component {
         </div>
         <Header
           as='h3'
-          style={{ marginTop: '0.25rem', marginBottom: '0.25rem' }}
+          style={{ marginTop: '0', marginBottom: '0.25rem', paddingTop: '0' }}
         >
           {product.name}
         </Header>

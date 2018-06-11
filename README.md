@@ -1,4 +1,4 @@
-# Pet Shop (Grace Shopper)
+# Pet Shop (Grace Shopper) [![Build Status](https://travis-ci.org/the-subsequent-donkies/pet-shop.svg?branch=master)](https://travis-ci.org/the-subsequent-donkies/pet-shop)
 
 An e-commerce web app created within 10 days, as part of the Senior curriculum for [FullStack Academy](https://www.fullstackacademy.com/)'s Chicago April 18 cohort.
 
