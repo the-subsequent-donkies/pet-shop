@@ -16,9 +16,9 @@ class FilteredProducts extends Component {
   render() {
     let products = this.props.filteredProducts
     return (
-      <div>
+      <div className='home-wrapper'>
         <CategorySelector />
-        <div id='product-list'>
+        <div className='center-container'>
           {products.map(product => <IndividualProduct product={product} key={product.id} />)}
         </div>
       </div>

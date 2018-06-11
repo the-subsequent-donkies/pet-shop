@@ -1,62 +1,73 @@
-import React, { Component } from 'react'
+'use strict'
+
+import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import PropTypes from 'prop-types'
 import { auth } from '../store/user'
-import history from '../history'
+import { Form, Input, Button } from 'semantic-ui-react'
 
-/**
- * COMPONENT
- */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error, user } = props
-
+  const isLoggedIn = Object.keys(user).length > 0 && !user.error
   return (
-    <div>
+    <div className='custom-form'>
       {
-        Object.keys(user).length > 0 && !user.error ?
-          <Redirect to="/" /> :
-          <div>
-            <form onSubmit={handleSubmit} name={name}>
-              <div>
-                <label htmlFor="email"><small>Email</small></label>
-                <input name="email" type="text" />
-              </div>
-              <div>
-                <label htmlFor="password"><small>Password</small></label>
-                <input name="password" type="password" />
-              </div>
+        isLoggedIn ?
+          <Redirect to="/" />
+          : (
+            <Form name={name} onSubmit={handleSubmit}>
+              <Form.Group widths='equal'>
+                <Form.Field
+                  name='email'
+                  control={Input}
+                  label='Email'
+                  placeholder='Your email'
+                />
+                <Form.Field
+                  name='password'
+                  control={Input}
+                  type='password'
+                  label='Password'
+                  placeholder='Enter your password'
+                />
+              </Form.Group>
               {props.name === 'signup' && (
-                <div name="signup">
-                  <div>
-                    <label htmlFor="firstName"><small>Name</small></label>
-                    <input name="firstName" type="text" />
-                  </div>
-                  <div>
-                    <label htmlFor="address"><small>Address</small></label>
-                    <input name="address" type="text" />
-                  </div>
-                </div>
+                <Form.Group widths='equal'>
+                  <Form.Field
+                    name='firstName'
+                    control={Input}
+                    label='Name'
+                    placeholder='Your Full Name'
+                  />
+                  <Form.Field
+                    name='address'
+                    control={Input}
+                    label='Address'
+                    placeholder='Your Address'
+                  />
+                </Form.Group>
               )}
-              <div>
-                <button type="submit">{displayName}</button>
-              </div>
+              <Form.Group>
+                <Form.Field
+                  control={Button}
+                  content={displayName}
+                //onClick={handleSubmit}
+                />
+                <Button
+                  content={`${displayName} with Google`}
+                  as='a'
+                  href='/auth/google'
+                />
+              </Form.Group>
               {error && error.response && <div> {error.response.data} </div>}
-            </form>
-            <a href="/auth/google">{displayName} with Google</a>
-          </div>
+            </Form>
+          )
       }
     </div>
   )
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = (state) => {
   return {
     name: 'login',
@@ -84,6 +95,7 @@ const mapDispatch = (dispatch) => {
       const password = evt.target.password.value
       const name = evt.target.firstName.value
       const address = evt.target.address.value
+      console.log(evt.target.name, formName, email, password, name, address)
       dispatch(auth(email, password, name, address, formName))
     }
   }
