@@ -16,7 +16,7 @@ class AllProducts extends Component {
     let products = this.props.products
     return (
 
-      <div id='product-list'>
+      <div className='center-container'>
         {products.map(product => <IndividualProduct product={product} key={product.id} />)}
       </div>
 
