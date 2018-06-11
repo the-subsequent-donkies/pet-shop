@@ -51,7 +51,7 @@ router.post('/', checkAccess, async (req, res, next) => {
 
 
 // PUT Routes
-router.put('/:productId', checkAccess, async (req, res, next) => {
+router.put('/:productId', async (req, res, next) => {
   const { name, inventory, price, imgUrl, description } = req.body
   try {
     const product = await Product.findById(req.params.productId)

@@ -10,7 +10,7 @@ import { Segment, Header, Divider, Button } from 'semantic-ui-react'
 class Order extends Component {
 
   handleClick = async (evt) => {
-    await this.props.updateStatus(this.props.order.id, 'Completed', this.props.user.id)
+    await this.props.updateStatus(this.props.order, 'Completed', this.props.user.id)
   }
 
   render() {
@@ -72,7 +72,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getOrder: (userId) => dispatch(getOrderServer(userId)),
-    updateStatus: (orderId, status, userId) => dispatch(updateOrderStatusServer(orderId, status, userId)),
+    updateStatus: (order, status, userId) => dispatch(updateOrderStatusServer(order, status, userId)),
     getOrderCost: (order) => {
       let ret = 0
       order.line_items.forEach(lineItem => {

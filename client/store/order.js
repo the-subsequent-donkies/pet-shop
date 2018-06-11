@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import { manageInventoryServer } from './product'
 
 const GET_ORDER = 'GET_ORDER'
 const ADD_LINEITEM_TO_ORDER = 'ADD_LINEITEM_TO_ORDER'
@@ -90,10 +91,14 @@ export const mergeOrdersServer = (localOrderId, userId) => {
   }
 }
 
-export const updateOrderStatusServer = (orderId, status, userId) => {
+export const updateOrderStatusServer = (order, status, userId) => {
   return async (dispatch) => {
-    const {data} = await axios.put(`/api/orders/${orderId}`, { status })
-    console.log('data', data)
+    console.log('status', status)
+    if (status === 'Completed') {
+
+      dispatch(manageInventoryServer(order))
+    }
+    const {data} = await axios.put(`/api/orders/${order.id}`, { status })
     dispatch(updateOrderStatus(data.status))
     if (status === 'Completed' || status === 'Cancelled') {
       dispatch(getOrderServer(userId))
