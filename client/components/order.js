@@ -11,9 +11,6 @@ const Order = (props) => {
   let order = props.order
   return (
     <div className='home-wrapper'>
-      <div>
-        <UserHome user={props.user} />
-      </div>
       <div className='center-container'>
         <Segment.Group
           raised
