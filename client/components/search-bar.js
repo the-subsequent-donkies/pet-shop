@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getCategoriesServer } from '../store/category'
-import { getProductsByCategoryServer, getProductsServer } from '../store/product'
+import { searchProductsServer } from '../store/product'
 import history from '../history'
 import { Button, Form, Input } from 'semantic-ui-react'
 // map state to props and dispatch to props and go from there
@@ -20,11 +19,14 @@ class SearchBar extends Component {
   }
 
   handleSubmit = () => {
+    const query = `?search=${this.state.search}`
+    this.props.searchProductsServer(query)
     // here we want to build a query string
     // first we want to build a query string that looks like this '?search=+this.state.search
   }
 
   render() {
+    console.log("what are my props", this.props)
     return (
       <Form
         onSubmit={this.handleSubmit}
@@ -52,9 +54,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCategoriesServer: () => dispatch(getCategoriesServer()),
-    getProductsByCategoryServer: (categoryId) => dispatch(getProductsByCategoryServer(categoryId)),
-    getProductsServer: () => dispatch(getProductsServer()),
+    searchProductsServer: (query) => dispatch(searchProductsServer(query)),
   }
 }
 

@@ -17,36 +17,13 @@ router.get('/', async (req, res, next) => {
     const foundProductsNoDuplicates = []
     const setOfUniqueIds = new Set()
     foundProducts.forEach(product => {
-      console.log('prodId nonononnonono', product.id)
       if (!setOfUniqueIds.has(product.id)) {
         setOfUniqueIds.add(product.id)
         foundProductsNoDuplicates.push(product)
       }
     })
-    console.log('my filteredarray', foundProductsNoDuplicates)
-
     res.json(foundProductsNoDuplicates)
   } catch (err) {
     next(err)
   }
 })
-
-// router.get('/', async (req, res, next) => {
-//   try {
-//     console.log("what is this garbage ", req.query)
-//     Category.findAll({
-//       where: {
-//         name: {
-//           [Sequelize.Op.iLike]: '%' + req.query.search + '%'
-//         },
-//       },
-//       include: [{ model: Product }]
-//     }).then((foundProduct) => {
-//       foundProduct[0].products.length > 0 ?
-//         res.json(foundProduct[0].products) :
-//         res.send("product not found or out of stock!")
-//     })
-//   } catch (err) {
-//     next(err)
-//   }
-// })
