@@ -9,10 +9,9 @@ import IndividualOrder from './individual-order'
 
 
 class UserOrders extends Component {
-
-  componentDidMount() {
-    this.props.getOrdersByUser(this.props.user.id)
-    console.log(this.props)
+  constructor(props) {
+    super(props)
+    props.getOrdersByUser(this.props.user.id)
   }
 
   render() {

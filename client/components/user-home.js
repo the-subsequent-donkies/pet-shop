@@ -21,7 +21,7 @@ const UserHome = (props) => {
           </Header>
             <Divider />
             <Header as='h4'>
-              Member Since {props.user.createdAt.toString().slice(0, 4)}
+              Member Since {props.user.createdAt}
             </Header>
           </Segment>
         </Segment.Group>
