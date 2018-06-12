@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { searchProductsServer } from '../store/product'
-import history from '../history'
+import IndividualProduct from './individual-product'
 import { Button, Form, Input } from 'semantic-ui-react'
 // map state to props and dispatch to props and go from there
 class SearchBar extends Component {
@@ -14,7 +14,8 @@ class SearchBar extends Component {
 
   handleChange = (evt) => {
     console.log(" event target value in handle change", evt.target.value)
-    this.setState(evt.target.value)
+    let stateUpdateObj = { search: evt.target.value }
+    this.setState(stateUpdateObj)
 
   }
 
@@ -27,21 +28,30 @@ class SearchBar extends Component {
 
   render() {
     console.log("what are my props", this.props)
+    let products = this.props.products
     return (
-      <Form
-        onSubmit={this.handleSubmit}
-      >
-        <Form.Field
-          control={Input}
-          placeholder='Search'
-          onChange={this.handleChange}
-        />
-        <Form.Field
-          type='Submit'
-          control={Button}
-          content="Submit"
-        />
-      </Form>
+      <div>
+        <Form
+          onSubmit={this.handleSubmit}
+        >
+          <Form.Field
+            control={Input}
+            placeholder='Search'
+            onChange={this.handleChange}
+          />
+          <Form.Field
+            type='Submit'
+            control={Button}
+            content="Submit"
+          />
+        </Form>
+
+
+        <div className='center-container'>
+          {products.map(product => <IndividualProduct product={product} key={product.id} />)}
+        </div>
+
+      </div>
     )
   }
 }

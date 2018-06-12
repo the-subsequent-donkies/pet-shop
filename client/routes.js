@@ -59,10 +59,11 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SelectedProduct} />
         <Route exact path="/products/:productId/edit" component={EditProductForm} />
         <Route exact path="/order" component={Order} />
-        <Route exact path="/search" component={SearchBar} />
+        {/* <Route exact path="/search" component={SearchBar} /> */}
         <Route exact path="/profile" component={UserHome} />
         <Route exact path="/user/orders" component={UserOrders} />
         <Route exact path="/users" component={UserList} />
+
       </div>
     )
   }

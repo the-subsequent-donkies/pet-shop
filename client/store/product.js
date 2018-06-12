@@ -103,7 +103,7 @@ export const manageInventoryServer = (order) => {
 
 export const searchProductsServer = (queryString) => {
   return async (dispatch) => {
-    const { data } = await axios.get(`/api/search=${queryString}`)
+    const { data } = await axios.get(`/api/search${queryString}`)
     dispatch(searchProducts(data))
 
   }
@@ -121,7 +121,7 @@ export const productsReducer = (state = [], action) => {
       const otherProducts = state.filter(product => product.id !== action.product.id)
       return [...otherProducts, action.product]
     case SEARCH_PRODUCTS:
-      return [...state, action.products]
+      return action.products
     default:
       return state
   }
