@@ -11,20 +11,24 @@ import IndividualOrder from './individual-order'
 class UserOrders extends Component {
   constructor(props) {
     super(props)
-    props.getOrdersByUser(this.props.user.id)
+    this.props.getOrdersByUser(this.props.user.id)
+
   }
+
 
   render() {
     return (
       <div className='home-wrapper'>
-        <Segment padded>
-          <Header as="h2">
-            Previous Orders:
-          </Header>
-          {this.props.orders.map(order =>
-            <IndividualOrder order={order} lineitems={order.line_items} key={order.id} />)
-          }
-        </Segment>
+        <div className='center-container'>
+          <Segment padded>
+            <Header as="h2">
+              Previous Orders:
+            </Header>
+            {this.props.orders.map(order =>
+              <IndividualOrder order={order} lineitems={order.line_items} key={order.id} />)
+            }
+          </Segment>
+        </div>
       </div>
     )
   }
@@ -32,8 +36,8 @@ class UserOrders extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    orders: state.orders,
-    user: state.user
+    user: state.user,
+    orders: state.orders
   }
 }
 

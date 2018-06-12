@@ -26,7 +26,8 @@ const getOrdersByUser = orders => ({ type: GET_ORDERS_BY_USER, orders })
 
 export const getOrdersByUserServer = (userId) => {
   return async (dispatch) => {
-    const { data } = await axios.get(`api/orders/user/${userId}`)
+    const { data } = await axios.get(`/api/orders/user/${userId}`)
+    console.log("data inside getOrdersbyuser: ", data)
     dispatch(getOrdersByUser(data))
   }
 }
