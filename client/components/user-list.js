@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllUsers } from '../store/admin-user-control';
+import { getAllUsers, createUser } from '../store/admin-user-control';
 import { connect } from 'react-redux';
 import { Segment, Header, Icon, Button } from 'semantic-ui-react'
 import IndividualUser from './individual-user'
@@ -55,7 +55,7 @@ class UserList extends Component {
           </Segment>
           {this.state.addFormBool ?
             <Segment attached>
-              <UserForm />
+              <UserForm formAction={this.props.addUser} />
             </Segment> : null}
           {allUsers.map(user => <IndividualUser user={user} key={user.id} />)}
         </div>
@@ -72,7 +72,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUsers: () => dispatch(getAllUsers())
+    getUsers: () => dispatch(getAllUsers()),
+    addUser: (user) => dispatch(createUser(user))
   }
 }
 

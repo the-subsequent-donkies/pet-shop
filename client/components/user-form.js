@@ -3,8 +3,7 @@
 import React, { Component } from 'react'
 import history from '../history'
 import { connect } from 'react-redux'
-import { Form, Input, Button, Radio } from 'semantic-ui-react'
-import { createUser } from '../store/admin-user-control'
+import { Form, Input, Button, Radio, Checkbox } from 'semantic-ui-react'
 
 class UserForm extends Component {
   constructor (props) {
@@ -23,9 +22,11 @@ class UserForm extends Component {
     })
   }
 
-  handleRadioChange = (event, data) => {
-    this.setState({
-      isAdmin: data.checked
+  handleRadioChange = () => {
+    this.setState(prevState => {
+      return {
+        isAdmin: !prevState.isAdmin
+      }
     })
   }
 
@@ -35,13 +36,17 @@ class UserForm extends Component {
   }
 
   invokeSubmit = async () => {
-    await this.props.addUser({ ...this.state })
-    this.setState({
-      name: '',
-      email: '',
-      address: '',
-      isAdmin: false
-    })
+    if (this.props.id) {
+      await this.props.formAction(this.props.id, { ...this.state })
+    } else {
+      await this.props.formAction({ ...this.state })
+      this.setState({
+        name: '',
+        email: '',
+        address: '',
+        isAdmin: false
+      })
+    }
   }
 
   render () {
@@ -83,14 +88,15 @@ class UserForm extends Component {
           </Form.Group>
           <div>
             <strong>Admin</strong>
-            <Form.Field
-              name='isAdmin'
-              control={Radio}
-              toggle
-              style={{ marginTop: '.5rem' }}
-              checked={this.props.isAdmin}
-              onChange={this.handleRadioChange}
-            />
+            <Form.Field>
+              <Checkbox
+                name='isAdmin'
+                toggle
+                style={{ marginTop: '.5rem' }}
+                checked={this.state.isAdmin}
+                onChange={this.handleRadioChange}
+              />
+            </Form.Field>
           </div>
         </div>
         <div
@@ -116,10 +122,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addUser: (user) => dispatch(createUser(user))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserForm)
+export default connect(mapStateToProps)(UserForm)
