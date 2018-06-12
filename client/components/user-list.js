@@ -2,15 +2,28 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllUsers } from '../store/all-user';
+import { getAllUsers } from '../store/admin-user-control';
 import { connect } from 'react-redux';
 import { Segment, Header, Icon, Button } from 'semantic-ui-react'
 import IndividualUser from './individual-user'
+import UserForm from './user-form'
 
 class UserList extends Component {
   constructor (props) {
     super(props)
     this.props.getUsers()
+    this.state = {
+      addFormBool: false
+    }
+  }
+
+  handleClick = (evt) => {
+    evt.preventDefault()
+    this.setState(prevState => {
+      return {
+        addFormBool: !prevState.addFormBool
+      }
+    })
   }
 
   render () {
@@ -35,11 +48,15 @@ class UserList extends Component {
                   content='Edit Users'
                 />
               </div>
-              <Button>
+              <Button onClick={this.handleClick}>
                 Add User
               </Button>
             </div>
           </Segment>
+          {this.state.addFormBool ?
+            <Segment attached>
+              <UserForm />
+            </Segment> : null}
           {allUsers.map(user => <IndividualUser user={user} key={user.id} />)}
         </div>
       </div>

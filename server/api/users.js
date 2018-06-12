@@ -20,8 +20,8 @@ router.get('/userId', checkAccess, (req, res, next) => {
 })
 
 router.post('/', checkAccess, (req, res, next) => {
-  const { name, description, isAdmin } = req.body
-  User.create({ name, description, isAdmin })
+  const { name, email, isAdmin, address } = req.body
+  User.create({ name, email, isAdmin, address })
     .then(user => res.json(user))
     .catch(next)
 })

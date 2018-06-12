@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { productsReducer, selectedProductReducer, filteredProductReducer } from './product'
 import { categoriesReducer } from './categories'
 import userReducer from './user'
-import allUsersReducer from './all-user'
+import { allUsersReducer, selectedUserReducer } from './admin-user-control'
 import orderReducer from './order'
 import { reviewsReducer, selectedReviewReducer } from './reviews'
 
@@ -18,7 +18,8 @@ const reducer = combineReducers({
   order: orderReducer,
   reviews: reviewsReducer,
   selectedReview: selectedReviewReducer,
-  allUsers: allUsersReducer
+  allUsers: allUsersReducer,
+  selectedUser: selectedUserReducer,
 })
 
 const middleware = composeWithDevTools(applyMiddleware(
