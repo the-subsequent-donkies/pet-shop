@@ -20,8 +20,8 @@ class SearchBar extends Component {
   }
 
   handleSubmit = () => {
-    // get the value from local state and dispatch the action that get the proper data
-
+    // here we want to build a query string
+    // first we want to build a query string that looks like this '?search=+this.state.search
   }
 
   render() {

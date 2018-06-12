@@ -8,7 +8,8 @@ export const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 export const POST_NEW_PRODUCT = 'POST_NEW_PRODUCT'
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY'
-
+export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS'
+export const SEARCH_PRODUCTS_BY_PRODUCTS = 'SEARCH_PRODUCTS_BY_PRODUCTS'
 // action creators
 
 const postNewProduct = (newProduct) => {
@@ -41,6 +42,13 @@ const getSingleProduct = (selectedProduct) => {
 const getProductsByCategory = (products) => {
   return {
     type: GET_PRODUCTS_BY_CATEGORY,
+    products
+  }
+}
+
+const searchProducts = (products) => {
+  return {
+    type: SEARCH_PRODUCTS,
     products
   }
 }
@@ -88,8 +96,16 @@ export const getProductsByCategoryServer = (categoryId) => {
 export const manageInventoryServer = (order) => {
   return async (dispatch) => {
     order.line_items.forEach(lineItem => {
-      dispatch(updateProductServer({...lineItem.product, inventory: lineItem.product.inventory - lineItem.quantity }))
+      dispatch(updateProductServer({ ...lineItem.product, inventory: lineItem.product.inventory - lineItem.quantity }))
     })
+  }
+}
+
+export const searchProductsServer = (queryString) => {
+  return async (dispatch) => {
+    const { data } = await axios.get(`/api/search=${queryString}`)
+    dispatch(searchProducts(data))
+
   }
 }
 
@@ -104,6 +120,8 @@ export const productsReducer = (state = [], action) => {
     case UPDATE_PRODUCT:
       const otherProducts = state.filter(product => product.id !== action.product.id)
       return [...otherProducts, action.product]
+    case SEARCH_PRODUCTS:
+      return [...state, action.products]
     default:
       return state
   }
