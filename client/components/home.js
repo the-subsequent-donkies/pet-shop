@@ -20,8 +20,6 @@ class Home extends Component {
         )}
         <CategorySelector />
         <AllProducts />
-
-
       </div>
     )
   }

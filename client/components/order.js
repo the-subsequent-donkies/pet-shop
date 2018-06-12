@@ -21,7 +21,9 @@ class Order extends Component {
             raised
             style={{ width: '100%' }}
           >
-            <Segment padded>
+            <Segment
+              padded
+            >
               <Header as='h1'>
                 Shopping Cart
               </Header>
@@ -38,13 +40,22 @@ class Order extends Component {
                   padded
                   style={{ clear: 'both' }}
                 >
-                  Order Total: ${this.props.getOrderCost(order)}
-                  <Button
-                    onClick={this.handleClick}
-                    style={{ float: 'right' }}
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}
                   >
-                    Submit Order
-                  </Button>
+                    <div>
+                      <strong>Order Total:</strong> ${this.props.getOrderCost(order)}
+                    </div>
+                      <Button
+                        onClick={this.handleClick}
+                      >
+                        Submit Order
+                      </Button>
+                  </div>
                 </Segment>
                 :
                 <Segment padded>
