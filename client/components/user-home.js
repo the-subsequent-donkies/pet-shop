@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import UserOrders from './user-orders'
 import IndividualUser from './individual-user'
 
+
 const UserHome = (props) => {
   return (
     <div className='home-wrapper'>
@@ -86,6 +87,7 @@ const UserHome = (props) => {
             )
           }
         </Segment.Group>
+
       </div >
     </div >
   )
@@ -93,7 +95,8 @@ const UserHome = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    allOrders: state.allOrders
   }
 }
 
