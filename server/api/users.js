@@ -13,6 +13,12 @@ router.get('/', checkAccess, (req, res, next) => {
     .catch(next)
 })
 
+router.get('/userId', checkAccess, (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(user => res.json(user))
+    .catch(next)
+})
+
 router.post('/', checkAccess, (req, res, next) => {
   const { name, description, isAdmin } = req.body
   User.create({ name, description, isAdmin })
