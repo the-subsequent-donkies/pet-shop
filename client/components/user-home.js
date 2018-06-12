@@ -5,92 +5,89 @@ import { Segment, Header, Divider, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import UserOrders from './user-orders'
+import IndividualUser from './individual-user'
 
 const UserHome = (props) => {
   return (
     <div className='home-wrapper'>
       <div className='center-container'>
-        <UserOrders />
         <Segment.Group
           raised
           style={{ width: '100%' }}
         >
-          <Segment padded color='red'>
+          <Segment color="blue">
             <Header as='h1'>
               Welcome, {props.user.name}!
-          </Header>
+            </Header>
             <Divider />
             <Header as='h4'>
               Member Since {props.user.createdAt.toString().slice(0, 4)}
             </Header>
           </Segment>
         </Segment.Group>
-        {
-          //isLoggedIn &&
-          (
-            <Segment.Group
-              raised
-              style={{ width: '100%' }}
-            >
-              <Segment padded color="blue" >
-                <Segment padded>
-                  <Header as={Link} to="/">
+        <Segment.Group
+          horizontal
+          raised
+        >
+          {
+            (props.user && !props.user.isAdmin) &&
+            (
+              <>
+                <Segment color="green">
+                  <Header as={Link} to="/profile/edit">
                     <Icon name="user circle" />
                     Update Profile
                 </Header>
                 </Segment>
-                <Segment padded>
-                  <Header as={Link} to="/">
+                <Segment color="green">
+                  <Header as={Link} to="/user/orders">
                     <Icon name="cart arrow down" />
                     Order History
                 </Header>
                 </Segment>
-              </Segment>
-            </Segment.Group>
-          )}
-        {
-          //isAdmin &&
-          (
-            <Segment.Group
-              raised
-              style={{ width: '100%' }}
-            >
-              <Segment padded color="green">
-                <Segment padded>
-                  <Header as={Link} to="/">
-                    <Icon name="cart" />
+              </>
+            )
+          }
+          {
+            props.user.isAdmin &&
+            (
+              <>
+                <Segment color="red">
+                  <Header as={Link} to="/user/orders">
+                    <Icon name="cart arrow down" />
                     Edit Orders
-                  </Header>
+                </Header>
                 </Segment>
-                <Segment padded>
-                  <Header as={Link} to="/">
+                <Segment color="red">
+                  <Header as={Link} to="/users">
                     <Icon name="users" />
                     Edit Users
                   </Header>
                 </Segment>
-                <Segment padded>
+                <Segment color="red">
                   <Header as={Link} to="/">
                     <Icon name="tags" />
                     Edit Categories
                   </Header>
                 </Segment>
-                <Segment padded>
+                <Segment color="red">
                   <Header as={Link} to="/newproduct">
                     <Icon name="edit" />
                     Add Products
                   </Header>
                 </Segment>
-                <Segment padded>
+                <Segment color="red">
                   <Header as={Link} to="/">
                     <Icon name="line graph" />
                     Analytics
                   </Header>
                 </Segment>
-              </Segment>
-            </Segment.Group>
-          )}
-      </div>
-    </div>
+              </>
+            )
+          }
+        </Segment.Group>
+      </div >
+    </div >
   )
 }
 
