@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LineItem from './line-item';
+import { Link } from 'react-router-dom'
+import LineItem from './line-item'
 import { getOrderServer, updateOrderStatusServer } from '../store/order'
 import UserHome from './user-home'
 import { Segment, Header, Divider, Button } from 'semantic-ui-react'
@@ -13,7 +14,7 @@ class Order extends Component {
   }
 
   render() {
-    let order = this.props.order
+    let { order, isLoggedIn } = this.props
     return (
       <div className='home-wrapper'>
         <div className='center-container'>
@@ -50,11 +51,30 @@ class Order extends Component {
                     <div>
                       <strong>Order Total:</strong> ${this.props.getOrderCost(order)}
                     </div>
-                      <Button
-                        onClick={this.handleClick}
-                      >
-                        Submit Order
-                      </Button>
+                    {
+                      isLoggedIn ?
+                        <Button
+                          onClick={this.handleClick}
+                        >
+                          Submit Order
+                        </Button>
+                      :
+                      <div>
+                        <Button
+                          as={Link}
+                          to='/signup'
+                        >
+                          Signup
+                        </Button>
+                        <Button
+                          as={Link}
+                          to='/login'
+                        >
+                          Login to Checkout
+                        </Button>
+                      </div>
+                    }
+
                   </div>
                 </Segment>
                 :
@@ -72,7 +92,8 @@ class Order extends Component {
 const mapState = (state) => {
   return {
     user: state.user,
-    order: state.order
+    order: state.order,
+    isLoggedIn: !!state.user.id
   }
 }
 
