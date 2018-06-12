@@ -61,7 +61,7 @@ const UserHome = (props) => {
                 style={{ width: '100%' }}
               >
                 <Segment padded>
-                  <Header as={Link} to="/">
+                  <Header as={Link} to="/user/orders">
                     <Icon name="cart" />
                     Edit Orders
                   </Header>
