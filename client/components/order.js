@@ -19,7 +19,6 @@ class Order extends Component {
       billingAddress: true,
       token: function(token) {
         console.log(token)
-        axios.post('/api/charge', token)
       }
     })
 
