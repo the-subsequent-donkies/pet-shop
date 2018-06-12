@@ -1,5 +1,7 @@
 import io from 'socket.io-client'
 import axios from 'axios'
+const SOCKET_CONNECTION = 'SOCKET_CONNECTION'
+const SOCKET_DISCONNECT = 'SOCKET_DISCONNECT'
 
 const axiosInstance = axios.create({
   timeout: 10000,
@@ -19,7 +21,7 @@ const socket = io(window.location.origin)
 socket.on('connect', async () => {
   console.log('Connected!')
   const myVisitor = {
-    type: 'SOCKET_CONNECTION',
+    type: SOCKET_CONNECTION,
     referringSite: document.referrer,
     page: location.pathname,
     time: Date.now(),
@@ -28,11 +30,22 @@ socket.on('connect', async () => {
   }
 
   // const res = await axiosInstance.post(`http://localhost:6969/api/requests`, )
-  socket.emit('hi', myVisitor)
+  socket.emit(SOCKET_CONNECTION, myVisitor)
 })
 
 socket.on('disconnect', () => {
   console.log(`Connection ${socket.id} has left the building`)
+  const myVisitor = {
+    type: SOCKET_DISCONNECT,
+    referringSite: document.referrer,
+    page: location.pathname,
+    time: Date.now(),
+    userAgent: navigator.userAgent,
+    browser: navigator.vendor
+  }
+
+  // const res = await axiosInstance.post(`http://localhost:6969/api/requests`, )
+  socket.emit(SOCKET_DISCONNECT, myVisitor)
 })
 
 export default socket
