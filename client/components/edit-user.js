@@ -25,7 +25,6 @@ class EditUser extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log("dispatching update", this.props.user.id, this.state)
     this.props.updateUser(this.props.user.id, { name: this.state.name, email: this.state.email, address: this.state.address, isAdmin: this.state.isAdmin })
   }
 
@@ -40,7 +39,7 @@ class EditUser extends Component {
             <div
               style={{
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}

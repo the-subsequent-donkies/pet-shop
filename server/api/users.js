@@ -28,7 +28,6 @@ router.post('/', checkAccess, (req, res, next) => {
 
 router.put('/:userId', (req, res, next) => {
   const { name, email, address, isAdmin } = req.body
-  console.log('insider routr')
   User.findById(req.params.userId)
     .then(user => user.update({ name, email, address, isAdmin }))
     .then((updatedUser) => {

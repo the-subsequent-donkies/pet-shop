@@ -25,7 +25,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/user/:userId', async (req, res, next) => {
   try {
-    console.log("insider route")
     const response = await Order.findAll({
       where: {
         userId: req.params.userId

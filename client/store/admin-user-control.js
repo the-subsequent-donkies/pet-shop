@@ -57,7 +57,6 @@ export const selectUserToEdit = userId => {
 }
 
 export const updateUserOnServer = (userId, user) => {
-  console.log("before the axios: ")
   return async dispatch => {
     const { data } = await axios.put(`/api/users/${userId}`, user)
     dispatch(updateUserServer(data))
@@ -71,7 +70,6 @@ export const allUsersReducer = (state = [], action) => {
     case ADD_A_USER:
       return [...state, action.user]
     case UPDATE_USER_ON_SERVER:
-      console.log("1")
       const otherUsers =
         state.filter(user => user.id !== action.user.id)
       return [...otherUsers, action.user]
@@ -85,7 +83,6 @@ export const selectedUserReducer = (state = {}, action) => {
     case SELECT_USER:
       return { ...state, ...action.user }
     case UPDATE_USER_ON_SERVER:
-      console.log("2")
       return { ...state, ...action.user }
     default:
       return state

@@ -25,7 +25,6 @@ const updateUser = user => ({ type: UPDATE_USER, user })
  */
 
 export const updateUserServer = (userId, user) => {
-  console.log("before the axios: ")
   return async dispatch => {
     const { data } = await axios.put(`/api/users/${userId}`, user)
     dispatch(updateUser(data))
