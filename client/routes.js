@@ -13,13 +13,14 @@ import { me, logout } from './store/user'
 import { Home } from './components'
 import SelectedProduct from './components/selected-product'
 import { getOrderServer, getLocalOrderServer, createLocalOrderServer, mergeOrdersServer } from './store/order';
-import SearchBar from './components/search-bar'///$$$$$$$remove here just for testing
 import FilteredProducts from './components/filtered-products'
 import EditReviewForm from './components/edit-review-form'
-import UserHome from './components/user-home';
+import UserHome from './components/user-home'
 import UserList from './components/user-list'
-import UserOrders from './components/user-orders';
+import UserOrders from './components/user-orders'
 import EditUser from './components/edit-user'
+import AddCategory from './components/add-category'
+import SearchBar from './components/search-bar'
 
 class Routes extends Component {
   constructor(props) {
@@ -60,12 +61,11 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SelectedProduct} />
         <Route exact path="/products/:productId/edit" component={EditProductForm} />
         <Route exact path="/order" component={Order} />
-        {/* <Route exact path="/search" component={SearchBar} /> */}
         <Route exact path="/profile" component={UserHome} />
         <Route exact path="/user/orders" component={UserOrders} />
         <Route exact path="/users" component={UserList} />
         <Route exact path="/profile/edit" component={EditUser} />
-
+        <Route exact path="/categories/add" component={AddCategory} />
       </div>
     )
   }
