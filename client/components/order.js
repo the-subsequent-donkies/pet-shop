@@ -8,26 +8,34 @@ import { getOrderServer, updateOrderStatusServer } from '../store/order'
 import { Segment, Header, Divider, Button } from 'semantic-ui-react'
 import axios from 'axios'
 
-const handler = StripeCheckout.configure({
-  key: 'pk_test_GRX2M07RaRMsxt0aa33tS7JH',
-  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-  locale: 'auto',
-  billingAddress: true,
-  token: function(token) {
-    console.log(token)
-    axios.post('/api/charge', token)
-  }
-})
+
 
 class Order extends Component {
   handleClick = (evt) => {
+    const handler = StripeCheckout.configure({
+      key: 'pk_test_GRX2M07RaRMsxt0aa33tS7JH',
+      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+      locale: 'auto',
+      billingAddress: true,
+      token: function(token) {
+        console.log(token)
+        axios.post('/api/charge', token)
+      }
+    })
+
+    let updateStatus = this.props.updateStatus
+    let order = this.props.order
+    let id = this.props.user.id
+
     evt.preventDefault()
     handler.open({
       name: 'Pet Shop',
       description: 'Your top choice for pet supplies',
-      amount: +this.props.getOrderCost(this.props.order) * 100
+      amount: +this.props.getOrderCost(this.props.order) * 100,
+      closed: function() {
+        updateStatus(order, 'Completed', id)
+      }
     })
-    this.props.updateStatus(this.props.order, 'Processing', this.props.user.id)
   }
 
   render() {
