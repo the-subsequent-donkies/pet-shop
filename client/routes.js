@@ -22,19 +22,14 @@ import UserList from './components/user-list'
 class Routes extends Component {
   constructor(props) {
     super(props)
-    // console.log(localStorage.getItem('orderId'))
     this.props.loadInitialData()
       .then(() => {
         if (this.props.isLoggedIn) {
           if (localStorage.getItem('orderId') && localStorage.getItem('orderId') !== 'undefined') {
-            // this.props.getLocalOrder(localStorage.getItem('orderId'))
             this.props.getOrder(this.props.user.id)
               .then(() => {
-                console.log(localStorage)
                 return this.props.mergeOrders(parseInt(localStorage.getItem('orderId'), 10), this.props.user.id)
               })
-
-            // localStorage.removeItem('orderId')
           }
           return this.props.getOrder(this.props.user.id)
         } else if (!localStorage.getItem('orderId') || localStorage.getItem('orderId') === 'undefined') {
