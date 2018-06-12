@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import LineItem from './line-item'
 import { getOrderServer, updateOrderStatusServer } from '../store/order'
 import { Segment, Header, Divider, Button } from 'semantic-ui-react'
+import axios from 'axios'
 
 const handler = StripeCheckout.configure({
   key: 'pk_test_GRX2M07RaRMsxt0aa33tS7JH',
@@ -14,6 +15,7 @@ const handler = StripeCheckout.configure({
   billingAddress: true,
   token: function(token) {
     console.log(token)
+    axios.post('/api/charge', token)
   }
 })
 
@@ -25,7 +27,7 @@ class Order extends Component {
       description: 'Your top choice for pet supplies',
       amount: +this.props.getOrderCost(this.props.order) * 100
     })
-    // await this.props.updateStatus(this.props.order, 'Completed', this.props.user.id)
+    this.props.updateStatus(this.props.order, 'Processing', this.props.user.id)
   }
 
   render() {
