@@ -10,29 +10,33 @@ const UserHome = (props) => {
   return (
     <div className='home-wrapper'>
       <div className='center-container'>
-        <UserOrders />
         <Segment.Group
           raised
           style={{ width: '100%' }}
         >
-          <Segment padded color='red'>
+          <Segment color="blue">
             <Header as='h1'>
               Welcome, {props.user.name}!
           </Header>
             <Divider />
             <Header as='h4'>
-              Member Since {props.user.createdAt.toString().slice(0, 4)}
+              Member Since {props.user.createdAt}
             </Header>
           </Segment>
         </Segment.Group>
-        {
-          //isLoggedIn &&
-          (
-            <Segment.Group
-              raised
-              style={{ width: '100%' }}
-            >
-              <Segment padded color="blue" >
+        <Segment.Group
+          horizontal
+          raised
+          style={{ width: '100%' }}
+        >
+          {
+            (props.user) &&
+            (
+              <Segment.Group
+                horizontal
+                raised
+                style={{ width: '100%' }}
+              >
                 <Segment padded>
                   <Header as={Link} to="/">
                     <Icon name="user circle" />
@@ -40,24 +44,24 @@ const UserHome = (props) => {
                 </Header>
                 </Segment>
                 <Segment padded>
-                  <Header as={Link} to="/">
+                  <Header as={Link} to="/user/orders">
                     <Icon name="cart arrow down" />
                     Order History
                 </Header>
                 </Segment>
-              </Segment>
-            </Segment.Group>
-          )}
-        {
-          //isAdmin &&
-          (
-            <Segment.Group
-              raised
-              style={{ width: '100%' }}
-            >
-              <Segment padded color="green">
+              </Segment.Group>
+            )
+          }
+          {
+            props.user.isAdmin &&
+            (
+              <Segment.Group
+                horizontal
+                raised
+                style={{ width: '100%' }}
+              >
                 <Segment padded>
-                  <Header as={Link} to="/">
+                  <Header as={Link} to="/user/orders">
                     <Icon name="cart" />
                     Edit Orders
                   </Header>
@@ -86,11 +90,12 @@ const UserHome = (props) => {
                     Analytics
                   </Header>
                 </Segment>
-              </Segment>
-            </Segment.Group>
-          )}
-      </div>
-    </div>
+              </Segment.Group>
+            )
+          }
+        </Segment.Group>
+      </div >
+    </div >
   )
 }
 

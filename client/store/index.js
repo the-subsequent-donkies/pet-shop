@@ -6,7 +6,7 @@ import { productsReducer, selectedProductReducer, filteredProductReducer } from 
 import { categoriesReducer } from './categories'
 import userReducer from './user'
 import { allUsersReducer, selectedUserReducer } from './admin-user-control'
-import { orderReducer, orderByUserReducer } from './order'
+import { orderReducer, orderByUserReducer, orderAllReducer } from './order'
 import { reviewsReducer, selectedReviewReducer } from './reviews'
 
 const reducer = combineReducers({
@@ -17,6 +17,7 @@ const reducer = combineReducers({
   user: userReducer,
   order: orderReducer,
   orders: orderByUserReducer,
+  allOrders: orderAllReducer,
   reviews: reviewsReducer,
   selectedReview: selectedReviewReducer,
   allUsers: allUsersReducer,
