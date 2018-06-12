@@ -2,28 +2,42 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllUsers } from '../store/all-user';
-import { connect } from 'react-redux';
-import { Segment, Header, Button } from 'semantic-ui-react'
+import { Segment, Header, Grid, Button } from 'semantic-ui-react'
 
 const IndividualUser = (props) => {
-  const { name, email, isAdmin } = props.user
+  const { name, email, isAdmin, address } = props.user
   return (
     <Segment
       raised
       attached
     >
-      <div style={{ float: 'left' }}>
-        <Header
-          as='h3'
-          style={{ margin: '0.25rem 0 .5rem 0' }}
-          content={name}
-        />
-        {email}
-      </div>
-      <div>
-        {isAdmin.toString()}
-      </div>
+      <Grid columns={3}>
+        <Grid.Column>
+          <Header
+            as='h3'
+            style={{ margin: '0.25rem 0 .5rem 0' }}
+            content={name}
+          />
+          <p>{email}</p>
+        </Grid.Column>
+        <Grid.Column
+          style={{ marginTop: '0.5rem' }}
+        >
+          <p style={{ marginBottom: '0.5rem' }}>{address}</p>
+          <p><strong>{isAdmin ? 'Admin' : 'User' }</strong></p>
+        </Grid.Column>
+        <Grid.Column
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-end'
+          }}
+        >
+          <Button>
+            Edit
+          </Button>
+        </Grid.Column>
+      </Grid>
     </Segment>
   )
 }

@@ -19,13 +19,25 @@ class UserList extends Component {
       <div className='home-wrapper'>
         <div className='center-container'>
           <Segment attached='top'>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Header
-                as='h2'
-                style={{ margin: '0.5rem 0 .5rem 0' }}
-                content='Users'
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Icon
+                name='users'
+                style={{ marginRight: '1rem', marginLeft: '.25rem', fontSize: '1.5rem' }}
               />
-              <Icon name='users' style={{ marginLeft: '1rem' }} />
+                <Header
+                  as='h2'
+                  style={{ margin: '0.5rem 0 .5rem 0' }}
+                  content='Edit Users'
+                />
+              </div>
+              <Button>
+                Add User
+              </Button>
             </div>
           </Segment>
           {allUsers.map(user => <IndividualUser user={user} key={user.id} />)}

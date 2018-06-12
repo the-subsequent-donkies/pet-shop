@@ -7,7 +7,7 @@ module.exports = router
 
 router.get('/', checkAccess, (req, res, next) => {
   User.findAll({
-    attributes: ['id', 'name', 'email', 'isAdmin']
+    attributes: ['id', 'name', 'address', 'email', 'isAdmin']
   })
     .then(users => res.json(users))
     .catch(next)
