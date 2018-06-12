@@ -1,7 +1,7 @@
 'use strict'
 
 const router = require('express').Router()
-const {User} = require('../db/models')
+const { User } = require('../db/models')
 const checkAccess = require('./checkAccess')
 module.exports = router
 
@@ -26,10 +26,14 @@ router.post('/', checkAccess, (req, res, next) => {
     .catch(next)
 })
 
-router.put('/:userId', checkAccess, (req, res, next) => {
-  const { name, description, isAdmin } = req.body
+router.put('/:userId', (req, res, next) => {
+  const { name, email, address, isAdmin } = req.body
+  console.log('insider routr')
   User.findById(req.params.userId)
-    .then(user => user.update({ name, description, isAdmin }))
+    .then(user => user.update({ name, email, address, isAdmin }))
+    .then((updatedUser) => {
+      res.json(updatedUser)
+    })
     .catch(next)
 })
 
