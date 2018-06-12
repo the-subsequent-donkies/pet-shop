@@ -13,10 +13,10 @@ import { me, logout } from './store/user'
 import { Home } from './components'
 import SelectedProduct from './components/selected-product'
 import { getOrderServer, getLocalOrderServer, createLocalOrderServer, mergeOrdersServer } from './store/order';
-
 import FilteredProducts from './components/filtered-products'
 import EditReviewForm from './components/edit-review-form'
-import UserHome from './components/user-home';
+import UserHome from './components/user-home'
+import UserList from './components/user-list'
 
 
 class Routes extends Component {
@@ -64,6 +64,7 @@ class Routes extends Component {
         <Route exact path="/products/:productId/edit" component={EditProductForm} />
         <Route exact path="/order" component={Order} />
         <Route exact path="/profile" component={UserHome} />
+        <Route exact path="/users" component={UserList} />
       </div>
     )
   }

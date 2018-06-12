@@ -1,6 +1,6 @@
 [
   {
-    "name": "lamine",
+    "name": "Lamine",
     "email": "lams101@gmail.com",
     "isAdmin": false,
     "password": "password",
@@ -9,7 +9,7 @@
     "credentials": "placeHolderCreds"
   },
   {
-    "name": "cody",
+    "name": "Cody",
     "email": "newfangled@gmail.com",
     "isAdmin": true,
     "password": "password",
@@ -18,7 +18,7 @@
     "credentials": "placeHolderCreds"
   },
   {
-    "name": "jake",
+    "name": "Jake",
     "email": "mookIsfat@aol.com",
     "isAdmin": false,
     "password": "password",
@@ -27,7 +27,7 @@
     "credentials": "placeHolderCreds"
   },
   {
-    "name": "eric",
+    "name": "Eric",
     "email": "goober@gmail.com",
     "isAdmin": true,
     "password": "password",

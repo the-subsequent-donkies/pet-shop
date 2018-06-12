@@ -4,25 +4,27 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { getAllUsers } from '../store/all-user';
 import { connect } from 'react-redux';
-import { Card, Form, Button } from 'semantic-ui-react'
+import { Segment, Header, Button } from 'semantic-ui-react'
 
 const IndividualUser = (props) => {
   const { name, email, isAdmin } = props.user
   return (
-    <Card
-      fluid
+    <Segment
       raised
+      attached
     >
-      <Card.Content>
-        <Card.Header
+      <div style={{ float: 'left' }}>
+        <Header
           as='h3'
-          style={{ margin: '1rem 0 .5rem 0' }}
-        >
-          {name} - Admin? {isAdmin}
-        </Card.Header>
+          style={{ margin: '0.25rem 0 .5rem 0' }}
+          content={name}
+        />
         {email}
-      </Card.Content>
-    </Card>
+      </div>
+      <div>
+        {isAdmin.toString()}
+      </div>
+    </Segment>
   )
 }
 
