@@ -51,14 +51,13 @@ class Order extends Component {
                     <div>
                       <strong>Order Total:</strong> ${this.props.getOrderCost(order)}
                     </div>
-                    {
-                      isLoggedIn ?
-                        <Button
-                          onClick={this.handleClick}
-                        >
-                          Submit Order
-                        </Button>
-                      :
+                    {isLoggedIn ?
+                      <Button
+                        onClick={this.handleClick}
+                      >
+                        Submit Order
+                      </Button>
+                    :
                       <div>
                         <Button
                           as={Link}
