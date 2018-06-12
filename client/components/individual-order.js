@@ -17,7 +17,7 @@ class IndividualOrder extends Component {
 
   handleItemClick = async (event, { name }) => {
     this.setState({ activeItem: name })
-    let updatedOrder = await this.props.updateStatus(this.props.order, this.state.activeItem, this.props.user.id)
+    await this.props.updateStatus(this.props.order, this.state.activeItem, this.props.user.id)
   }
 
   render() {
@@ -51,9 +51,12 @@ class IndividualOrder extends Component {
 
           {(this.props.user && this.props.user.isAdmin) && (
             <Menu>
-              <Dropdown item text="Change Status" >
+              <Dropdown item
+                text="Change Status"
+                position="right">
                 <Dropdown.Menu position="right">
-                  <Dropdown.Item name="Initialized"
+                  <Dropdown.Item
+                    name="Initialized"
                     active={this.state.activeItem === "Initialized"}
                     onClick={this.handleItemClick}>Initialized</Dropdown.Item>
                   <Dropdown.Item
