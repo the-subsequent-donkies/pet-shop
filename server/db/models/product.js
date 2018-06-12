@@ -2,7 +2,6 @@
 
 const Sequelize = require('sequelize')
 const db = require('../db')
-const Category = require('./category')
 
 const Product = db.define('product', {
   name: {
@@ -24,15 +23,33 @@ const Product = db.define('product', {
   description: {
     type: Sequelize.TEXT,
     allowNull: false
+  },
+  status: {
+    type: Sequelize.ENUM('inStock', 'outOfStock', 'unavailable')
   }
 }, {
-  hooks: {
-    beforeCreate: product => {
-      if (product.imgUrl === '') {
-        product.imgUrl = '../../images/default-product.jpg'
+    hooks: {
+      beforeCreate: product => {
+        if (product.imgUrl === '') {
+          product.imgUrl = '../../images/default-product.jpg'
+        }
       }
     }
-  }
-})
+  })
+
+
+Product.search = async function (query) {
+  const Category = require('./category')
+  const result = await this.findAll({
+    where: {
+      name: {
+        [Sequelize.Op.iLike]: '%' + query + '%'
+      },
+      status: 'inStock',
+    },
+    include: [{ model: Category }]
+  })
+  return result
+}
 
 module.exports = Product
