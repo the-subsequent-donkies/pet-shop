@@ -7,15 +7,21 @@ module.exports = router
 
 router.get('/', checkAccess, (req, res, next) => {
   User.findAll({
-    attributes: ['id', 'email', 'isAdmin']
+    attributes: ['id', 'name', 'address', 'email', 'isAdmin']
   })
     .then(users => res.json(users))
     .catch(next)
 })
 
+router.get('/userId', checkAccess, (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(user => res.json(user))
+    .catch(next)
+})
+
 router.post('/', checkAccess, (req, res, next) => {
-  const { name, description, isAdmin } = req.body
-  User.create({ name, description, isAdmin })
+  const { name, email, isAdmin, address } = req.body
+  User.create({ name, email, isAdmin, address })
     .then(user => res.json(user))
     .catch(next)
 })

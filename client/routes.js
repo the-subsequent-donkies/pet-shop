@@ -13,29 +13,23 @@ import { me, logout } from './store/user'
 import { Home } from './components'
 import SelectedProduct from './components/selected-product'
 import { getOrderServer, getLocalOrderServer, createLocalOrderServer, mergeOrdersServer } from './store/order';
-
 import FilteredProducts from './components/filtered-products'
 import EditReviewForm from './components/edit-review-form'
-import UserHome from './components/user-home';
+import UserHome from './components/user-home'
+import UserList from './components/user-list'
 import UserOrders from './components/user-orders';
-
 
 class Routes extends Component {
   constructor(props) {
     super(props)
-    // console.log(localStorage.getItem('orderId'))
     this.props.loadInitialData()
       .then(() => {
         if (this.props.isLoggedIn) {
           if (localStorage.getItem('orderId') && localStorage.getItem('orderId') !== 'undefined') {
-            // this.props.getLocalOrder(localStorage.getItem('orderId'))
             this.props.getOrder(this.props.user.id)
               .then(() => {
-                console.log(localStorage)
                 return this.props.mergeOrders(parseInt(localStorage.getItem('orderId'), 10), this.props.user.id)
               })
-
-            // localStorage.removeItem('orderId')
           }
           return this.props.getOrder(this.props.user.id)
         } else if (!localStorage.getItem('orderId') || localStorage.getItem('orderId') === 'undefined') {
@@ -66,6 +60,7 @@ class Routes extends Component {
         <Route exact path="/order" component={Order} />
         <Route exact path="/profile" component={UserHome} />
         <Route exact path="/user/orders" component={UserOrders} />
+        <Route exact path="/users" component={UserList} />
       </div>
     )
   }
