@@ -5,6 +5,7 @@ import axios from 'axios'
 //action types
 
 export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const POST_NEW_CATEGORY = 'POST_NEW_CATEGORY'
 
 // action creators
 
@@ -21,6 +22,8 @@ export const getCategoriesServer = () => {
     dispatch(getCategories(data))
   }
 }
+
+
 
 export const categoriesReducer = (state = [], action) => {
   switch (action.type) {
