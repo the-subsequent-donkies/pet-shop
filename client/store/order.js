@@ -10,6 +10,7 @@ const GET_LOCAL_ORDER = 'GET_LOCAL_ORDER'
 const CREATE_LOCAL_ORDER = 'CREATE_LOCAL_ORDER'
 const GET_ORDERS_BY_USER = 'GET_ORDERS_BY_USER'
 const UPDATE_ORDER_STATUS = 'UPDATE_ORDER_STATUS'
+const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 
 const defaultOrder = {
   line_items: []
@@ -23,10 +24,18 @@ const getLocalOrder = order => ({ type: GET_LOCAL_ORDER, order })
 const createLocalOrder = order => ({ type: CREATE_LOCAL_ORDER, order })
 const updateOrderStatus = status => ({ type: UPDATE_ORDER_STATUS, status })
 const getOrdersByUser = orders => ({ type: GET_ORDERS_BY_USER, orders })
+const getAllOrders = orders => ({ type: GET_ALL_ORDERS, orders })
+
+export const getAllOrdersServer = () => {
+  return async (dispatch) => {
+    const { data } = await axios.get('/api/orders')
+    dispatch(getAllOrders(data))
+  }
+}
 
 export const getOrdersByUserServer = (userId) => {
   return async (dispatch) => {
-    const { data } = await axios.get(`api/orders/user/${userId}`)
+    const { data } = await axios.get(`/api/orders/user/${userId}`)
     dispatch(getOrdersByUser(data))
   }
 }
@@ -159,6 +168,15 @@ export const orderReducer = (state = defaultOrder, action) => {
 export const orderByUserReducer = (state = [], action) => {
   switch (action.type) {
     case GET_ORDERS_BY_USER:
+      return action.orders
+    default:
+      return state
+  }
+}
+
+export const orderAllReducer = (state = [], action) => {
+  switch (action.type) {
+    case GET_ALL_ORDERS:
       return action.orders
     default:
       return state

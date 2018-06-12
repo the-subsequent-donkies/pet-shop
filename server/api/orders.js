@@ -137,7 +137,7 @@ router.put('/:orderId', async (req, res, next) => {
   try {
     const { ...data } = req.body
     const order = await Order.findById(req.params.orderId)
-    const updatedOrder = await order.update({...data, submittedAt: Date.now()})
+    const updatedOrder = await order.update({ ...data, submittedAt: Date.now() })
     res.status(200).json(updatedOrder)
   } catch (err) {
     next(err)

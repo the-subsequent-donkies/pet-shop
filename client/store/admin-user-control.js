@@ -66,13 +66,13 @@ export const updateUserOnServer = (userId, user) => {
 export const allUsersReducer = (state = [], action) => {
   switch (action.type) {
     case GET_ALL_USERS:
-      return [ ...state, ...action.users ]
+      return [...state, ...action.users]
     case ADD_A_USER:
-      return [ ...state, action.user ]
+      return [...state, action.user]
     case UPDATE_USER_ON_SERVER:
       const otherUsers =
         state.filter(user => user.id !== action.user.id)
-      return [ ...otherUsers, action.user ]
+      return [...otherUsers, action.user]
     default:
       return state
   }

@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AllProducts from './all-products';
 import CategorySelector from './category-selector'
+import SearchBar from './search-bar'
 import FilteredProducts from './filtered-products';
 /**
  * COMPONENT
@@ -19,6 +20,7 @@ class Home extends Component {
           <h3>Welcome, {email}</h3>
         )}
         <CategorySelector />
+        <SearchBar />
         <AllProducts />
       </div>
     )
