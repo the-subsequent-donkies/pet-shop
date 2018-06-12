@@ -13,22 +13,19 @@ router.get('/', async (req, res, next) => {
   try {
     const productResult = await Product.search(req.query.search)
     const categoryResult = await Category.search(req.query.search)
-    console.log("what is this category result", categoryResult)
-    res.json(productResult)
+    const foundProducts = [...productResult, ...categoryResult[0].products]
+    const foundProductsNoDuplicates = []
+    const setOfUniqueIds = new Set()
+    foundProducts.forEach(product => {
+      console.log('prodId nonononnonono', product.id)
+      if (!setOfUniqueIds.has(product.id)) {
+        setOfUniqueIds.add(product.id)
+        foundProductsNoDuplicates.push(product)
+      }
+    })
+    console.log('my filteredarray', foundProductsNoDuplicates)
 
-    // Product.findAll({
-    //   where: {
-    //     name: {
-    //       [Sequelize.Op.iLike]: '%' + req.query.search + '%'
-    //     },
-    //     status: 'inStock',
-    //   },
-    //   include: [{ model: Category }]
-    // }).then((foundProduct) => {
-    //   foundProduct.length > 0 ?
-    //     res.json(foundProduct) :
-    //     next()
-    // })
+    res.json(foundProductsNoDuplicates)
   } catch (err) {
     next(err)
   }

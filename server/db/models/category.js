@@ -15,23 +15,16 @@ const Category = db.define('category', {
 })
 
 
-Category.search = async function (query) {
+Category.search = function (query) {
   const Product = require('./product')
-  console.log('console.log the query', query)
-  console.log('what is this?', this)
-  console.log("what is product", Product)
-  const result = await Category.findAll({
+  return this.findAll({
     where: {
       name: {
         [Sequelize.Op.iLike]: '%' + query + '%'
       },
     },
     include: [Product],
-
-
   })
-  console.log("what is this result", result)
-  return true
 }
 
 module.exports = Category

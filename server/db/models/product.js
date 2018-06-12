@@ -37,9 +37,9 @@ const Product = db.define('product', {
     }
   })
 
-const Category = require('./category')
 
 Product.search = async function (query) {
+  const Category = require('./category')
   const result = await this.findAll({
     where: {
       name: {
