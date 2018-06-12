@@ -23,6 +23,26 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/user/:userId', async (req, res, next) => {
+  try {
+    const response = await Order.findAll({
+      where: {
+        userId: req.params.userId
+      },
+      include: [
+        {
+          model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product' }]
+        }
+      ]
+    })
+    res.json(response)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:orderId', async (req, res, next) => {
   try {
     const response = await Order.findOne({
@@ -63,23 +83,23 @@ router.get('/me/:userId', (req, res, next) => {
           status: 'Initialized',
           submittedAt: Date.now()
         })
-        .then((createdOrder) => {
-          return Order.findOne({
-            where: {
-              id: createdOrder.id
-            },
-            include: [
-              {
-                model: LineItem,
-                as: 'line_items',
-                include: [{ model: Product, as: 'product' }]
-              }
-            ]
+          .then((createdOrder) => {
+            return Order.findOne({
+              where: {
+                id: createdOrder.id
+              },
+              include: [
+                {
+                  model: LineItem,
+                  as: 'line_items',
+                  include: [{ model: Product, as: 'product' }]
+                }
+              ]
+            })
           })
-        })
-        .then((result) => {
-          res.json(result)
-        })
+          .then((result) => {
+            res.json(result)
+          })
     })
   } catch (err) {
     next(err)
@@ -98,9 +118,11 @@ router.post('/', async (req, res, next) => {
         id: addedOrder.id
       },
       include: [
-        {model: LineItem,
+        {
+          model: LineItem,
           as: 'line_items',
-          include: [{ model: Product, as: 'product'}]}
+          include: [{ model: Product, as: 'product' }]
+        }
       ]
     })
     res.status(201).json(gotOrder)

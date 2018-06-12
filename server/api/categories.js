@@ -3,7 +3,6 @@
 const router = require('express').Router()
 const { Category } = require('../db/models')
 const checkAccess = require('./checkAccess')
-
 module.exports = router
 
 router.get('/', async (req, res, next) => {
