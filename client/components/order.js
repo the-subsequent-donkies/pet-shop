@@ -5,12 +5,27 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import LineItem from './line-item'
 import { getOrderServer, updateOrderStatusServer } from '../store/order'
-import UserHome from './user-home'
 import { Segment, Header, Divider, Button } from 'semantic-ui-react'
 
+const handler = StripeCheckout.configure({
+  key: 'pk_test_GRX2M07RaRMsxt0aa33tS7JH',
+  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+  locale: 'auto',
+  billingAddress: true,
+  token: function(token) {
+    console.log(token)
+  }
+})
+
 class Order extends Component {
-  handleClick = async (evt) => {
-    await this.props.updateStatus(this.props.order, 'Completed', this.props.user.id)
+  handleClick = (evt) => {
+    evt.preventDefault()
+    handler.open({
+      name: 'Pet Shop',
+      description: 'Your top choice for pet supplies',
+      amount: +this.props.getOrderCost(this.props.order) * 100
+    })
+    // await this.props.updateStatus(this.props.order, 'Completed', this.props.user.id)
   }
 
   render() {
@@ -52,11 +67,13 @@ class Order extends Component {
                       <strong>Order Total:</strong> ${this.props.getOrderCost(order)}
                     </div>
                     {isLoggedIn ?
-                      <Button
-                        onClick={this.handleClick}
-                      >
-                        Submit Order
-                      </Button>
+                      <div>
+                        <Button
+                          onClick={this.handleClick}
+                        >
+                          Checkout
+                        </Button>
+                      </div>
                     :
                       <div>
                         <Button
@@ -73,7 +90,6 @@ class Order extends Component {
                         </Button>
                       </div>
                     }
-
                   </div>
                 </Segment>
                 :
