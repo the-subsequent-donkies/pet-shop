@@ -8,9 +8,16 @@ import { getOrderServer, updateOrderStatusServer } from '../store/order'
 import { Segment, Header, Divider, Button } from 'semantic-ui-react'
 import axios from 'axios'
 
-
+import io from 'socket.io-client'
+const socket = io(window.location.origin)
+import {socketEmit} from '../socket'
 
 class Order extends Component {
+  constructor(props) {
+    super(props)
+    socketEmit('ORDER_VIEW', {userId: this.props.user.id}, socket)
+  }
+
   handleClick = (evt) => {
     const handler = StripeCheckout.configure({
       key: 'pk_test_GRX2M07RaRMsxt0aa33tS7JH',
@@ -35,13 +42,15 @@ class Order extends Component {
         updateStatus(order, 'Completed', id)
       }
     })
+    socketEmit('SUBMIT_ORDER', {userId: this.props.user.id}, socket)
+
   }
 
   render() {
     let { order, isLoggedIn } = this.props
     return (
-      <div className='home-wrapper'>
-        <div className='center-container'>
+      <div className="home-wrapper">
+        <div className="center-container">
           <Segment.Group
             raised
             style={{ width: '100%' }}
@@ -49,7 +58,7 @@ class Order extends Component {
             <Segment
               padded
             >
-              <Header as='h1'>
+              <Header as="h1">
                 Shopping Cart
               </Header>
               {
@@ -73,7 +82,7 @@ class Order extends Component {
                     }}
                   >
                     <Header
-                      as='h3'
+                      as="h3"
                       style={{
                         marginTop: '1rem',
                         marginLeft: '.5rem'
@@ -93,13 +102,13 @@ class Order extends Component {
                       <div>
                         <Button
                           as={Link}
-                          to='/signup'
+                          to="/signup"
                         >
                           Signup
                         </Button>
                         <Button
                           as={Link}
-                          to='/login'
+                          to="/login"
                         >
                           Login to Checkout
                         </Button>

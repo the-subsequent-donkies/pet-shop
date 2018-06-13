@@ -6,11 +6,19 @@ import { addLineitemServer } from '../store/order';
 import { connect } from 'react-redux';
 import { Card, Image, Button } from 'semantic-ui-react'
 
+import io from 'socket.io-client'
+const socket = io(window.location.origin)
+import {socketEmit} from '../socket'
+
 class IndividualProduct extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   handleAdd = async (evt) => {
     evt.preventDefault()
     await this.props.addToOrder(this.props.orderId, this.props.product)
+    socketEmit('ADD_PRODUCT_CART', {userId: this.props.userId}, socket)
   }
 
   render() {
@@ -21,10 +29,10 @@ class IndividualProduct extends Component {
         raised
       >
         <Card.Content>
-          <div className='product-list-img-bound'>
+          <div className="product-list-img-bound">
             <Image
               src={product.imgUrl}
-              size='small'
+              size="small"
             />
           </div>
           <Card.Header
@@ -51,7 +59,7 @@ class IndividualProduct extends Component {
             to={`/products/${product.id}/edit`}
           />
           <Button
-            content='Add to Cart'
+            content="Add to Cart"
             onClick={this.handleAdd}
             style={{ float: 'right' }}
           />
@@ -64,7 +72,8 @@ class IndividualProduct extends Component {
 
 const mapState = (state) => {
   return {
-    orderId: state.order.id
+    orderId: state.order.id,
+    userId: state.user.id
   }
 }
 

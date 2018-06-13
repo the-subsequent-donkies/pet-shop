@@ -10,6 +10,7 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
+const socketio = require('socket.io')
 module.exports = app
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
@@ -49,6 +50,13 @@ const createApp = () => {
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
 
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  })
+
   // any remaining requests with an extension (.js, .css, etc.) send 404
   app.use((req, res, next) => {
     if (path.extname(req.path).length) {
@@ -73,9 +81,15 @@ const createApp = () => {
   })
 }
 
+
 const startListening = () => {
-  app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+
+  const io = socketio(server)
+  require('./socket')(io)
 }
+
+// set up our socket control center
 
 const syncDb = () => db.sync()
 
