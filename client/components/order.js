@@ -72,9 +72,15 @@ class Order extends Component {
                       alignItems: 'center'
                     }}
                   >
-                    <div>
-                      <strong>Order Total:</strong> ${this.props.getOrderCost(order)}
-                    </div>
+                    <Header
+                      as='h3'
+                      style={{
+                        marginTop: '1rem',
+                        marginLeft: '.5rem'
+                      }}
+                    >
+                      Order Total: ${this.props.getOrderCost(order)}
+                    </Header>
                     {isLoggedIn ?
                       <div>
                         <Button
