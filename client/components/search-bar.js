@@ -13,7 +13,6 @@ class SearchBar extends Component {
   }
 
   handleChange = (evt) => {
-    console.log(" event target value in handle change", evt.target.value)
     let stateUpdateObj = { search: evt.target.value }
     this.setState(stateUpdateObj)
 
@@ -27,7 +26,6 @@ class SearchBar extends Component {
   }
 
   render() {
-    console.log("what are my props", this.props)
     let products = this.props.products
     return (
       <div>
