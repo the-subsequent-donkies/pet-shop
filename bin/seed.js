@@ -2,7 +2,7 @@
 
 const db = require('../server/db/db')
 const { User, LineItem, Order, Product, Review, Category } = require('../server/db/models')
-const { productData, categoryData, reviewData, userData } = require('./data')
+const { productData, categoryData, reviewData, userData, orderData, lineItemData } = require('./data')
 
 const seed = async () => {
 
@@ -32,8 +32,19 @@ const seed = async () => {
   await Promise.all(reviewData.map(rData => Review.create({ ...rData })))
 
   console.log(`
-    Seeding of Reviews table successful!
+    Seeding of Reviews table successful!`)
+
+  await Promise.all(orderData.map(oData => Order.create({ ...oData })))
+
+  console.log(`
+    Seeding of Orders table successful!`)
+
+  await Promise.all(lineItemData.map(lData => LineItem.create({ ...lData })))
+
+  console.log(`
+    Seeding of Line Items table successful!
   `)
+
 
   db.close()
 }
