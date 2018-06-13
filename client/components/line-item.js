@@ -116,6 +116,7 @@ class LineItem extends Component {
                   name='quantity-input'
                   control={Input}
                   value={this.state.quantity}
+                  style={{ width: '5rem' }}
                 />
                 <Form.Field
                   as={Button}
