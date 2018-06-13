@@ -65,7 +65,7 @@ class Routes extends Component {
         <Route exact path="/user/orders" component={UserOrders} />
         <Route exact path="/users" component={UserList} />
         <Route exact path="/profile/edit" component={EditUser} />
-        <Route exact path="/categories/add" component={AddCategory} />
+        <Route exact path="/addcategory" component={AddCategory} />
       </div>
     )
   }

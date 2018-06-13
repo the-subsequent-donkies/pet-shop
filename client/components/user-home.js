@@ -66,7 +66,7 @@ const UserHome = (props) => {
                   </Header>
                 </Segment>
                 <Segment color="red">
-                  <Header as={Link} to="/">
+                  <Header as={Link} to="/addcategory">
                     <Icon name="tags" />
                     Edit Categories
                   </Header>
