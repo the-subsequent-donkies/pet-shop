@@ -26,22 +26,23 @@ class SearchBar extends Component {
   }
 
   render() {
-    let products = this.props.products
     return (
       <div>
         <Form
           onSubmit={this.handleSubmit}
         >
-          <Form.Field
-            control={Input}
-            placeholder='Search'
-            onChange={this.handleChange}
-          />
-          <Form.Field
-            type='Submit'
-            control={Button}
-            content="Submit"
-          />
+          <Form.Group widths='equal'>
+            <Form.Field
+              control={Input}
+              placeholder='Search'
+              onChange={this.handleChange}
+            />
+            <Form.Field
+              type='Submit'
+              control={Button}
+              content="Submit"
+            />
+          </Form.Group>
         </Form>
       </div>
     )

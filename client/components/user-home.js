@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import UserOrders from './user-orders'
 import IndividualUser from './individual-user'
-
+import history from '../history'
 
 const UserHome = (props) => {
   return (
@@ -97,8 +97,6 @@ const UserHome = (props) => {
                 </Segment>
                 <Segment color="red">
                   <Header
-                    as={a}
-                    href="http://pet-shop-analytics.herokuapp.com/"
                     style={{ fontSize: '1.5rem' }}
                   >
                     <Icon name="line graph" />
