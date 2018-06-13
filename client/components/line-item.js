@@ -2,8 +2,8 @@
 
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { deleteLineitemServer, updateLineitemServer } from '../store/order'
-import { Segment, Image, Header, Form, Input, Button } from 'semantic-ui-react'
+import { deleteLineitemServer, updateLineitemServer, getLocalOrderServer } from '../store/order'
+import { Segment, Image, Header, Form, Input, Button, Grid } from 'semantic-ui-react'
 
 class LineItem extends Component {
   constructor() {
@@ -36,6 +36,7 @@ class LineItem extends Component {
       await this.props.deleteItem(this.props.lineItem.id)
     } else {
       await this.props.updateItem(this.props.lineItem.id, this.state.quantity)
+      this.props.getOrder(this.props.lineItem.orderId)
     }
   }
 
@@ -68,30 +69,71 @@ class LineItem extends Component {
           {product.name}
         </Header>
         <p>{product.description}</p>
-        <Form
-          onChange={this.handleChange}
-          style={{ float: 'right' }}
+        <Grid
+          columns={2}
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            clear: 'both'
+          }}
         >
-          <Form.Group>
-            <Form.Field
-              name='quantity-input'
-              control={Input}
-              value={this.state.quantity}
-            />
-            <Form.Field
-              as={Button}
-              onClick={this.handleUpdate}
-              content='Update'
-              style={{ margin: '0 .5rem' }}
-            />
-            <Form.Field
-              as={Button}
-              onClick={this.handleDelete}
-              content='Delete'
-              style={{ marginRight: '.5rem' }}
-            />
-          </Form.Group>
-        </Form>
+          <Grid.Column>
+            <Grid
+              columns={3}
+              style={{ marginLeft: '3rem' }}
+            >
+              <Grid.Column>
+                <Header
+                  as='h4'
+                >
+                  Quantity: {this.props.lineItem.quantity}
+                </Header>
+              </Grid.Column>
+              <Grid.Column>
+                <Header
+                  as='h4'
+                >
+                Price: ${product.price}
+                </Header>
+              </Grid.Column>
+              <Grid.Column>
+                <Header
+                  as='h4'
+                >
+                  Subtotal: ${(this.props.lineItem.quantity * product.price).toFixed(2)}
+                </Header>
+              </Grid.Column>
+            </Grid>
+          </Grid.Column>
+          <Grid.Column>
+            <Form
+              onChange={this.handleChange}
+              style={{ float: 'right' }}
+            >
+              <Form.Group>
+                <Form.Field
+                  name='quantity-input'
+                  control={Input}
+                  value={this.state.quantity}
+                  style={{ width: '5rem' }}
+                />
+                <Form.Field
+                  as={Button}
+                  onClick={this.handleUpdate}
+                  content='Update'
+                  style={{ margin: '0 .5rem' }}
+                />
+                <Form.Field
+                  as={Button}
+                  onClick={this.handleDelete}
+                  content='Delete'
+                  style={{ marginRight: '.5rem' }}
+                />
+              </Form.Group>
+            </Form>
+          </Grid.Column>
+        </Grid>
       </Segment>
     )
   }
@@ -99,6 +141,7 @@ class LineItem extends Component {
 
 const mapDispatch = (dispatch) => {
   return {
+    getOrder: (id) => dispatch(getLocalOrderServer(id)),
     deleteItem: (id) => dispatch(deleteLineitemServer(id)),
     updateItem: (id, quantity) => dispatch(updateLineitemServer(id, quantity))
   }

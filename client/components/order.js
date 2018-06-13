@@ -2,18 +2,43 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LineItem from './line-item';
+import { Link } from 'react-router-dom'
+import LineItem from './line-item'
 import { getOrderServer, updateOrderStatusServer } from '../store/order'
-import UserHome from './user-home'
 import { Segment, Header, Divider, Button } from 'semantic-ui-react'
+import axios from 'axios'
+
+
 
 class Order extends Component {
-  handleClick = async (evt) => {
-    await this.props.updateStatus(this.props.order, 'Completed', this.props.user.id)
+  handleClick = (evt) => {
+    const handler = StripeCheckout.configure({
+      key: 'pk_test_GRX2M07RaRMsxt0aa33tS7JH',
+      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+      locale: 'auto',
+      billingAddress: true,
+      token: function(token) {
+        console.log(token)
+      }
+    })
+
+    let updateStatus = this.props.updateStatus
+    let order = this.props.order
+    let id = this.props.user.id
+
+    evt.preventDefault()
+    handler.open({
+      name: 'Pet Shop',
+      description: 'Your top choice for pet supplies',
+      amount: +this.props.getOrderCost(this.props.order) * 100,
+      closed: function() {
+        updateStatus(order, 'Completed', id)
+      }
+    })
   }
 
   render() {
-    let order = this.props.order
+    let { order, isLoggedIn } = this.props
     return (
       <div className='home-wrapper'>
         <div className='center-container'>
@@ -47,14 +72,39 @@ class Order extends Component {
                       alignItems: 'center'
                     }}
                   >
-                    <div>
-                      <strong>Order Total:</strong> ${this.props.getOrderCost(order)}
-                    </div>
-                      <Button
-                        onClick={this.handleClick}
-                      >
-                        Submit Order
-                      </Button>
+                    <Header
+                      as='h3'
+                      style={{
+                        marginTop: '1rem',
+                        marginLeft: '.5rem'
+                      }}
+                    >
+                      Order Total: ${this.props.getOrderCost(order)}
+                    </Header>
+                    {isLoggedIn ?
+                      <div>
+                        <Button
+                          onClick={this.handleClick}
+                        >
+                          Checkout
+                        </Button>
+                      </div>
+                    :
+                      <div>
+                        <Button
+                          as={Link}
+                          to='/signup'
+                        >
+                          Signup
+                        </Button>
+                        <Button
+                          as={Link}
+                          to='/login'
+                        >
+                          Login to Checkout
+                        </Button>
+                      </div>
+                    }
                   </div>
                 </Segment>
                 :
@@ -72,7 +122,8 @@ class Order extends Component {
 const mapState = (state) => {
   return {
     user: state.user,
-    order: state.order
+    order: state.order,
+    isLoggedIn: !!state.user.id
   }
 }
 

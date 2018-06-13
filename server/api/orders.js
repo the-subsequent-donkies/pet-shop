@@ -2,6 +2,7 @@
 
 const router = require('express').Router()
 const { Order, LineItem, Product } = require('../db/models')
+const op = require('sequelize').Op
 const checkAccess = require('./checkAccess')
 module.exports = router
 
@@ -66,7 +67,7 @@ router.get('/me/:userId', (req, res, next) => {
     Order.find({
       where: {
         userId: +req.params.userId,
-        status: 'Initialized',
+        status: 'Initialized'
       },
       include: [
         {

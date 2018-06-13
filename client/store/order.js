@@ -56,7 +56,6 @@ export const addLineitemServer = (orderId, product) => {
         productId: product.id,
         currentPrice: product.price
       })
-
     dispatch(addLineitemToOrder(data))
   }
 }
@@ -108,6 +107,8 @@ export const mergeOrdersServer = (localOrderId, userId) => {
         dispatch(addLineitemServer(accountOrder.id, localLineitem.product))
       }
     })
+
+    localStorage.clear()
   }
 }
 
