@@ -10,18 +10,18 @@ import IndividualUser from './individual-user'
 
 const UserHome = (props) => {
   return (
-    <div className='home-wrapper'>
-      <div className='center-container'>
+    <div className="home-wrapper">
+      <div className="center-container">
         <Segment.Group
           raised
           style={{ width: '100%' }}
         >
           <Segment color="blue">
-            <Header as='h1'>
+            <Header as="h1">
               Welcome, {props.user.name}!
             </Header>
             <Divider />
-            <Header as='h4'>
+            <Header as="h4">
               Member Since {props.user.createdAt.toString().slice(0, 4)}
             </Header>
           </Segment>
@@ -97,8 +97,8 @@ const UserHome = (props) => {
                 </Segment>
                 <Segment color="red">
                   <Header
-                    as={Link}
-                    to="/"
+                    as={a}
+                    href="http://pet-shop-analytics.herokuapp.com/"
                     style={{ fontSize: '1.5rem' }}
                   >
                     <Icon name="line graph" />
