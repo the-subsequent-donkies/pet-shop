@@ -2,14 +2,8 @@
 const { expect } = require('chai')
 const request = require('supertest')
 const app = require('../../index')
-// const db = require('../../db')
 const { Order, LineItem, Product, User } = require('../../db/models')
 const axios = require('axios')
-
-// console.log(Order.create({
-//   status: "Initialized",
-//   submittedAt: "2018-04-01 08:22:52.7-05"
-// }))
 
 describe('Line-Item Routes', () => {
   describe('api/line-items', () => {
@@ -155,7 +149,6 @@ describe('Line-Item Routes', () => {
         .get('/api/orders/me/1')
         .expect(200)
         .then(res => {
-          console.log("what is res.body here", res.body)
           expect(res.body).to.be.an('object')
           expect(res.body.line_items).to.be.an('array')
           expect(res.body.line_items[0].product).to.be.an('object')

@@ -1,18 +1,27 @@
 [
   {
-    "status": "Initialized",
-    "submittedAt": "2018-06-01 08:22:52.7-05"
+    "status": "Completed",
+    "submittedAt": "2018-06-01 08:22:52.7-05",
+    "userId": 3
   },
   {
-    "status": "Initialized",
-    "submittedAt": "2018-06-01 08:22:52.7-05"
+    "status": "Cancelled",
+    "submittedAt": "2018-06-01 08:22:52.7-05",
+    "userId": 3
   },
   {
-    "status": "Initialized",
-    "submittedAt": "2018-07-01 08:22:52.7-05"
+    "status": "Completed",
+    "submittedAt": "2018-07-01 08:22:52.7-05",
+    "userId": 2
   },
   {
-    "status": "Initialized",
-    "submittedAt": "2018-06-01 08:22:52.7-05"
+    "status": "Completed",
+    "submittedAt": "2018-06-01 08:22:52.7-05",
+    "userId": 4
+  },
+  {
+    "status": "Processing",
+    "submittedAt": "2018-06-01 08:22:52.7-05",
+    "userId": 1
   }
 ]

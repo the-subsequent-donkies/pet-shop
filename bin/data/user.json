@@ -1,11 +1,26 @@
 [
   {
+    "name": "Admin",
+    "email": "admin@email.com",
+    "isAdmin": true,
+    "password": "admin",
+    "address": "1234 Fake St, Chicago, IL 60622",
+    "credentials": "placeHolderCreds"
+  },
+  {
+    "name": "User",
+    "email": "user@email.com",
+    "isAdmin": false,
+    "password": "user",
+    "address": "5678 Made Up Blvd, Chicago, IL 60603",
+    "credentials": "placeHolderCreds"
+  },
+  {
     "name": "Lamine",
     "email": "lams101@gmail.com",
     "isAdmin": false,
     "password": "password",
-    "isAdmin": false,
-    "address": "111 south one ave",
+    "address": "111 S One Ave, Chicago, IL 60637",
     "credentials": "placeHolderCreds"
   },
   {
@@ -13,8 +28,7 @@
     "email": "newfangled@gmail.com",
     "isAdmin": true,
     "password": "password",
-    "isAdmin": true,
-    "address": "87 west printer pl",
+    "address": "87 W Printer Pl, Chicago, IL 60613",
     "credentials": "placeHolderCreds"
   },
   {
@@ -22,8 +36,7 @@
     "email": "mookIsfat@aol.com",
     "isAdmin": false,
     "password": "password",
-    "isAdmin": false,
-    "address": "213 fredface square",
+    "address": "213 Red Meadow Square, New York, NY 12110",
     "credentials": "placeHolderCreds"
   },
   {
@@ -31,8 +44,7 @@
     "email": "goober@gmail.com",
     "isAdmin": true,
     "password": "password",
-    "isAdmin": true,
-    "address": "123 w bikinibottom rd",
+    "address": "123 W Bikini Bottom Rd, The Ocean",
     "credentials": "placeHolderCreds"
   }
 ]

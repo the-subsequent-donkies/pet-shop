@@ -1,7 +1,7 @@
 [
   {
     "name": "Bone",
-    "inventory": "4",
+    "inventory": "56",
     "price": "2.50",
     "imgUrl": "https://i.imgur.com/zzD13aO.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
@@ -9,27 +9,53 @@
     "status": "inStock"
   },
   {
-    "name": "Boney",
-    "inventory": "4",
-    "price": "2.50",
-    "imgUrl": "https://i.imgur.com/zzD13aO.jpg",
+    "name": "Chew Toy",
+    "inventory": "74",
+    "price": "25.50",
+    "imgUrl": "https://i.imgur.com/izgjZ0b.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
     "category": "Dogs",
     "status": "inStock"
   },
   {
-    "name": "Boone",
-    "inventory": "4",
-    "price": "2.50",
-    "imgUrl": "https://i.imgur.com/zzD13aO.jpg",
+    "name": "Dog Collar",
+    "inventory": "42",
+    "price": "12.50",
+    "imgUrl": "https://i.imgur.com/QVX2TcX.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
     "category": "Dogs",
     "status": "inStock"
   },
   {
-    "name": "Scratch Post",
-    "inventory": "6",
-    "price": "22.50",
+    "name": "Doggie Bed",
+    "inventory": "24",
+    "price": "47.50",
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+    "category": "Dogs",
+    "status": "inStock"
+  },
+  {
+    "name": "Ball",
+    "inventory": "98",
+    "price": "10.50",
+    "imgUrl": "https://i.imgur.com/4Uwm0.jpg",
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+    "category": "Dogs",
+    "status": "inStock"
+  },
+  {
+    "name": "Kitty Castle",
+    "inventory": "34",
+    "price": "155.95",
+    "imgUrl": "https://i.imgur.com/P1ARWFX.jpg",
+    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+    "category": "Cats",
+    "status": "inStock"
+  },
+  {
+    "name": "Scratching Post",
+    "inventory": "63",
+    "price": "27.50",
     "imgUrl": "https://i.imgur.com/jI1kMrK.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
     "category": "Cats",
@@ -37,28 +63,20 @@
   },
   {
     "name": "Fake Mouse",
-    "inventory": "0",
-    "price": "5.00",
-    "imgUrl": "https://i.imgur.com/dQ7u2Wg.jpg",
+    "inventory": "45",
+    "price": "18.50",
+    "imgUrl": "https://i.imgur.com/YwcrAa9.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
     "category": "Cats",
     "status": "outOfStock"
   },
   {
     "name": "Hamster Wheel",
-    "inventory": "0",
+    "inventory": "24",
     "price": "7.50",
     "imgUrl": "https://i.imgur.com/fFptBSA.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
     "category": "Hamsters",
     "status": "outOfStock"
-  },
-  {
-    "name": "Doggie Bed",
-    "inventory": "12",
-    "price": "47.50",
-    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.",
-    "category": "Dogs",
-    "status": "inStock"
   }
 ]

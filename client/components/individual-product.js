@@ -52,11 +52,18 @@ class IndividualProduct extends Component {
           </Card.Description>
         </Card.Content>
         <Card.Content>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Button
+            as={Link}
+            content='Edit'
+            to={`/products/${product.id}/edit`}
+          />
           <Button
             content="Add to Cart"
             onClick={this.handleAdd}
             style={{ float: 'right' }}
           />
+          </div>
         </Card.Content>
       </Card>
     )
