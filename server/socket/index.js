@@ -18,6 +18,26 @@ module.exports = (io) => {
       await axios.post(`${ANALYTICS_URL}/api/requests`, data)
     })
 
+    socket.on('ADD_PRODUCT_CART', async (data) => {
+      await axios.post(`${ANALYTICS_URL}/api/requests`, data)
+    })
+
+    socket.on('SUBMIT_REVIEW', async (data) => {
+      await axios.post(`${ANALYTICS_URL}/api/requests`, data)
+    })
+
+    socket.on('SELECT_CATEGORY', async (data) => {
+      await axios.post(`${ANALYTICS_URL}/api/requests`, data)
+    })
+
+    socket.on('SUBMIT_ORDER', async (data) => {
+      await axios.post(`${ANALYTICS_URL}/api/requests`, data)
+    })
+
+    socket.on('ORDER_VIEW', async (data) => {
+      await axios.post(`${ANALYTICS_URL}/api/requests`, data)
+    })
+
     socket.on('disconnect', async (data) => {
       await axios.post(`${ANALYTICS_URL}/api/requests`, {reqType: SOCKET_DISCONNECT, socketId: socket.id, time: Date.now()})
       console.log(`Connection ${socket.id} has left the building`)

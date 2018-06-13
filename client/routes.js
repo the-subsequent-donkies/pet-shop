@@ -37,10 +37,6 @@ class Routes extends Component {
           if (localStorage.getItem('orderId') && localStorage.getItem('orderId') !== 'undefined') {
             this.props.getOrder(this.props.user.id)
               .then(() => {
-<<<<<<< HEAD
-                // console.log(localStorage)
-=======
->>>>>>> 7ea2660844e1fe6046890cf17cf11255adb83e37
                 return this.props.mergeOrders(parseInt(localStorage.getItem('orderId'), 10), this.props.user.id)
               })
           }

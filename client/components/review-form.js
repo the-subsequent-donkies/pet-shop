@@ -6,6 +6,10 @@ import ReactStars from 'react-stars'
 import history from '../history'
 import { Form, TextArea, Button } from 'semantic-ui-react'
 
+import io from 'socket.io-client'
+const socket = io(window.location.origin)
+import {socketEmit} from '../socket'
+
 class ReviewForm extends Component {
   constructor(props) {
     super(props)
@@ -51,6 +55,7 @@ class ReviewForm extends Component {
       stars: 0,
       reviewId: 0
     })
+    socketEmit('SUBMIT_REVIEW', {userId: this.props.user.id}, socket)
   }
 
   invokeSubmit = async () => {
@@ -83,25 +88,25 @@ class ReviewForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <Form.Field
-          name='content'
+          name="content"
           control={TextArea}
-          label='Leave your thoughts here'
+          label="Leave your thoughts here"
           value={content}
           style={{ marginTop: '0.75rem' }}
           onChange={this.handleTextChange}
         />
         <div
-          className='review-form-submit-row'
+          className="review-form-submit-row"
         >
           <Form.Field
-            name='stars'
+            name="stars"
             control={ReactStars}
-            label='Your rating'
+            label="Your rating"
             value={parseInt(stars, 10)}
             onChange={this.handleStarClick}
           />
           <Button
-            type='submit'
+            type="submit"
             style={{ marginTop: '1rem', marginBottom: '1rem' }}
           >
             Submit

@@ -5,6 +5,10 @@ import { getProductsByCategoryServer, getProductsServer } from '../store/product
 import history from '../history'
 import { Form, Select } from 'semantic-ui-react'
 
+import io from 'socket.io-client'
+const socket = io(window.location.origin)
+import {socketEmit} from '../socket'
+
 class CategorySelector extends Component {
   constructor(props) {
     super(props)
@@ -22,6 +26,7 @@ class CategorySelector extends Component {
       history.push(`/`)
     } else {
       await this.props.getProductsByCategoryServer(this.state.category)
+      socketEmit('SELECT_CATEGORY', {userId: this.props.user.id}, socket)
       history.push(`/categories/${this.state.category}`)
     }
   }
@@ -45,7 +50,7 @@ class CategorySelector extends Component {
       <Form>
         <Form.Field
           as={Select}
-          placeholder='Select a Category'
+          placeholder="Select a Category"
           options={categoryOptions}
           onChange={this.handleChange}
           value={this.state.category}
@@ -57,7 +62,8 @@ class CategorySelector extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories
+    categories: state.categories,
+    user: state.user
   }
 }
 

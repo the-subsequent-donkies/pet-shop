@@ -6,6 +6,10 @@ import { addLineitemServer } from '../store/order';
 import { connect } from 'react-redux';
 import { Card, Image, Button } from 'semantic-ui-react'
 
+import io from 'socket.io-client'
+const socket = io(window.location.origin)
+import {socketEmit} from '../socket'
+
 class IndividualProduct extends Component {
   constructor(props) {
     super(props)
@@ -14,6 +18,7 @@ class IndividualProduct extends Component {
   handleAdd = async (evt) => {
     evt.preventDefault()
     await this.props.addToOrder(this.props.orderId, this.props.product)
+    socketEmit('ADD_PRODUCT_CART', {userId: this.props.userId}, socket)
   }
 
   render() {

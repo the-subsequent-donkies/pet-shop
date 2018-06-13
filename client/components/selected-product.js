@@ -17,7 +17,7 @@ class SelectedProduct extends Component {
     super(props)
     this.props.getSingleProduct(this.props.match.params.productId)
     this.props.getFilteredReviews(this.props.match.params.productId)
-    socketEmit('SELECTED_PRODUCT_VIEW', {userId: this.props.userId}, socket)
+    socketEmit('SELECTED_PRODUCT_VIEW', {userId: this.props.user.id}, socket)
   }
 
   render() {
