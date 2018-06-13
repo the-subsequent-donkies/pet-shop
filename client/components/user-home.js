@@ -97,12 +97,15 @@ const UserHome = (props) => {
                 </Segment>
                 <Segment color="red">
                   <Header
-                    as={a}
-                    href="http://pet-shop-analytics.herokuapp.com/"
                     style={{ fontSize: '1.5rem' }}
                   >
+                    <a
+                      href="http://pet-shop-analytics.herokuapp.com/"
+                      style={{ textDecoration: 'none' }}
+                    >
                     <Icon name="line graph" />
                     Analytics
+                    </a>
                   </Header>
                 </Segment>
               </Segment.Group>

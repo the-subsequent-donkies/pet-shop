@@ -20,7 +20,7 @@ class Home extends Component {
           <h3>Welcome, {name}</h3>
         )}
         <div style={{
-          display: 'flex'
+          display: 'flex',
         }}>
           <CategorySelector />
           <SearchBar />
