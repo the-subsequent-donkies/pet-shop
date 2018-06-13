@@ -6,7 +6,6 @@ import { Redirect } from 'react-router'
 import PropTypes from 'prop-types'
 import { auth } from '../store/user'
 import { Form, Input, Button } from 'semantic-ui-react'
-import { required, validateEmail } from './validation'
 
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error, user } = props

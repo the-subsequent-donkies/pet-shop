@@ -9,12 +9,12 @@ module.exports = (io) => {
   io.on('connection', async (socket) => {
     console.log(`A socket connection to the server has been made: ${socket.id}`)
     socket.on(SOCKET_CONNECTION, async (data) => {
-      visitorData[socket.id] = data;
-      await axios.post(`http://localhost:6969/api/requests`, visitorData[socketId])
+      await axios.post(`http://localhost:6969/api/requests`, data)
     })
 
     socket.on('disconnect', async (data) => {
-      await axios.post(`http://localhost:6969/api/requests`, {...visitorData[socket.id], type: SOCKET_DISCONNECT, time: Date.now() })
+      await axios.post(`http://localhost:6969/api/requests`, {reqType: SOCKET_DISCONNECT, socketId: socket.id, time: Date.now()})
+      console.log(`Connection ${socket.id} has left the building`)
     })
   })
 }

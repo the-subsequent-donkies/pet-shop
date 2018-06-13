@@ -18,6 +18,10 @@ import FilteredProducts from './components/filtered-products'
 import EditReviewForm from './components/edit-review-form'
 import UserHome from './components/user-home';
 
+import io from 'socket.io-client'
+const socket = io(window.location.origin)
+import {socketEmit} from './socket'
+
 
 class Routes extends Component {
   constructor(props) {
@@ -44,6 +48,8 @@ class Routes extends Component {
         }
       })
       .then(() => {
+        console.log(socketEmit)
+        socketEmit('SOCKET_CONNECTION', {userId: this.props.user.id})
         if (!this.props.isLoggedIn) {
           localStorage.setItem('orderId', this.props.orderId)
         }
