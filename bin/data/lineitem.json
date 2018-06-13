@@ -1,22 +1,62 @@
 [
   {
     "productId": 1,
-    "currentPrice": 2.5,
-    "quantity": 5
+    "currentPrice": 2.50,
+    "quantity": 5,
+    "orderId": 1
   },
   {
     "productId": 2,
-    "currentPrice": 3.5,
-    "quantity": 6
+    "currentPrice": 3.50,
+    "quantity": 6,
+    "orderId": 1
   },
   {
     "productId": 3,
     "currentPrice": 2.55,
-    "quantity": 9
+    "quantity": 4,
+    "orderId": 2
   },
   {
     "productId": 4,
     "currentPrice": 5.55,
-    "quantity": 90
+    "quantity": 4,
+    "orderId": 2
+  },
+  {
+    "productId": 4,
+    "currentPrice": 5.55,
+    "quantity": 4,
+    "orderId": 1
+  },
+  {
+    "productId": 5,
+    "currentPrice": 15.55,
+    "quantity": 4,
+    "orderId": 2
+  },
+  {
+    "productId": 8,
+    "currentPrice": 15.55,
+    "quantity": 4,
+    "orderId": 3
+  },
+  {
+    "productId": 6,
+    "currentPrice": 15.55,
+    "quantity": 4,
+    "orderId": 4
+  },
+  {
+    "productId": 9,
+    "currentPrice": 15.55,
+    "quantity": 4,
+    "orderId": 3
+  },
+  {
+    "productId": 7,
+    "currentPrice": 15.55,
+    "quantity": 4,
+    "orderId": 5
   }
 ]

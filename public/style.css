@@ -83,7 +83,9 @@ nav a {
 }
 
 .selected-product-content {
-  padding: 1rem;
+  padding-top: 1.5rem;
+  padding-left: 1rem;
+
 }
 
 .single-review-edit-row {

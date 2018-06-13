@@ -48,45 +48,6 @@ class IndividualOrder extends Component {
               }
             </Table.Body>
           </Table>
-
-          {(this.props.user && this.props.user.isAdmin) && (
-            <Menu>
-              <Dropdown
-                fluid
-                item
-                text="Change Status"
-              >
-                <Dropdown.Menu
-                  onChange={this.handleChange}
-                >
-                  <Dropdown.Item
-                    name="Initialized"
-                    active={this.state.activeItem === "Initialized"}
-                  >
-                    Initialized
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    name="Processing"
-                    active={this.state.activeItem === "Processing"}
-                  >
-                    Processing
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    name="Cancelled"
-                    active={this.state.activeItem === "Cancelled"}
-                  >
-                    Cancelled
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    name="Completed"
-                    active={this.state.activeItem === "Completed"}
-                  >
-                    Completed
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </Menu>
-          )}
         </Card>
       </div>
     )
