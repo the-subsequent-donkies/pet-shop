@@ -37,13 +37,13 @@ class IndividualOrder extends Component {
             <Table.Body>
               {
                 this.props.lineitems.map(lineitem =>
-                  <Table.Row key={lineitem.id}>
+                  (<Table.Row key={lineitem.id}>
                     <Table.Cell>{lineitem.orderId}</Table.Cell>
                     <Table.Cell>{lineitem.product.name}</Table.Cell>
                     <Table.Cell>{lineitem.currentPrice}</Table.Cell>
                     <Table.Cell>{lineitem.quantity}</Table.Cell>
                     <Table.Cell>{this.props.order.status}</Table.Cell>
-                  </Table.Row>
+                  </Table.Row>)
                 )
               }
             </Table.Body>
