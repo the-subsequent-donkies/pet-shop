@@ -14,4 +14,17 @@ const Category = db.define('category', {
   }
 })
 
+
+Category.search = function (query) {
+  const Product = require('./product')
+  return this.findAll({
+    where: {
+      name: {
+        [Sequelize.Op.iLike]: '%' + query + '%'
+      },
+    },
+    include: [Product],
+  })
+}
+
 module.exports = Category

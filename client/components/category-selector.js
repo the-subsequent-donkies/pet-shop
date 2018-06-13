@@ -28,12 +28,11 @@ class CategorySelector extends Component {
 
   render() {
     const categoryOptions = []
-    if (this.state.category !== '') {
-      categoryOptions.push({
-        text: 'All Products',
-        value: '/',
-      })
-    }
+    categoryOptions.push({
+      text: 'All Products',
+      value: '/',
+    })
+
     this.props.categories.forEach(category => {
       categoryOptions.push({
         key: category.id,

@@ -17,8 +17,8 @@ Product.hasMany(LineItem, { as: "lineitems" })
 Order.hasMany(LineItem)
 LineItem.belongsTo(Order)
 
-Product.belongsToMany(Category, { through: ProductCategory })
 Category.belongsToMany(Product, { through: ProductCategory })
+Product.belongsToMany(Category, { through: ProductCategory })
 
 Review.belongsTo(Product)
 Product.hasMany(Review)

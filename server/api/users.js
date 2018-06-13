@@ -1,29 +1,38 @@
 'use strict'
 
 const router = require('express').Router()
-const {User} = require('../db/models')
+const { User } = require('../db/models')
 const checkAccess = require('./checkAccess')
 module.exports = router
 
 router.get('/', checkAccess, (req, res, next) => {
   User.findAll({
-    attributes: ['id', 'email', 'isAdmin']
+    attributes: ['id', 'name', 'address', 'email', 'isAdmin']
   })
     .then(users => res.json(users))
     .catch(next)
 })
 
-router.post('/', checkAccess, (req, res, next) => {
-  const { name, description, isAdmin } = req.body
-  User.create({ name, description, isAdmin })
+router.get('/userId', checkAccess, (req, res, next) => {
+  User.findById(req.params.userId)
     .then(user => res.json(user))
     .catch(next)
 })
 
-router.put('/:userId', checkAccess, (req, res, next) => {
-  const { name, description, isAdmin } = req.body
+router.post('/', checkAccess, (req, res, next) => {
+  const { name, email, isAdmin, address } = req.body
+  User.create({ name, email, isAdmin, address })
+    .then(user => res.json(user))
+    .catch(next)
+})
+
+router.put('/:userId', (req, res, next) => {
+  const { name, email, address, isAdmin } = req.body
   User.findById(req.params.userId)
-    .then(user => user.update({ name, description, isAdmin }))
+    .then(user => user.update({ name, email, address, isAdmin }))
+    .then((updatedUser) => {
+      res.json(updatedUser)
+    })
     .catch(next)
 })
 

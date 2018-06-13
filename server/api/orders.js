@@ -2,6 +2,7 @@
 
 const router = require('express').Router()
 const { Order, LineItem, Product } = require('../db/models')
+const op = require('sequelize').Op
 const checkAccess = require('./checkAccess')
 module.exports = router
 
@@ -9,6 +10,26 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const response = await Order.findAll({
+      include: [
+        {
+          model: LineItem,
+          as: 'line_items',
+          include: [{ model: Product, as: 'product' }]
+        }
+      ]
+    })
+    res.json(response)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/user/:userId', async (req, res, next) => {
+  try {
+    const response = await Order.findAll({
+      where: {
+        userId: req.params.userId
+      },
       include: [
         {
           model: LineItem,
@@ -46,7 +67,7 @@ router.get('/me/:userId', (req, res, next) => {
     Order.find({
       where: {
         userId: +req.params.userId,
-        status: 'Initialized',
+        status: 'Initialized'
       },
       include: [
         {
@@ -63,23 +84,23 @@ router.get('/me/:userId', (req, res, next) => {
           status: 'Initialized',
           submittedAt: Date.now()
         })
-        .then((createdOrder) => {
-          return Order.findOne({
-            where: {
-              id: createdOrder.id
-            },
-            include: [
-              {
-                model: LineItem,
-                as: 'line_items',
-                include: [{ model: Product, as: 'product' }]
-              }
-            ]
+          .then((createdOrder) => {
+            return Order.findOne({
+              where: {
+                id: createdOrder.id
+              },
+              include: [
+                {
+                  model: LineItem,
+                  as: 'line_items',
+                  include: [{ model: Product, as: 'product' }]
+                }
+              ]
+            })
           })
-        })
-        .then((result) => {
-          res.json(result)
-        })
+          .then((result) => {
+            res.json(result)
+          })
     })
   } catch (err) {
     next(err)
@@ -98,9 +119,11 @@ router.post('/', async (req, res, next) => {
         id: addedOrder.id
       },
       include: [
-        {model: LineItem,
+        {
+          model: LineItem,
           as: 'line_items',
-          include: [{ model: Product, as: 'product'}]}
+          include: [{ model: Product, as: 'product' }]
+        }
       ]
     })
     res.status(201).json(gotOrder)
@@ -114,7 +137,7 @@ router.put('/:orderId', async (req, res, next) => {
   try {
     const { ...data } = req.body
     const order = await Order.findById(req.params.orderId)
-    const updatedOrder = await order.update({...data, submittedAt: Date.now()})
+    const updatedOrder = await order.update({ ...data, submittedAt: Date.now() })
     res.status(200).json(updatedOrder)
   } catch (err) {
     next(err)
