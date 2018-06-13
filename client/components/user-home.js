@@ -61,7 +61,7 @@ const UserHome = (props) => {
                     style={{ fontSize: '1.5rem' }}
                   >
                     <Icon name="cart arrow down" />
-                    Edit Orders
+                    All Orders
                   </Header>
                 </Segment>
                 <Segment color="red">
