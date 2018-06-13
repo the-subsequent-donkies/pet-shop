@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const ANALYTICS_URL = 'http://localhost:6969'
+const ANALYTICS_URL = 'http://pet-shop-analytics.herokuapp.com'
 
 const SOCKET_CONNECTION = 'SOCKET_CONNECTION'
 const SOCKET_DISCONNECT = 'SOCKET_DISCONNECT'
