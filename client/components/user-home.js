@@ -98,7 +98,6 @@ const UserHome = (props) => {
                 <Segment color="red">
                   <Header
                     style={{ fontSize: '1.5rem' }}
-                    onClick={() => history.push('http://pet-shop-analytics.herokuapp.com/')}
                   >
                     <Icon name="line graph" />
                     Analytics
