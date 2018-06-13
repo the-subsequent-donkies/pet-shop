@@ -15,7 +15,7 @@ class IndividualOrder extends Component {
     }
   }
 
-  handleItemClick = async (event, { name }) => {
+  handleChange = async (event, { name }) => {
     this.setState({ activeItem: name })
     await this.props.updateStatus(this.props.order, this.state.activeItem, this.props.user.id)
   }
@@ -51,26 +51,38 @@ class IndividualOrder extends Component {
 
           {(this.props.user && this.props.user.isAdmin) && (
             <Menu>
-              <Dropdown item
+              <Dropdown
+                fluid
+                item
                 text="Change Status"
-                position="right">
-                <Dropdown.Menu position="right">
+              >
+                <Dropdown.Menu
+                  onChange={this.handleChange}
+                >
                   <Dropdown.Item
                     name="Initialized"
                     active={this.state.activeItem === "Initialized"}
-                    onClick={this.handleItemClick}>Initialized</Dropdown.Item>
+                  >
+                    Initialized
+                  </Dropdown.Item>
                   <Dropdown.Item
                     name="Processing"
                     active={this.state.activeItem === "Processing"}
-                    onClick={this.handleItemClick}>Processing</Dropdown.Item>
+                  >
+                    Processing
+                  </Dropdown.Item>
                   <Dropdown.Item
                     name="Cancelled"
                     active={this.state.activeItem === "Cancelled"}
-                    onClick={this.handleItemClick}>Cancelled</Dropdown.Item>
+                  >
+                    Cancelled
+                  </Dropdown.Item>
                   <Dropdown.Item
                     name="Completed"
                     active={this.state.activeItem === "Completed"}
-                    onClick={this.handleItemClick}>Completed</Dropdown.Item>
+                  >
+                    Completed
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Menu>
