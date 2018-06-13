@@ -1,5 +1,7 @@
 const axios = require('axios')
 
+const ANALYTICS_URL = 'http://localhost:6969'
+
 const SOCKET_CONNECTION = 'SOCKET_CONNECTION'
 const SOCKET_DISCONNECT = 'SOCKET_DISCONNECT'
 
@@ -9,11 +11,15 @@ module.exports = (io) => {
   io.on('connection', async (socket) => {
     console.log(`A socket connection to the server has been made: ${socket.id}`)
     socket.on(SOCKET_CONNECTION, async (data) => {
-      await axios.post(`http://localhost:6969/api/requests`, data)
+      await axios.post(`${ANALYTICS_URL}/api/requests`, data)
+    })
+
+    socket.on('SELECTED_PRODUCT_VIEW', async (data) => {
+      await axios.post(`${ANALYTICS_URL}/api/requests`, data)
     })
 
     socket.on('disconnect', async (data) => {
-      await axios.post(`http://localhost:6969/api/requests`, {reqType: SOCKET_DISCONNECT, socketId: socket.id, time: Date.now()})
+      await axios.post(`${ANALYTICS_URL}/api/requests`, {reqType: SOCKET_DISCONNECT, socketId: socket.id, time: Date.now()})
       console.log(`Connection ${socket.id} has left the building`)
     })
   })

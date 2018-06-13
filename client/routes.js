@@ -34,7 +34,7 @@ class Routes extends Component {
             // this.props.getLocalOrder(localStorage.getItem('orderId'))
             this.props.getOrder(this.props.user.id)
               .then(() => {
-                console.log(localStorage)
+                // console.log(localStorage)
                 return this.props.mergeOrders(parseInt(localStorage.getItem('orderId'), 10), this.props.user.id)
               })
 
@@ -48,8 +48,8 @@ class Routes extends Component {
         }
       })
       .then(() => {
-        console.log(socketEmit)
-        socketEmit('SOCKET_CONNECTION', {userId: this.props.user.id})
+        // console.log(socketEmit)
+        socketEmit('SOCKET_CONNECTION', {userId: this.props.user.id}, socket)
         if (!this.props.isLoggedIn) {
           localStorage.setItem('orderId', this.props.orderId)
         }

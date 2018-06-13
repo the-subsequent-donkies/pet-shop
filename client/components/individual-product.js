@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 import { Card, Image, Button } from 'semantic-ui-react'
 
 class IndividualProduct extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   handleAdd = async (evt) => {
     evt.preventDefault()
@@ -21,10 +24,10 @@ class IndividualProduct extends Component {
         raised
       >
         <Card.Content>
-          <div className='product-list-img-bound'>
+          <div className="product-list-img-bound">
             <Image
               src={product.imgUrl}
-              size='small'
+              size="small"
             />
           </div>
           <Card.Header
@@ -45,7 +48,7 @@ class IndividualProduct extends Component {
         </Card.Content>
         <Card.Content>
           <Button
-            content='Add to Cart'
+            content="Add to Cart"
             onClick={this.handleAdd}
             style={{ float: 'right' }}
           />
@@ -57,7 +60,8 @@ class IndividualProduct extends Component {
 
 const mapState = (state) => {
   return {
-    orderId: state.order.id
+    orderId: state.order.id,
+    userId: state.user.id
   }
 }
 

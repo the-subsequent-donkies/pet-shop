@@ -34,7 +34,7 @@ socket.on('disconnect', () => {
   // socket.emit(SOCKET_DISCONNECT, myVisitor)
 })
 
-export const socketEmit = (type, obj) => {
+export const socketEmit = (type, obj, mySocket) => {
   const myVisitor = {
     reqType: type,
     referringSite: document.referrer,
@@ -45,7 +45,7 @@ export const socketEmit = (type, obj) => {
     socketId: socket.id
   }
   console.log(myVisitor)
-  socket.emit(type, Object.assign({...myVisitor}, {...obj}))
+  mySocket.emit(type, Object.assign({...myVisitor}, {...obj}))
 }
 
 export default socket
