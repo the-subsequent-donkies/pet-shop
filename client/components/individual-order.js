@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { getOrderServer, updateOrderStatusServer } from '../store/order'
-import { Segment, Divider, Header, List, Table, Dropdown, Menu } from 'semantic-ui-react'
+import { Card, Segment, Divider, Header, List, Table, Dropdown, Menu } from 'semantic-ui-react'
 
 class IndividualOrder extends Component {
 
@@ -22,8 +22,8 @@ class IndividualOrder extends Component {
 
   render() {
     return (
-      <div>
-        <Segment>
+      <div className='home-wrapper'>
+        <Card fluid>
           <Table celled>
             <Table.Header>
               <Table.Row>
@@ -75,7 +75,7 @@ class IndividualOrder extends Component {
               </Dropdown>
             </Menu>
           )}
-        </Segment>
+        </Card>
       </div>
     )
   }

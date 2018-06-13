@@ -32,57 +32,79 @@ const UserHome = (props) => {
           {
             (props.user && !props.user.isAdmin) &&
             (
-              <>
+              <Segment.Group horizontal>
                 <Segment color="green">
                   <Header as={Link} to="/profile/edit">
                     <Icon name="user circle" />
                     Update Profile
-                </Header>
+                  </Header>
                 </Segment>
                 <Segment color="green">
                   <Header as={Link} to="/user/orders">
                     <Icon name="cart arrow down" />
                     Order History
-                </Header>
+                  </Header>
                 </Segment>
-              </>
+              </Segment.Group>
             )
           }
           {
             props.user.isAdmin &&
             (
-              <>
+              <Segment.Group
+                horizontal
+              >
                 <Segment color="red">
-                  <Header as={Link} to="/user/orders">
+                  <Header
+                    as={Link}
+                    to="/user/orders"
+                    style={{ fontSize: '1.5rem' }}
+                  >
                     <Icon name="cart arrow down" />
                     Edit Orders
-                </Header>
+                  </Header>
                 </Segment>
                 <Segment color="red">
-                  <Header as={Link} to="/users">
+                  <Header
+                    as={Link}
+                    to="/users"
+                    style={{ fontSize: '1.5rem' }}
+                  >
                     <Icon name="users" />
                     Edit Users
                   </Header>
                 </Segment>
                 <Segment color="red">
-                  <Header as={Link} to="/">
+                  <Header
+                    as={Link}
+                    to="/"
+                    style={{ fontSize: '1.5rem' }}
+                  >
                     <Icon name="tags" />
                     Edit Categories
                   </Header>
                 </Segment>
                 <Segment color="red">
-                  <Header as={Link} to="/newproduct">
+                  <Header
+                    as={Link}
+                    to="/newproduct"
+                    style={{ fontSize: '1.5rem' }}
+                  >
                     <Icon name="edit" />
                     Add Products
                   </Header>
                 </Segment>
                 <Segment color="red">
-                  <Header as={Link} to="/">
+                  <Header
+                    as={Link}
+                    to="/"
+                    style={{ fontSize: '1.5rem' }}
+                  >
                     <Icon name="line graph" />
                     Analytics
                   </Header>
                 </Segment>
-              </>
+              </Segment.Group>
             )
           }
         </Segment.Group>

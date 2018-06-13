@@ -45,12 +45,6 @@ class SearchBar extends Component {
             content="Submit"
           />
         </Form>
-
-
-        <div className='center-container'>
-          {products.map(product => <IndividualProduct product={product} key={product.id} />)}
-        </div>
-
       </div>
     )
   }
