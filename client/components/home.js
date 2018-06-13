@@ -11,16 +11,20 @@ import FilteredProducts from './filtered-products';
  */
 class Home extends Component {
   render() {
-    const { email } = this.props.user
+    const { name } = this.props.user
     const { isLoggedIn } = this.props
     const unFiltered = Object.keys(this.props.match.params).length < 1
     return (
       <div className='home-wrapper'>
         {isLoggedIn && (
-          <h3>Welcome, {email}</h3>
+          <h3>Welcome, {name}</h3>
         )}
-        <CategorySelector />
-        <SearchBar />
+        <div style={{
+          display: 'flex'
+        }}>
+          <CategorySelector />
+          <SearchBar />
+        </div>
         <AllProducts />
       </div>
     )
