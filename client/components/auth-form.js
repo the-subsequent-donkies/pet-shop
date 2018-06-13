@@ -11,41 +11,41 @@ const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error, user } = props
   const isLoggedIn = Object.keys(user).length > 0 && !user.error
   return (
-    <div className='custom-form'>
+    <div className="custom-form">
       {
         isLoggedIn ?
           <Redirect to="/" />
           : (
             <Form name={name} onSubmit={handleSubmit}>
               {props.name === 'signup' && (
-                <Form.Group widths='equal'>
+                <Form.Group widths="equal">
                   <Form.Field
-                    name='firstName'
+                    name="firstName"
                     control={Input}
-                    label='Name'
-                    placeholder='Your full name'
+                    label="Name"
+                    placeholder="Your full name"
                   />
                   <Form.Field
-                    name='address'
+                    name="address"
                     control={Input}
-                    label='Address'
-                    placeholder='Enter your address'
+                    label="Address"
+                    placeholder="Enter your address"
                   />
                 </Form.Group>
               )}
-              <Form.Group widths='equal'>
+              <Form.Group widths="equal">
                 <Form.Field
-                  name='email'
+                  name="email"
                   control={Input}
-                  label='Email'
-                  placeholder='Your email'
+                  label="Email"
+                  placeholder="Your email"
                 />
                 <Form.Field
-                  name='password'
+                  name="password"
                   control={Input}
-                  type='password'
-                  label='Password'
-                  placeholder='Enter your password'
+                  type="password"
+                  label="Password"
+                  placeholder="Enter your password"
                 />
               </Form.Group>
               <Form.Group>
@@ -55,8 +55,8 @@ const AuthForm = (props) => {
                 />
                 <Button
                   content={`${displayName} with Google`}
-                  as='a'
-                  href='/auth/google'
+                  as="a"
+                  href="/auth/google"
                 />
               </Form.Group>
               {error && error.response && <div> {error.response.data} </div>}

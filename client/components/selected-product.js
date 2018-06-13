@@ -10,11 +10,16 @@ import SingleReview from './single-review'
 import NewReviewForm from './new-review-form'
 import { addLineitemServer } from '../store/order';
 
+import io from 'socket.io-client'
+const socket = io(window.location.origin)
+import {socketEmit} from '../socket'
+
 class SelectedProduct extends Component {
   constructor(props) {
     super(props)
     this.props.getSingleProduct(this.props.match.params.productId)
     this.props.getFilteredReviews(this.props.match.params.productId)
+    socketEmit('SELECTED_PRODUCT_VIEW', {userId: this.props.user.id}, socket)
   }
 
   handleAdd = async (evt) => {
@@ -25,8 +30,8 @@ class SelectedProduct extends Component {
   render() {
     const { product, reviews, user } = this.props
     return (
-      <div className='home-wrapper'>
-        <div className='center-container'>
+      <div className="home-wrapper">
+        <div className="center-container">
           <Segment.Group raised>
             <Segment padded>
               <div
@@ -36,24 +41,24 @@ class SelectedProduct extends Component {
                 }}
               >
                 <Header
-                  as='h1'
+                  as="h1"
                   style={{ marginBottom: '0.25rem' }}
                 >
                   {product.name}
                 </Header>
                 <Button
                   as={Link}
-                  content='Edit'
+                  content="Edit"
                   to={`/products/${product.id}/edit`}
                 />
               </div>
-              <div className='selected-product-img-bound'>
+              <div className="selected-product-img-bound">
                 <Image
                   src={product.imgUrl}
-                  className='selected-product-img'
+                  className="selected-product-img"
                 />
               </div>
-              <div className='selected-product-content'>
+              <div className="selected-product-content">
                 {product.description}
                 <div style={{
                   display: 'flex',
@@ -62,20 +67,20 @@ class SelectedProduct extends Component {
                 }}>
                   <div>
                     <Header
-                      as='h3'
+                      as="h3"
                       style={{ marginBottom: '0' }}
                     >
                       Price: ${product.price}
                     </Header>
                     <Header
-                      as='h4'
+                      as="h4"
                       style={{ marginTop: '0' }}
                     >
                       Inventory: {product.inventory}
                     </Header>
                   </div>
                   <Button
-                    content='Add to Cart'
+                    content="Add to Cart"
                     onClick={this.handleAdd}
                   />
                 </div>
